@@ -8,6 +8,7 @@ import { Testimonial } from "@/components/ui/Testimonial";
 import { StatCard } from "@/components/ui/StatCard";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { FAQ } from "@/components/ui/FAQ";
+import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 
 export const metadata: Metadata = genMeta({
@@ -121,7 +122,7 @@ export default function HomePage() {
         
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="animate-fade-in-up">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
                 Professional Services
                 <br />
@@ -164,7 +165,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="hidden lg:block relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="hidden lg:block relative h-[500px] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               <Image
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
                 alt="Business professionals working together"
@@ -210,7 +211,9 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-              <Testimonial key={index} {...testimonial} />
+              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <Testimonial {...testimonial} />
+              </div>
             ))}
           </div>
         </Container>
@@ -296,7 +299,7 @@ export default function HomePage() {
       {/* Partner Logos */}
       <Section background="gray" spacing="md">
         <Container>
-          <div className="text-center mb-10">
+          <div className="text-center mb-10 animate-fade-in-up">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
               Trusted Partners
             </h2>
@@ -305,16 +308,128 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 items-center justify-items-center">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {[
+              "Shopify",
+              "Square",
+              "QuickBooks",
+              "Salesforce",
+              "Microsoft",
+              "Google",
+            ].map((partner, i) => (
               <div
                 key={i}
-                className="w-full h-20 bg-white rounded-lg flex items-center justify-center border border-neutral-200 shadow-sm hover:shadow-md transition-shadow"
+                className="w-full h-20 bg-white rounded-lg flex items-center justify-center border border-neutral-200 shadow-sm hover:shadow-md transition-all hover:scale-105 animate-fade-in-up"
+                style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <span className="text-xs text-neutral-400 font-medium">
-                  Partner {i}
+                <span className="text-sm text-neutral-600 font-semibold">
+                  {partner}
                 </span>
               </div>
             ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Blog Section */}
+      <Section background="white" spacing="lg">
+        <Container>
+          <div className="flex items-center justify-between mb-12 animate-fade-in-up">
+            <div>
+              <p className="text-sm text-primary-600 font-semibold mb-2 uppercase tracking-wide">
+                From the Blog
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
+                Explore Our Latest Resources
+              </h2>
+            </div>
+            <Link
+              href="/resources"
+              className="hidden md:block text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+            >
+              View All →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "10 Essential Strategies for Business Growth in 2024",
+                excerpt:
+                  "Discover proven strategies that successful businesses are using to drive growth and stay competitive.",
+                category: "Business Growth",
+                date: "Jan 15, 2024",
+                image:
+                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+                slug: "10-essential-strategies-business-growth",
+              id: "1",
+              },
+              {
+                title: "How to Optimize Your Business Operations",
+                excerpt:
+                  "Learn practical tips and techniques to streamline your operations and improve efficiency.",
+                category: "Operations",
+                date: "Jan 10, 2024",
+                image:
+                  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+                slug: "optimize-business-operations",
+              id: "2",
+              },
+              {
+                title: "Financial Planning: A Complete Guide",
+                excerpt:
+                  "Everything you need to know about financial planning and cash flow management.",
+                category: "Finance",
+                date: "Jan 5, 2024",
+                image:
+                  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop",
+                slug: "financial-planning-guide-small-business",
+              id: "3",
+              },
+            ].map((post, index) => (
+              <Link
+                key={index}
+                href={`/resources/${post.slug}`}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <Card hover className="h-full overflow-hidden">
+                  <div className="relative h-48 mb-4 -m-6 mb-4">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6 pt-0">
+                    <div className="flex items-center gap-3 mb-3 text-sm text-neutral-500">
+                      <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded text-xs font-medium">
+                        {post.category}
+                      </span>
+                      <span>{post.date}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-neutral-600 mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <span className="text-primary-600 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                      Learn more →
+                    </span>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-8 md:hidden">
+            <Link
+              href="/resources"
+              className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+            >
+              View All Resources →
+            </Link>
           </div>
         </Container>
       </Section>

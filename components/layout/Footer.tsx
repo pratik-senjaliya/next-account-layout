@@ -10,24 +10,26 @@ const services = [
 ];
 
 const resources = [
-  { name: "Blog", href: "/blog" },
-  { name: "Case Studies", href: "/case-studies" },
-  { name: "Whitepapers", href: "/whitepapers" },
-  { name: "Webinars", href: "/webinars" },
+  { name: "Blog", href: "/resources" },
+  { name: "Case Studies", href: "/resources" },
+  { name: "Whitepapers", href: "/resources" },
+  { name: "Webinars", href: "/resources" },
+  { name: "Guides", href: "/resources" },
 ];
 
 const company = [
   { name: "About Us", href: "/about" },
-  { name: "Our Team", href: "/team" },
-  { name: "Careers", href: "/careers" },
+  { name: "Our Team", href: "/about" },
+  { name: "Careers", href: "/about" },
+  { name: "Press", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
 
 const legal = [
-  { name: "Privacy Policy", href: "/privacy" },
-  { name: "Terms of Service", href: "/terms" },
-  { name: "Cookie Policy", href: "/cookies" },
-  { name: "Security", href: "/security" },
+  { name: "Privacy Policy", href: "/contact" },
+  { name: "Terms of Service", href: "/contact" },
+  { name: "Cookie Policy", href: "/contact" },
+  { name: "Security", href: "/contact" },
 ];
 
 export const Footer: React.FC = () => {
@@ -45,14 +47,14 @@ export const Footer: React.FC = () => {
                     YourCompany
                   </span>
                 </Link>
-                <p className="text-sm text-neutral-400 mb-6 max-w-sm">
+                <p className="text-sm text-neutral-400 mb-6 max-w-sm leading-relaxed">
                   Professional services and solutions for your business. Modern,
                   reliable, and efficient.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-primary-600 rounded-lg transition-colors"
+                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-secondary-600 rounded-lg transition-colors"
                     aria-label="LinkedIn"
                   >
                     <svg
@@ -65,7 +67,7 @@ export const Footer: React.FC = () => {
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-primary-600 rounded-lg transition-colors"
+                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-secondary-600 rounded-lg transition-colors"
                     aria-label="Twitter"
                   >
                     <svg
@@ -78,7 +80,7 @@ export const Footer: React.FC = () => {
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-primary-600 rounded-lg transition-colors"
+                    className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-secondary-600 rounded-lg transition-colors"
                     aria-label="Facebook"
                   >
                     <svg
@@ -94,13 +96,15 @@ export const Footer: React.FC = () => {
 
               {/* Services */}
               <div>
-                <h3 className="text-white font-semibold mb-4">Services</h3>
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                  Services
+                </h3>
                 <ul className="space-y-3">
                   {services.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm hover:text-white transition-colors"
+                        className="text-sm hover:text-white transition-colors text-neutral-400"
                       >
                         {item.name}
                       </Link>
@@ -111,13 +115,15 @@ export const Footer: React.FC = () => {
 
               {/* Resources */}
               <div>
-                <h3 className="text-white font-semibold mb-4">Resources</h3>
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                  Resources
+                </h3>
                 <ul className="space-y-3">
                   {resources.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm hover:text-white transition-colors"
+                        className="text-sm hover:text-white transition-colors text-neutral-400"
                       >
                         {item.name}
                       </Link>
@@ -128,19 +134,46 @@ export const Footer: React.FC = () => {
 
               {/* Company */}
               <div>
-                <h3 className="text-white font-semibold mb-4">Company</h3>
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                  Company
+                </h3>
                 <ul className="space-y-3">
                   {company.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm hover:text-white transition-colors"
+                        className="text-sm hover:text-white transition-colors text-neutral-400"
                       >
                         {item.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+
+            {/* Contact Info Section */}
+            <div className="mt-12 pt-8 border-t border-neutral-800">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                  <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">
+                    Get in Touch
+                  </h3>
+                  <div className="space-y-2">
+                    <a
+                      href="tel:+1234567890"
+                      className="block text-sm text-neutral-400 hover:text-white transition-colors"
+                    >
+                      +1 (234) 567-8900
+                    </a>
+                    <a
+                      href="mailto:info@yoursite.com"
+                      className="block text-sm text-neutral-400 hover:text-white transition-colors"
+                    >
+                      info@yoursite.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -154,12 +187,12 @@ export const Footer: React.FC = () => {
             <p className="text-sm text-neutral-400">
               © {new Date().getFullYear()} YourCompany. All rights reserved.
             </p>
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex flex-wrap items-center gap-4 md:gap-6">
               {legal.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm hover:text-white transition-colors"
+                  className="text-sm hover:text-white transition-colors text-neutral-400"
                 >
                   {item.name}
                 </Link>
@@ -171,4 +204,3 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
-

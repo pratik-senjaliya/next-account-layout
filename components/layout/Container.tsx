@@ -9,8 +9,8 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 const sizeClasses = {
   sm: "max-w-3xl",
   md: "max-w-5xl",
-  lg: "max-w-7xl",
-  xl: "max-w-[90rem]",
+  lg: "max-w-[1600px]",
+  xl: "max-w-[1800px]",
   full: "max-w-full",
 };
 

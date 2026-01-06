@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import React from "react";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import Link from "next/link";
+import { getAllServices } from "@/lib/services";
 
 export const metadata: Metadata = genMeta({
   title: "Consulting Services",
@@ -20,12 +23,10 @@ export const metadata: Metadata = genMeta({
   ],
 });
 
-const serviceCategories = [
-  {
-    title: "Business Strategy",
-    description:
-      "Develop comprehensive strategies that align with your business goals and market opportunities. We help you identify growth areas and create actionable plans.",
-    icon: (
+// Get services dynamically
+const getIcon = (iconName: string) => {
+  const icons: Record<string, React.ReactElement> = {
+    chart: (
       <svg
         className="w-8 h-8"
         fill="none"
@@ -40,12 +41,22 @@ const serviceCategories = [
         />
       </svg>
     ),
-  },
-  {
-    title: "Operations Optimization",
-    description:
-      "Streamline your business processes to improve efficiency and reduce costs. Our experts analyze your workflows and implement improvements that deliver measurable results.",
-    icon: (
+    target: (
+      <svg
+        className="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    ),
+    lightning: (
       <svg
         className="w-8 h-8"
         fill="none"
@@ -60,12 +71,7 @@ const serviceCategories = [
         />
       </svg>
     ),
-  },
-  {
-    title: "Financial Advisory",
-    description:
-      "Get expert financial guidance to make informed decisions about investments, budgeting, and resource allocation. We help you optimize your financial performance.",
-    icon: (
+    dollar: (
       <svg
         className="w-8 h-8"
         fill="none"
@@ -80,12 +86,7 @@ const serviceCategories = [
         />
       </svg>
     ),
-  },
-  {
-    title: "Technology Consulting",
-    description:
-      "Leverage technology to transform your business. We help you select, implement, and optimize technology solutions that drive growth and innovation.",
-    icon: (
+    computer: (
       <svg
         className="w-8 h-8"
         fill="none"
@@ -100,48 +101,10 @@ const serviceCategories = [
         />
       </svg>
     ),
-  },
-  {
-    title: "Organizational Development",
-    description:
-      "Build stronger teams and organizational structures. We help you develop leadership capabilities, improve communication, and create cultures that drive success.",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Market Analysis",
-    description:
-      "Understand your market position and identify opportunities. We provide comprehensive market research and competitive analysis to inform your strategic decisions.",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-        />
-      </svg>
-    ),
-  },
-];
+  };
+
+  return icons[iconName] || icons.chart;
+};
 
 const processSteps = [
   {
@@ -177,6 +140,8 @@ const processSteps = [
 ];
 
 export default function ServicesPage() {
+  const services = getAllServices();
+
   return (
     <>
       {/* Hero Section */}
@@ -197,7 +162,14 @@ export default function ServicesPage() {
         </div>
         
         <Container className="relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Services" },
+            ]}
+            className="mb-6 text-primary-200"
+          />
+          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
               Business Consulting
               <br />
@@ -212,7 +184,7 @@ export default function ServicesPage() {
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white"
+                className="bg-secondary-500 hover:bg-secondary-600 text-white animate-scale-in"
               >
                 Schedule Consultation
               </Button>
@@ -231,7 +203,7 @@ export default function ServicesPage() {
       {/* Service Overview */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               Comprehensive Consulting Solutions
             </h2>
@@ -244,16 +216,24 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {serviceCategories.map((service, index) => (
-              <Card key={index} hover className="p-6">
-                <div className="text-primary-600 mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-neutral-600 leading-relaxed">
-                  {service.description}
-                </p>
-              </Card>
+            {services.map((service, index) => (
+              <Link key={service.id} href={`/services/${service.slug}`}>
+                <Card hover className="p-6 h-full animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="text-primary-600 mb-4">{getIcon(service.icon)}</div>
+                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-600 leading-relaxed mb-4">
+                    {service.description}
+                  </p>
+                  <span className="text-primary-600 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
+                    Learn More
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Card>
+              </Link>
             ))}
           </div>
         </Container>
