@@ -13,11 +13,56 @@ const navigation = [
     name: "Services",
     href: "/services",
     submenu: [
-      { name: "Bookkeeping & Accounting", href: "/services/bookkeeping-accounting" },
-      { name: "Tax Preparation", href: "/services/tax-preparation" },
-      { name: "Payroll and Compliance", href: "/services/payroll-compliance" },
-      { name: "Audit & Assurance", href: "/services/audit-assurance" },
-      { name: "Virtual CFO & FP&A", href: "/services/virtual-cfo-fpa" },
+      {
+        name: "Bookkeeping & Accounting",
+        href: "/services/bookkeeping-accounting",
+        description: "Accurate and timely financial record-keeping for your business.",
+        icon: (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        ),
+      },
+      {
+        name: "Tax Preparation",
+        href: "/services/tax-preparation",
+        description: "Expert tax planning and preparation to maximize your savings.",
+        icon: (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        ),
+      },
+      {
+        name: "Payroll and Compliance",
+        href: "/services/payroll-compliance",
+        description: "Seamless payroll processing and regulatory compliance.",
+        icon: (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        ),
+      },
+      {
+        name: "Audit & Assurance",
+        href: "/services/audit-assurance",
+        description: "Robust audit readiness and internal control examinations.",
+        icon: (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        ),
+      },
+      {
+        name: "Virtual CFO & FP&A",
+        href: "/services/virtual-cfo-fpa",
+        description: "Strategic financial leadership to drive your business growth.",
+        icon: (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        ),
+      },
     ],
   },
 ];
@@ -175,18 +220,66 @@ export const Header: React.FC = () => {
                         </svg>
                       </Link>
 
-                      {/* Dropdown Menu */}
+                      {/* Mega Menu */}
                       {hoveredService && (
-                        <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-neutral-200 py-2 z-50 animate-slide-down">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.href}
-                              href={subItem.href}
-                              className="block px-4 py-3 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[800px] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                          <div className="grid grid-cols-12 gap-8">
+                            {/* Services Column */}
+                            <div className="col-span-8">
+                              <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
+                                <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                                  Our Services
+                                </h3>
+                                <Link
+                                  href="/services"
+                                  className="text-xs font-semibold text-primary-600 hover:text-primary-700 underline flex items-center gap-1"
+                                >
+                                  View Hub
+                                </Link>
+                              </div>
+                              <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                                {item.submenu.map((subItem) => (
+                                  <Link
+                                    key={subItem.href}
+                                    href={subItem.href}
+                                    className="group flex items-start gap-4 p-3 rounded-lg hover:bg-neutral-50 transition-colors"
+                                  >
+                                    <div className="mt-1 p-2 bg-primary-50 text-primary-600 rounded-lg group-hover:bg-primary-100 group-hover:text-primary-700 transition-colors">
+                                      {subItem.icon}
+                                    </div>
+                                    <div>
+                                      <div className="text-sm font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                                        {subItem.name}
+                                      </div>
+                                      <p className="text-xs text-neutral-500 line-clamp-2 mt-0.5">
+                                        {subItem.description}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Featured Section */}
+                            <div className="col-span-4 bg-neutral-900 rounded-xl p-6 text-white flex flex-col justify-between relative overflow-hidden group">
+                              <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-all duration-500"></div>
+                              <div>
+                                <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-[10px] font-bold uppercase tracking-widest rounded mb-3">
+                                  Partner with us
+                                </span>
+                                <h4 className="text-lg font-bold mb-2">Ready to scale?</h4>
+                                <p className="text-xs text-neutral-400 mb-4 leading-relaxed">
+                                  Let our expert team handle your finances while you focus on what you do best.
+                                </p>
+                              </div>
+                              <Button
+                                size="sm"
+                                className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-xs font-bold"
+                              >
+                                Free Consultation
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
