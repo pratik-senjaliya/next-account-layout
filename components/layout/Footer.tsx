@@ -3,33 +3,25 @@ import Link from "next/link";
 import { Container } from "./Container";
 
 const services = [
-  { name: "Business Consulting", href: "/services" },
-  { name: "Strategic Planning", href: "/services/strategic-planning" },
-  { name: "Operations Optimization", href: "/services/operations" },
-  { name: "Financial Advisory", href: "/services/financial" },
+  { name: "Bookkeeping & Accounting", href: "/services/bookkeeping-accounting" },
+  { name: "Tax Preparation", href: "/services/tax-preparation" },
+  { name: "Payroll and Compliance", href: "/services/payroll-compliance" },
+  { name: "Audit & Assurance", href: "/services/audit-assurance" },
+  { name: "Virtual CFO & FP&A", href: "/services/virtual-cfo-fpa" },
 ];
 
 const resources = [
-  { name: "Blog", href: "/resources" },
-  { name: "Case Studies", href: "/resources" },
-  { name: "Whitepapers", href: "/resources" },
-  { name: "Webinars", href: "/resources" },
-  { name: "Guides", href: "/resources" },
+  { name: "FAQ", href: "/services#faq" },
 ];
 
 const company = [
-  { name: "About Us", href: "/about" },
-  { name: "Our Team", href: "/about" },
-  { name: "Careers", href: "/about" },
-  { name: "Press", href: "/about" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
 ];
 
 const legal = [
-  { name: "Privacy Policy", href: "/contact" },
-  { name: "Terms of Service", href: "/contact" },
-  { name: "Cookie Policy", href: "/contact" },
-  { name: "Security", href: "/contact" },
+  { name: "Privacy Policy", href: "#" },
+  { name: "Terms of Service", href: "#" },
 ];
 
 export const Footer: React.FC = () => {

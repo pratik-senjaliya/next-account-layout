@@ -13,17 +13,13 @@ const navigation = [
     name: "Services",
     href: "/services",
     submenu: [
-      { name: "Business Consulting", href: "/services/business-consulting" },
-      { name: "Strategic Planning", href: "/services/strategic-planning" },
-      { name: "Operations Optimization", href: "/services/operations" },
-      { name: "Financial Advisory", href: "/services/financial" },
-      { name: "Technology Consulting", href: "/services/technology" },
+      { name: "Bookkeeping & Accounting", href: "/services/bookkeeping-accounting" },
+      { name: "Tax Preparation", href: "/services/tax-preparation" },
+      { name: "Payroll and Compliance", href: "/services/payroll-compliance" },
+      { name: "Audit & Assurance", href: "/services/audit-assurance" },
+      { name: "Virtual CFO & FP&A", href: "/services/virtual-cfo-fpa" },
     ],
   },
-  { name: "Solutions", href: "/solutions" },
-  { name: "About", href: "/about" },
-  { name: "Resources", href: "/resources" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export const Header: React.FC = () => {

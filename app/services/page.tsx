@@ -7,415 +7,331 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import Link from "next/link";
+import { FAQ } from "@/components/ui/FAQ";
+import { Testimonial } from "@/components/ui/Testimonial";
 import { getAllServices } from "@/lib/services";
+import Link from "next/link";
 
 export const metadata: Metadata = genMeta({
-  title: "Consulting Services",
+  title: "Professional Services Overview",
   description:
-    "Expert business consulting services to help your company grow, optimize operations, and achieve strategic goals. Professional guidance tailored to your needs.",
-  keywords: [
-    "business consulting",
-    "consulting services",
-    "strategic planning",
-    "operations",
-    "professional services",
-  ],
+    "Discover our full suite of financial, tax, and strategic business services designed to help you scale efficiently.",
 });
 
-// Get services dynamically
-const getIcon = (iconName: string) => {
-  const icons: Record<string, React.ReactElement> = {
-    chart: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-        />
-      </svg>
-    ),
-    target: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-    lightning: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      </svg>
-    ),
-    dollar: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-    computer: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
-    ),
-  };
-
-  return icons[iconName] || icons.chart;
-};
-
-const processSteps = [
-  {
-    step: "01",
-    title: "Initial Consultation",
-    description:
-      "We start with a comprehensive consultation to understand your business, challenges, and goals. This helps us tailor our approach to your specific needs.",
-  },
-  {
-    step: "02",
-    title: "Analysis & Assessment",
-    description:
-      "Our team conducts a thorough analysis of your current operations, identifying areas for improvement and opportunities for growth.",
-  },
-  {
-    step: "03",
-    title: "Strategy Development",
-    description:
-      "We develop a customized strategy with clear objectives, actionable steps, and measurable outcomes aligned with your business goals.",
-  },
-  {
-    step: "04",
-    title: "Implementation Support",
-    description:
-      "We work alongside your team to implement the strategy, providing guidance, training, and support throughout the process.",
-  },
-  {
-    step: "05",
-    title: "Ongoing Optimization",
-    description:
-      "We monitor progress, measure results, and continuously optimize the strategy to ensure you achieve and exceed your objectives.",
-  },
-];
-
-export default function ServicesPage() {
+export default function ServicesHubPage() {
   const services = getAllServices();
+
+  const commonFAQ = [
+    {
+      question: "How do I know which service is right for my business?",
+      answer: "We offer a free initial consultation to assess your business's current state and long-term goals. Based on this assessment, we recommend a tailored combination of services.",
+    },
+    {
+      question: "Can I bundle multiple services?",
+      answer: "Absolutely. Most of our clients benefit from a combination of bookkeeping, tax, and CFO advisory to ensure holistic financial management.",
+    },
+    {
+      question: "Are your services available for international businesses?",
+      answer: "Yes, we support businesses across various jurisdictions, particularly those with US-based entities or operations.",
+    },
+  ];
+
+  const genericProcess = [
+    { step: "01", title: "Free Consultation", description: "A initial deep dive into your business needs and current financial health." },
+    { step: "02", title: "Custom Proposal", description: "We draft a strategy and service package tailored specifically to your objectives." },
+    { step: "03", title: "Seamless Onboarding", description: "Our team integrates with your systems and staff with zero downtime." },
+    { step: "04", title: "Ongoing Excellence", description: "Continuous execution, monitoring, and strategic advisory to drive growth." },
+  ];
 
   return (
     <>
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <Section
         background="white"
         spacing="xl"
-        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden"
+        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden py-24 md:py-32"
       >
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-20">
           <Image
-            src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&h=1080&fit=crop"
-            alt="Business consulting professionals"
+            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&h=1080&fit=crop"
+            alt="Financial strategy and growth"
             fill
             className="object-cover"
             priority
           />
         </div>
-        
+
         <Container className="relative z-10">
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
               { label: "Services" },
             ]}
-            className="mb-6 text-primary-200"
+            className="mb-8 text-primary-200"
           />
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-              Business Consulting
-              <br />
-              <span className="text-secondary-400">Services</span>
+          <div className="max-w-4xl animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
+              Comprehensive Financial <br />
+              <span className="text-secondary-400">Solutions for Growth</span>
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Expert guidance to help your business grow, optimize operations,
-              and achieve strategic goals. Professional consulting services
-              tailored to your unique needs.
+            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed">
+              From daily bookkeeping to executive-level strategic guidance,
+              we provide the expertise your business needs at every stage.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6">
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white animate-scale-in"
+                className="bg-secondary-500 hover:bg-secondary-600 text-white px-10 py-4"
               >
-                Schedule Consultation
+                Schedule Free Consultation
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="border-white text-white hover:bg-white/10 px-10 py-4"
               >
-                Learn More
+                View Case Studies
               </Button>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* Service Overview */}
+      {/* 2. Intro/About Us Section */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              Comprehensive Consulting Solutions
-            </h2>
-            <p className="text-lg text-neutral-600 leading-relaxed">
-              We offer a wide range of consulting services designed to address
-              every aspect of your business. From strategic planning to
-              operational optimization, our expert team provides the guidance
-              you need to succeed.
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="animate-fade-in-left">
+              <span className="text-primary-600 font-semibold uppercase tracking-wider text-sm mb-4 block">Our Philosophy</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-8 font-primary">
+                Excellence in Financial <br />Partnership
+              </h2>
+              <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
+                We believe that accurate financial data is the foundation of every successful business decision. Our mission is to transform your complex financial processes into a streamlined growth engine.
+              </p>
+              <div className="grid grid-cols-3 gap-8 p-8 bg-primary-50 rounded-2xl">
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">15+</div>
+                  <p className="text-xs text-neutral-500 uppercase font-bold mt-1">Years Exp</p>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">500+</div>
+                  <p className="text-xs text-neutral-500 uppercase font-bold mt-1">Clients</p>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">98%</div>
+                  <p className="text-xs text-neutral-500 uppercase font-bold mt-1">Retention</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative h-[500px] rounded-[40px] overflow-hidden shadow-2xl animate-fade-in-right transform lg:rotate-2 hover:rotate-0 transition-transform duration-500">
+              <Image
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=1000&fit=crop"
+                alt="Our leadership team"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 3. Our Services/Solutions Section */}
+      <Section background="gray" spacing="lg" id="all-services">
+        <Container>
+          <div className="text-center mb-20 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 font-primary">Our Core Expertise</h2>
+            <p className="text-lg text-neutral-600">
+              Deep specialized knowledge across five critical pillars of business financial success.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {services.map((service, index) => (
-              <Link key={service.id} href={`/services/${service.slug}`}>
-                <Card hover className="p-6 h-full animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="text-primary-600 mb-4">{getIcon(service.icon)}</div>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed mb-4">
-                    {service.description}
-                  </p>
-                  <span className="text-primary-600 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                    Learn More
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
+              <Link key={service.id} href={`/services/${service.slug}`} className="group">
+                <Card hover className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors"></div>
+                  </div>
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-neutral-600 mb-8 flex-grow leading-relaxed">
+                      {service.description}
+                    </p>
+                    <div className="flex items-center text-primary-600 font-bold gap-2 group-hover:gap-4 transition-all">
+                      <span>Explore Details</span>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
                 </Card>
               </Link>
+            ))}
+            {/* Custom Solution Card */}
+            <Card className="h-full flex flex-col justify-center items-center bg-primary-900 text-white p-10 text-center border-none shadow-xl transform lg:scale-105">
+              <div className="w-16 h-16 bg-secondary-500 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Enterprise Needs?</h3>
+              <p className="text-primary-100 mb-8">We offer custom-built financial solutions for high-complexity organizations.</p>
+              <Button variant="secondary" className="w-full py-4 text-lg">Talk to a Partner</Button>
+            </Card>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4. Our Process Section */}
+      <Section background="white" spacing="lg">
+        <Container>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">How We Partner With You</h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Our refined onboarding and engagement process ensures clarity and results from day one.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-neutral-100 -z-10"></div>
+            {genericProcess.map((step, index) => (
+              <div key={index} className="bg-white p-8 rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md transition-all text-center group">
+                <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
+                  {step.step}
+                </div>
+                <h3 className="text-xl font-bold text-neutral-900 mb-3">{step.title}</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* Process Section */}
-      <Section background="gray" spacing="lg">
+      {/* 5. Why Choose Us Section */}
+      <Section background="primary" spacing="lg" className="bg-neutral-900 text-white">
         <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              Our Consulting Process
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              A proven methodology that delivers results
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop"
-                alt="Consulting process"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-8">
-              {processSteps.slice(0, 3).map((step, index) => (
-                <div key={index}>
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="text-3xl font-bold text-primary-600">
-                      {step.step}
-                    </div>
-                    <h3 className="text-xl font-semibold text-neutral-900">
-                      {step.title}
-                    </h3>
-                  </div>
-                  <p className="text-neutral-600 leading-relaxed ml-12">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 lg:order-2">
-              {processSteps.slice(3).map((step, index) => (
-                <div key={index}>
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="text-3xl font-bold text-primary-600">
-                      {step.step}
-                    </div>
-                    <h3 className="text-xl font-semibold text-neutral-900">
-                      {step.title}
-                    </h3>
-                  </div>
-                  <p className="text-neutral-600 leading-relaxed ml-12">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg lg:order-1">
-              <Image
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop"
-                alt="Team collaboration"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Benefits Section */}
-      <Section background="white" spacing="lg">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-                Why Choose Our Consulting Services
-              </h2>
-              <div className="space-y-6">
+              <span className="text-secondary-400 font-semibold uppercase tracking-wider text-sm mb-4 block">The Value Proposition</span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-10 leading-tight">Expertise You Can Trust, <br />Results You Can Measure</h2>
+              <div className="space-y-10">
                 {[
-                  {
-                    title: "Experienced Professionals",
-                    description:
-                      "Our team brings decades of combined experience across industries, ensuring you get expert guidance.",
-                  },
-                  {
-                    title: "Customized Solutions",
-                    description:
-                      "Every business is unique. We tailor our approach to your specific needs, challenges, and goals.",
-                  },
-                  {
-                    title: "Proven Methodology",
-                    description:
-                      "Our process is based on best practices and proven frameworks that deliver measurable results.",
-                  },
-                  {
-                    title: "Ongoing Support",
-                    description:
-                      "We don't just deliver a plan—we work with you to implement it and ensure long-term success.",
-                  },
-                ].map((benefit, index) => (
-                  <div key={index}>
-                    <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-neutral-600">{benefit.description}</p>
+                  { title: "Direct Access to Principals", desc: "No junior associates. You work directly with experienced financial leaders." },
+                  { title: "Scalable Infrastructure", desc: "Our systems grow with your business, from $1M to $100M+ in revenue." },
+                  { title: "Proactive Strategy", desc: "We don't just report the past; we forecast and plan for your future." },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-6">
+                    <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-secondary-400">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <p className="text-neutral-400 leading-relaxed">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
-                alt="Consulting benefits"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent flex items-end p-8">
-                <div className="text-white">
-                  <div className="text-5xl font-bold mb-2">15+</div>
-                  <div className="text-xl font-semibold mb-4">
-                    Years of Experience
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="relative h-64 rounded-3xl overflow-hidden shadow-xl">
+                    <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=1000&fit=crop" alt="Strategy" fill className="object-cover" />
                   </div>
-                  <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/20">
-                    <div>
-                      <div className="text-3xl font-bold mb-1">500+</div>
-                      <div className="text-sm opacity-90">
-                        Projects Completed
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-bold mb-1">98%</div>
-                      <div className="text-sm opacity-90">
-                        Client Satisfaction
-                      </div>
-                    </div>
+                  <div className="relative h-48 rounded-3xl overflow-hidden shadow-xl">
+                    <Image src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=1000&fit=crop" alt="Meeting" fill className="object-cover" />
                   </div>
                 </div>
+                <div className="space-y-4 pt-12">
+                  <div className="relative h-48 rounded-3xl overflow-hidden shadow-xl">
+                    <Image src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=1000&fit=crop" alt="Analysis" fill className="object-cover" />
+                  </div>
+                  <div className="relative h-64 rounded-3xl overflow-hidden shadow-xl">
+                    <Image src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=1000&fit=crop" alt="Growth" fill className="object-cover" />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary-500 text-white p-8 rounded-full shadow-2xl font-bold text-center">
+                <div className="text-3xl">99%</div>
+                <div className="text-xs uppercase">Accuracy</div>
               </div>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* CTA Section */}
+      {/* 6. Testimonial Section */}
+      <Section background="gray" spacing="lg">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <Testimonial
+              quote="Partnering with this team has completely changed our company's success story. We went from reactive firefighting to proactive growth planning in months."
+              author="Robert Chen"
+              role="Founder"
+              company="Veridian Ventures"
+            />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 7. FAQ Section */}
+      <Section background="white" spacing="lg">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center text-neutral-900 mb-12">Frequently Asked Questions</h2>
+            <FAQ items={commonFAQ} />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 8. CTA Section */}
       <Section
         background="primary"
-        spacing="lg"
-        className="bg-gradient-to-r from-primary-700 to-primary-800"
+        spacing="xl"
+        className="bg-secondary-600 text-white text-center relative overflow-hidden"
       >
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Ready to Transform Your Business?
+        <div className="absolute inset-0 bg-primary-900/10"></div>
+        <Container className="relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white leading-tight">
+              Transform Your Financial <br />Strategy Today
             </h2>
-            <p className="text-xl mb-8 text-primary-100 leading-relaxed">
-              Schedule a consultation today and discover how our consulting
-              services can help you achieve your business goals.
+            <p className="text-xl md:text-2xl mb-12 text-white/90 leading-relaxed font-medium">
+              Join 500+ businesses that have chosen excellence. Schedule your initial consultation and let's map out your growth trajectory.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-white text-primary-700 hover:bg-primary-50"
+                className="bg-white text-secondary-600 hover:bg-neutral-100 px-12 py-5 text-xl font-bold shadow-2xl"
               >
-                Schedule Consultation
+                Book My Free Call
               </Button>
-              <Link href="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                >
-                  Contact Us
-                </Button>
-              </Link>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white text-white hover:bg-white/10 px-12 py-5 text-xl font-bold"
+              >
+                Contact Sales Team
+              </Button>
             </div>
+            <p className="mt-8 text-white/70 text-sm font-semibold">
+              Comprehensive Assessment • No Commitment • Expert Insights
+            </p>
           </div>
         </Container>
       </Section>

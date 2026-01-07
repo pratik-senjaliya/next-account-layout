@@ -1,18 +1,32 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import React from "react";
+import { getServiceBySlug, getAllServices } from "@/lib/services";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { getServiceBySlug, getAllServices } from "@/lib/services";
+import { FAQ } from "@/components/ui/FAQ";
+import { Testimonial } from "@/components/ui/Testimonial";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+
+  if (!service) return {};
+
+  return genMeta({
+    title: service.title,
+    description: service.longDescription,
+  });
 }
 
 export async function generateStaticParams() {
@@ -21,108 +35,6 @@ export async function generateStaticParams() {
     slug: service.slug,
   }));
 }
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
-
-  if (!service) {
-    return genMeta({
-      title: "Service Not Found",
-      description: "The requested service could not be found.",
-    });
-  }
-
-  return genMeta({
-    title: service.title,
-    description: service.description,
-    keywords: [service.title.toLowerCase(), "services", "consulting"],
-  });
-}
-
-const getIcon = (iconName: string) => {
-  const icons: Record<string, React.ReactElement> = {
-    chart: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-        />
-      </svg>
-    ),
-    target: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-    lightning: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      </svg>
-    ),
-    dollar: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-    computer: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
-    ),
-  };
-
-  return icons[iconName] || icons.chart;
-};
 
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params;
@@ -134,15 +46,15 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <Section
         background="white"
         spacing="xl"
-        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden"
+        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden py-24 md:py-32 lg:py-40"
       >
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-20">
           <Image
-            src={service.image}
+            src={service.heroImage}
             alt={service.title}
             fill
             className="object-cover"
@@ -157,152 +69,232 @@ export default async function ServicePage({ params }: PageProps) {
               { label: "Services", href: "/services" },
               { label: service.title },
             ]}
-            className="mb-6 text-primary-200"
+            className="mb-8 text-primary-200"
           />
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary-500/20 rounded-full mb-6">
-              <div className="text-secondary-400">{getIcon(service.icon)}</div>
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
+          <div className="max-w-4xl animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
               {service.title}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-              {service.description}
+            <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
+              {service.longDescription}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6">
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white animate-scale-in"
+                className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
               >
-                Schedule Consultation
+                Schedule Free Consultation
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
               >
-                Learn More
+                Learn Our Methodology
               </Button>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* Service Overview */}
-      <Section background="white" spacing="lg">
+      {/* 2. Intro/About us Section */}
+      <Section background="white" spacing="lg" className="py-24 md:py-32">
         <Container>
-          <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              About {service.title}
-            </h2>
-            <p className="text-lg text-neutral-600 leading-relaxed">
-              {service.longDescription}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="animate-fade-in-left order-2 lg:order-1">
+              <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Overview</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-8 leading-tight font-primary">
+                {service.intro.title}
+              </h2>
+              <p className="text-xl text-neutral-600 mb-12 leading-relaxed">
+                {service.intro.content}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                {service.intro.stats.map((stat, i) => (
+                  <div key={i} className="p-6 bg-neutral-50 rounded-2xl border-l-4 border-primary-600">
+                    <div className="text-4xl font-bold text-primary-700 mb-2">{stat.value}</div>
+                    <p className="text-sm text-neutral-500 uppercase font-bold tracking-wider">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative h-[600px] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
+              <Image
+                src={service.image}
+                alt={`${service.title} specialists`}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/20 to-transparent"></div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 3. Our services/solutions Section */}
+      <Section background="gray" spacing="lg" className="py-24 md:py-32">
+        <Container>
+          <div className="text-center mb-20 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Service Capabilities</h2>
+            <p className="text-lg text-neutral-600 leading-relaxed font-medium">
+              Comprehensive and specialized {service.title} solutions built
+              around your business's specific requirements.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <h3 className="text-2xl font-semibold text-neutral-900 mb-6">
-                Key Features
-              </h3>
-              <ul className="space-y-4">
-                {service.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg
-                        className="w-4 h-4 text-primary-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-neutral-600 leading-relaxed">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {service.features.map((feature, index) => (
+              <Card key={index} hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl">
+                <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
+                  <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
 
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <h3 className="text-2xl font-semibold text-neutral-900 mb-6">
-                Benefits
-              </h3>
-              <ul className="space-y-4">
-                {service.benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-secondary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg
-                        className="w-4 h-4 text-secondary-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-neutral-600 leading-relaxed">
-                      {benefit}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* 4. Our Process Section */}
+      <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
+        <Container>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Proven Implementation</h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto font-medium">
+              We follow a rigorous methodology to ensure your {service.title} transition is effortless and effective.
+            </p>
           </div>
 
-          <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+            <div className="hidden lg:block absolute top-[60px] left-0 w-full h-1 bg-neutral-100 -z-10"></div>
+            {service.process.map((step, index) => (
+              <div key={index} className="text-center group">
+                <div className="w-24 h-24 bg-white border-8 border-primary-50 text-primary-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-8 group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all duration-500 shadow-xl">
+                  {step.step}
+                </div>
+                <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-700 transition-colors">{step.title}</h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* 5. Why choose us Section */}
+      <Section background="primary" spacing="lg" className="bg-neutral-900 text-white py-24 md:py-32 overflow-hidden">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
+            <div>
+              <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
+              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {service.title} <br />Advantage</h2>
+              <div className="space-y-12">
+                {service.whyChooseUs.map((item, i) => (
+                  <div key={i} className="flex gap-8 group">
+                    <div className="flex-shrink-0 w-16 h-16 bg-white/5 rounded-[20px] flex items-center justify-center text-secondary-400 border border-white/10 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300">
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-bold mb-3 text-white">{item.title}</h4>
+                      <p className="text-lg text-neutral-400 leading-relaxed max-w-md">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative h-[600px] lg:h-[700px]">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+              <div className="relative h-full rounded-[60px] overflow-hidden shadow-2xl border-8 border-white/5">
+                <Image
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=1200&fit=crop"
+                  alt="Client success story"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-900 via-primary-900/40 to-transparent p-12">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-1 bg-secondary-500"></div>
+                    <span className="text-secondary-400 font-bold uppercase tracking-widest text-xs">Innovation Partner</span>
+                  </div>
+                  <p className="text-2xl text-white font-bold leading-tight">
+                    Driving performance through <br />strategic financial leadership.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 6. Testimonial Section */}
+      <Section background="gray" spacing="lg" className="py-24 md:py-32">
+        <Container>
+          <div className="max-w-5xl mx-auto">
+            <Testimonial
+              quote={service.testimonial.quote}
+              author={service.testimonial.author}
+              role={service.testimonial.role}
+              company={service.testimonial.company}
             />
           </div>
         </Container>
       </Section>
 
-      {/* CTA Section */}
+      {/* 7. FAQ Section */}
+      <Section background="white" spacing="lg" className="py-24 md:py-32">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Expert Q&A</h2>
+              <p className="text-lg text-neutral-600 font-medium">
+                Detailed answers to the most common questions regarding our {service.title} services.
+              </p>
+            </div>
+            <FAQ items={service.faqs} />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 8. CTA Section */}
       <Section
         background="primary"
-        spacing="lg"
-        className="bg-gradient-to-r from-primary-700 to-primary-800"
+        spacing="xl"
+        className="bg-secondary-600 text-white text-center relative overflow-hidden py-32 md:py-40"
       >
-        <Container>
-          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Ready to Get Started with {service.title}?
+        <div className="absolute inset-0 bg-primary-900/20"></div>
+        <Container className="relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-7xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
+              Ready to Upgrade Your <br />{service.title}?
             </h2>
-            <p className="text-xl mb-8 text-primary-100 leading-relaxed">
-              Schedule a consultation today and discover how our {service.title.toLowerCase()} services can help you achieve your business goals.
+            <p className="text-xl md:text-3xl mb-14 text-white/95 leading-relaxed font-medium">
+              Join elite businesses that trust our experts with their growth.
+              Schedule your strategy session today.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center">
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-white text-primary-700 hover:bg-primary-50"
+                className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
               >
                 Schedule Consultation
               </Button>
-              <Link href="/contact">
+              <Link href="/services">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-white text-white hover:bg-white/10"
+                  className="border-white text-white hover:bg-white/10 px-16 py-6 text-2xl font-bold rounded-2xl"
                 >
-                  Contact Us
+                  See All Solutions
                 </Button>
               </Link>
             </div>
@@ -312,4 +304,3 @@ export default async function ServicePage({ params }: PageProps) {
     </>
   );
 }
-
