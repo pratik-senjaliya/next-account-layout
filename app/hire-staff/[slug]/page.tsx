@@ -86,7 +86,7 @@ export default async function HireStaffPage({ params }: PageProps) {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
+                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
                 >
                   Schedule Free Consultation
                 </Button>
@@ -95,7 +95,7 @@ export default async function HireStaffPage({ params }: PageProps) {
                 targetId="methodology"
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10 px-10 py-4"
+                className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
               >
                 Learn Our Methodology
               </ScrollButton>
@@ -264,7 +264,7 @@ export default async function HireStaffPage({ params }: PageProps) {
                 <Button
                   variant="primary"
                   size="lg"
-                  className="bg-white text-primary-600 hover:bg-neutral-100 shadow-2xl text-lg px-10 py-6 w-full sm:w-auto"
+                  className="bg-white text-primary-600 hover:bg-neutral-100 shadow-2xl text-lg px-10 py-6 w-full sm:w-auto border-2 border-transparent"
                 >
                   Start Your Free Trial
                 </Button>
@@ -335,7 +335,7 @@ export default async function HireStaffPage({ params }: PageProps) {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
+                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
                   Schedule Consultation
                 </Button>

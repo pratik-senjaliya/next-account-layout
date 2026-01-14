@@ -139,7 +139,7 @@ export default function HomePage() {
                   <Button
                     variant="secondary"
                     size="lg"
-                    className="bg-secondary-500 hover:bg-secondary-600 text-white w-full sm:w-auto"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white w-full sm:w-auto border-2 border-transparent"
                   >
                     Get Started
                   </Button>
@@ -472,7 +472,7 @@ export default function HomePage() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="bg-white text-primary-700 hover:bg-primary-50"
+                  className="bg-white text-primary-700 hover:bg-primary-50 border-2 border-transparent"
                 >
                   Schedule a Call
                 </Button>
