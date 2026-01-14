@@ -10,6 +10,8 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
+import { ExperienceTabs } from "@/components/ui/ExperienceTabs";
+import { SoftwareGrid } from "@/components/ui/SoftwareGrid";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -132,59 +134,62 @@ export default async function HireStaffPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* 3. Our services/solutions Section */}
-      <Section background="gray" spacing="lg" className="py-24 md:py-32">
+
+      {/* 3.5. Experience Levels Section - NEW */}
+      <Section background="white" spacing="lg" className="py-24 md:py-32 bg-gradient-to-b from-neutral-50 to-white">
         <Container>
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Service Capabilities</h2>
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Experience Levels</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Choose Your Perfect Match</h2>
             <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-              Comprehensive and specialized {position.title} solutions built
-              around your business's specific requirements.
+              From junior associates to senior managers, we have professionals at every experience level to match your specific needs and budget.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {position.features.map((feature, index) => (
-              <Card key={index} hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl">
-                <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
-                  <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <ExperienceTabs experienceLevels={position.experienceLevels} />
         </Container>
       </Section>
 
-      {/* 4. Our Process Section */}
+      {/* 4. Getting Started / Process Section - UPDATED */}
       <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
         <Container>
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Proven Implementation</h2>
+            <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">How It Works</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Getting Started</h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto font-medium">
               We follow a rigorous methodology to ensure your {position.title} transition is effortless and effective.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
             <div className="hidden lg:block absolute top-[60px] left-0 w-full h-1 bg-neutral-100 -z-10"></div>
-            {position.process.map((step, index) => (
+            {position.gettingStarted.map((step, index) => (
               <div key={index} className="text-center group">
                 <div className="w-24 h-24 bg-white border-8 border-primary-50 text-primary-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-8 group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all duration-500 shadow-xl">
                   {step.step}
                 </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-700 transition-colors">{step.title}</h3>
-                <p className="text-neutral-600 leading-relaxed">
+                <h3 className="text-xl font-bold text-neutral-900 mb-4 group-hover:text-primary-700 transition-colors">{step.title}</h3>
+                <p className="text-neutral-600 leading-relaxed text-sm">
                   {step.description}
                 </p>
               </div>
             ))}
           </div>
+        </Container>
+      </Section>
+
+      {/* 4.5. Software Integration Section - NEW */}
+      <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
+        <Container>
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Software Expertise</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Seamless Integration</h2>
+            <p className="text-lg text-neutral-600 leading-relaxed font-medium">
+              Our professionals are proficient in all major platforms and tools. No need to change your existing workflow.
+            </p>
+          </div>
+
+          <SoftwareGrid categories={position.softwareCategories} />
         </Container>
       </Section>
 
@@ -230,6 +235,43 @@ export default async function HireStaffPage({ params }: PageProps) {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 5.5. Risk-Free Trial Section - NEW */}
+      <Section background="white" spacing="lg" className="py-24 md:py-32 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
+        <Container>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 mb-6">
+              <span className="text-sm font-bold uppercase tracking-wider">{position.trial.duration} Risk-Free</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">Try Before You Commit</h2>
+            <p className="text-xl md:text-2xl text-primary-100 mb-12 leading-relaxed max-w-3xl mx-auto">
+              {position.trial.description}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="bg-white text-primary-600 hover:bg-neutral-100 shadow-2xl text-lg px-10 py-6 w-full sm:w-auto"
+                >
+                  Start Your Free Trial
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="border-2 border-white text-white hover:bg-white hover:text-primary-600 text-lg px-10 py-6 w-full sm:w-auto"
+                >
+                  Schedule a Call
+                </Button>
+              </Link>
+            </div>
             </div>
           </div>
         </Container>
