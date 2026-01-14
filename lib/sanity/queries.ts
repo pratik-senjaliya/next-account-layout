@@ -284,3 +284,27 @@ export async function getHomePage() {
 
   return client.fetch(query)
 }
+
+// ==================== ABOUT PAGE ====================
+
+export async function getAboutPage() {
+  const query = `*[_type == "aboutPage"][0] {
+    heroTitle,
+    heroTitleHighlight,
+    heroDescription,
+    "heroImage": heroImage.asset->url,
+    whatWeDoTitle,
+    whatWeDoDescription,
+    stats,
+    timelineTitle,
+    timelineEvents,
+    missionTitle,
+    missionDescription,
+    missionEmphasis,
+    "missionImage": missionImage.asset->url,
+    valuesTitle,
+    valuesDescription,
+    values
+  }`
+  return client.fetch(query)
+}
