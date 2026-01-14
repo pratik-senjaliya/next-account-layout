@@ -149,7 +149,21 @@ export default defineType({
             name: 'partners',
             title: 'Partner Names',
             type: 'array',
-            of: [{ type: 'string' }],
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'name', type: 'string', title: 'Partner Name' }),
+                        defineField({ name: 'logo', type: 'image', title: 'Logo', options: { hotspot: true } }),
+                    ],
+                    preview: {
+                        select: {
+                            title: 'name',
+                            media: 'logo',
+                        },
+                    },
+                },
+            ],
             group: 'partners',
         }),
 

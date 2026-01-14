@@ -281,7 +281,10 @@ export async function getHomePage() {
     },
     partnersTitle,
     partnersDescription,
-    partners,
+    partners[] {
+      name,
+      "logo": logo.asset->url
+    },
     blogTitle,
     blogDescription,
     faqTitle,

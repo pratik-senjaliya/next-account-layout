@@ -132,12 +132,12 @@ export default async function HomePage() {
     partnersTitle: "Trusted Partners",
     partnersDescription: "We work with industry-leading platforms",
     partners: [
-      "Shopify",
-      "Square",
-      "QuickBooks",
-      "Salesforce",
-      "Microsoft",
-      "Google",
+      { name: "Shopify", logo: "https://cdn.worldvectorlogo.com/logos/shopify.svg" },
+      { name: "Square", logo: "https://cdn.worldvectorlogo.com/logos/square-1.svg" },
+      { name: "QuickBooks", logo: "https://cdn.worldvectorlogo.com/logos/quickbooks.svg" },
+      { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
+      { name: "Microsoft", logo: "https://cdn.worldvectorlogo.com/logos/microsoft.svg" },
+      { name: "Google", logo: "https://cdn.worldvectorlogo.com/logos/google-1-1.svg" },
     ],
     blogTitle: "Explore Our Latest Resources",
     blogDescription: "From the Blog",
@@ -313,7 +313,6 @@ export default async function HomePage() {
             </p>
           </div>
 
-
           <div className="space-y-20 md:space-y-28">
             {data.features?.map((feature: any, index: number) => (
               <div
@@ -352,16 +351,25 @@ export default async function HomePage() {
               {data.partnersDescription}
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 items-center justify-items-center">
-            {data.partners?.map((partner: string, i: number) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center">
+            {data.partners?.map((partner: any, i: number) => (
               <div
                 key={i}
-                className="w-full h-20 bg-white rounded-lg flex items-center justify-center border border-neutral-200 shadow-sm hover:shadow-md transition-all hover:scale-105 animate-fade-in-up"
+                className="relative w-full h-16 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 animate-fade-in-up flex items-center justify-center"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <span className="text-sm text-neutral-600 font-semibold">
-                  {partner}
-                </span>
+                {partner && partner.logo ? (
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name || "Partner Logo"}
+                    fill
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="text-sm font-semibold text-neutral-500 border border-neutral-300 rounded px-3 py-2">
+                    {partner?.name || (typeof partner === 'string' ? partner : "Partner")}
+                  </span>
+                )}
               </div>
             ))}
           </div>
