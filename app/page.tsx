@@ -119,7 +119,7 @@ export default function HomePage() {
             priority
           />
         </div>
-        
+
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
@@ -135,20 +135,24 @@ export default function HomePage() {
                 that work together to help your business succeed and grow.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="bg-secondary-500 hover:bg-secondary-600 text-white"
-                >
-                  Get Started
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                >
-                  Schedule a Call
-                </Button>
+                <Link href="/services">
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white w-full sm:w-auto"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
+                  >
+                    Schedule a Call
+                  </Button>
+                </Link>
               </div>
               <div className="flex flex-wrap items-center gap-8 text-sm md:text-base text-primary-200">
                 <div className="flex items-center gap-2">
@@ -361,7 +365,7 @@ export default function HomePage() {
                 image:
                   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
                 slug: "10-essential-strategies-business-growth",
-              id: "1",
+                id: "1",
               },
               {
                 title: "How to Optimize Your Business Operations",
@@ -372,7 +376,7 @@ export default function HomePage() {
                 image:
                   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
                 slug: "optimize-business-operations",
-              id: "2",
+                id: "2",
               },
               {
                 title: "Financial Planning: A Complete Guide",
@@ -383,7 +387,7 @@ export default function HomePage() {
                 image:
                   "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop",
                 slug: "financial-planning-guide-small-business",
-              id: "3",
+                id: "3",
               },
             ].map((post, index) => (
               <Link
@@ -458,13 +462,15 @@ export default function HomePage() {
               grow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-white text-primary-700 hover:bg-primary-50"
-              >
-                Schedule a Call
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-primary-700 hover:bg-primary-50"
+                >
+                  Schedule a Call
+                </Button>
+              </Link>
               <Link href="/services">
                 <Button
                   variant="outline"

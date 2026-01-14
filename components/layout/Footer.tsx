@@ -2,21 +2,28 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "./Container";
 
+import { industries } from "@/lib/industries";
+import { hireStaffPositions as hireStaff } from "@/lib/hire-staff";
+
 const services = [
   { name: "Bookkeeping & Accounting", href: "/services/bookkeeping-accounting" },
   { name: "Tax Preparation", href: "/services/tax-preparation" },
   { name: "Payroll and Compliance", href: "/services/payroll-compliance" },
   { name: "Audit & Assurance", href: "/services/audit-assurance" },
   { name: "Virtual CFO & FP&A", href: "/services/virtual-cfo-fpa" },
+  { name: "View All Services", href: "/services" },
 ];
 
 const resources = [
-  { name: "FAQ", href: "/services#faq" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Blog", href: "/resources" },
 ];
 
 const company = [
   { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const legal = [
@@ -31,9 +38,9 @@ export const Footer: React.FC = () => {
       <div className="border-b border-neutral-800">
         <Container>
           <div className="py-12 md:py-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
-              {/* Company Info */}
-              <div className="lg:col-span-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-8">
+              {/* Company Info - Spans 2 cols on large screens */}
+              <div className="col-span-2 lg:col-span-2">
                 <Link href="/" className="inline-block mb-4">
                   <span className="text-2xl font-bold text-white">
                     YourCompany
@@ -105,13 +112,51 @@ export const Footer: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Resources */}
+              {/* Industries */}
               <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
-                  Resources
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                  Industries
                 </h3>
                 <ul className="space-y-3">
-                  {resources.map((item) => (
+                  {industries.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/industries/${item.slug}`}
+                        className="text-sm hover:text-white transition-colors text-neutral-400"
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Hire Staff */}
+              <div>
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                  Hire Staff
+                </h3>
+                <ul className="space-y-3">
+                  {hireStaff.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/hire-staff/${item.slug}`}
+                        className="text-sm hover:text-white transition-colors text-neutral-400"
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Company & Resources */}
+              <div>
+                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                  Company
+                </h3>
+                <ul className="space-y-3">
+                  {company.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
@@ -121,16 +166,10 @@ export const Footer: React.FC = () => {
                       </Link>
                     </li>
                   ))}
-                </ul>
-              </div>
-
-              {/* Company */}
-              <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
-                  Company
-                </h3>
-                <ul className="space-y-3">
-                  {company.map((item) => (
+                  <li className="pt-4 border-t border-neutral-800 mt-4">
+                    <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold block mb-3">Resources</span>
+                  </li>
+                  {resources.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}

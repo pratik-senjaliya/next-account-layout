@@ -4,6 +4,7 @@ import React from "react";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
+import { ScrollButton } from "@/components/ui/ScrollButton";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
@@ -79,20 +80,23 @@ export default function ServicesHubPage() {
               we provide the expertise your business needs at every stage.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white px-10 py-4"
-              >
-                Schedule Free Consultation
-              </Button>
-              <Button
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-10 py-4"
+                >
+                  Schedule Free Consultation
+                </Button>
+              </Link>
+              <ScrollButton
+                targetId="all-services"
                 variant="outline"
                 size="lg"
                 className="border-white text-white hover:bg-white/10 px-10 py-4"
               >
                 View Case Studies
-              </Button>
+              </ScrollButton>
             </div>
           </div>
         </Container>
@@ -314,20 +318,24 @@ export default function ServicesHubPage() {
               Join 500+ businesses that have chosen excellence. Schedule your initial consultation and let's map out your growth trajectory.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-white text-secondary-600 hover:bg-neutral-100 px-12 py-5 text-xl font-bold shadow-2xl"
-              >
-                Book My Free Call
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10 px-12 py-5 text-xl font-bold"
-              >
-                Contact Sales Team
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-12 py-5 text-xl font-bold shadow-2xl"
+                >
+                  Book My Free Call
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white/10 px-12 py-5 text-xl font-bold"
+                >
+                  Contact Sales Team
+                </Button>
+              </Link>
             </div>
             <p className="mt-8 text-white/70 text-sm font-semibold">
               Comprehensive Assessment • No Commitment • Expert Insights

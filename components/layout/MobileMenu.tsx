@@ -181,7 +181,14 @@ export const MobileMenu: React.FC<{
   isOpen: boolean;
   onClose: () => void;
 }> = ({ isOpen, onClose }) => {
-  const [expandedService, setExpandedService] = useState(false);
+  const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
+
+  const toggleMenu = (menuName: string) => {
+    setExpandedMenus((prev) => ({
+      ...prev,
+      [menuName]: !prev[menuName],
+    }));
+  };
 
   return (
     <>
@@ -231,17 +238,18 @@ export const MobileMenu: React.FC<{
           <nav className="flex-1 overflow-y-auto">
             {navigation.map((item) => {
               if (item.submenu) {
+                const isExpanded = expandedMenus[item.name] || false;
                 return (
                   <div key={item.href}>
                     <button
-                      onClick={() => setExpandedService(!expandedService)}
+                      onClick={() => toggleMenu(item.name)}
                       className="w-full px-4 py-3 text-left flex items-center justify-between text-base font-medium border-b border-neutral-200 text-neutral-700 hover:text-primary-600 hover:bg-neutral-50 transition-colors"
                     >
                       <span>{item.name}</span>
                       <svg
                         className={cn(
-                          "w-5 h-5 text-neutral-600 flex-shrink-0 transition-transform",
-                          expandedService && "rotate-180"
+                          "w-5 h-5 text-neutral-600 flex-shrink-0 transition-transform duration-200",
+                          isExpanded && "rotate-180"
                         )}
                         fill="none"
                         stroke="currentColor"
@@ -255,23 +263,27 @@ export const MobileMenu: React.FC<{
                         />
                       </svg>
                     </button>
-                    {expandedService && (
-                      <div className="bg-neutral-50 border-b border-neutral-200">
-                        {item.submenu.map((subItem) => (
-                          <div key={subItem.href} onClick={onClose}>
-                            <Link
-                              href={subItem.href}
-                              className="flex items-center gap-3 px-8 py-3 text-sm text-neutral-600 hover:text-primary-600 hover:bg-primary-50 transition-colors"
-                            >
-                              <div className="text-primary-500">
-                                {subItem.icon}
-                              </div>
-                              <span>{subItem.name}</span>
-                            </Link>
+
+                    <div
+                      className={cn(
+                        "overflow-hidden transition-all duration-300 ease-in-out bg-neutral-50",
+                        isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                      )}
+                    >
+                      {item.submenu.map((subItem) => (
+                        <Link
+                          key={subItem.href}
+                          href={subItem.href}
+                          onClick={onClose}
+                          className="flex items-center gap-3 px-8 py-3 text-sm text-neutral-600 hover:text-primary-600 hover:bg-primary-50 transition-colors"
+                        >
+                          <div className="text-primary-500">
+                            {subItem.icon}
                           </div>
-                        ))}
-                      </div>
-                    )}
+                          <span>{subItem.name}</span>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 );
               }

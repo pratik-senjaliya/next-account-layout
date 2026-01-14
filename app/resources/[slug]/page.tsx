@@ -1,54 +1,34 @@
-import type { Metadata } from "next";
+"use client";
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { generateMetadata as genMeta } from "@/lib/seo";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { ReadingProgress } from "@/components/ui/ReadingProgress";
+import { ShareButtons } from "@/components/ui/ShareButtons";
 import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/blog";
 import Link from "next/link";
+import { use } from "react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const posts = getAllBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
-
-  if (!post) {
-    return genMeta({
-      title: "Post Not Found",
-      description: "The requested blog post could not be found.",
-    });
-  }
-
-  return genMeta({
-    title: post.title,
-    description: post.excerpt,
-    keywords: [post.category.toLowerCase(), "blog", "article"],
-  });
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
+export default function BlogPostPage({ params }: PageProps) {
+  const { slug } = use(params);
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
+  const currentUrl = `https://yoursite.com/resources/${post.slug}`; // Update with actual domain
+
   return (
     <>
+      <ReadingProgress />
+
       {/* Hero Section */}
       <Section
         background="white"
@@ -147,11 +127,44 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Content */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="max-w-3xl mx-auto">
-            <article
-              className="prose prose-lg max-w-none animate-fade-in-up"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              {/* Main Content */}
+              <div className="lg:col-span-8">
+                <article
+                  className="prose prose-lg max-w-none animate-fade-in-up
+                    prose-headings:font-bold prose-headings:text-neutral-900
+                    prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:scroll-mt-20
+                    prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+                    prose-p:text-neutral-700 prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6
+                    prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-neutral-900 prose-strong:font-semibold
+                    prose-ul:my-6 prose-li:my-2
+                    first:prose-p:text-xl first:prose-p:text-neutral-800 first:prose-p:leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
+
+              {/* Sidebar - Share Buttons (Sticky) */}
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200">
+                    <ShareButtons title={post.title} url={currentUrl} />
+                  </div>
+
+                  {/* Back to Top Button */}
+                  <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 transition-all font-medium"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                    </svg>
+                    Back to Top
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </Section>

@@ -218,7 +218,7 @@ export const Header: React.FC = () => {
               <p className="text-center">
                 <strong>Free Consultation</strong> when you start an annual plan
                 <Link
-                  href="#schedule-call"
+                  href="/contact"
                   className="ml-2 font-semibold underline hover:no-underline"
                 >
                   Learn More →
@@ -399,12 +399,14 @@ export const Header: React.FC = () => {
                                   Let our expert team handle your finances while you focus on what you do best.
                                 </p>
                               </div>
-                              <Button
-                                size="sm"
-                                className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-xs font-bold"
-                              >
-                                Free Consultation
-                              </Button>
+                              <Link href="/contact" className="w-full">
+                                <Button
+                                  size="sm"
+                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-xs font-bold"
+                                >
+                                  Free Consultation
+                                </Button>
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -422,16 +424,15 @@ export const Header: React.FC = () => {
 
             {/* CTA Button & Mobile Menu */}
             <div className="flex items-center gap-4">
-              <Button
-                variant="primary"
-                size="sm"
-                className="hidden md:inline-flex bg-secondary-600 hover:bg-secondary-700"
-                onClick={() => {
-                  // Handle schedule call
-                }}
-              >
-                Schedule a Call
-              </Button>
+              <Link href="/contact" className="hidden md:inline-flex">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="bg-secondary-600 hover:bg-secondary-700"
+                >
+                  Schedule a Call
+                </Button>
+              </Link>
 
               {/* Mobile Menu Button */}
               <button

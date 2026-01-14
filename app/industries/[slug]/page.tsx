@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { ScrollButton } from "@/components/ui/ScrollButton";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
@@ -80,20 +81,23 @@ export default async function IndustryPage({ params }: PageProps) {
               {industry.longDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
-              >
-                Schedule Free Consultation
-              </Button>
-              <Button
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
+                >
+                  Schedule Free Consultation
+                </Button>
+              </Link>
+              <ScrollButton
+                targetId="methodology"
                 variant="outline"
                 size="lg"
                 className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
               >
                 Learn Our Methodology
-              </Button>
+              </ScrollButton>
             </div>
           </div>
         </Container>
@@ -271,13 +275,15 @@ export default async function IndustryPage({ params }: PageProps) {
               Schedule your strategy session today.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
-              >
-                Schedule Consultation
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
+                >
+                  Schedule Consultation
+                </Button>
+              </Link>
               <Link href="/industrys">
                 <Button
                   variant="outline"

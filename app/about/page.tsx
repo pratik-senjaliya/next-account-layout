@@ -256,23 +256,23 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Link href="/careers">
+            <Link href="/industries">
               <Card hover className="p-6 text-center">
                 <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                  Careers
+                  Industries
                 </h3>
                 <p className="text-neutral-600">
-                  Join our team and help shape the future of business services
+                  Explore how we tailor our services to your specific industry needs
                 </p>
               </Card>
             </Link>
-            <Link href="/press">
+            <Link href="/hire-staff">
               <Card hover className="p-6 text-center">
                 <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                  Press
+                  Hire Staff
                 </h3>
                 <p className="text-neutral-600">
-                  Latest news and press releases about our company
+                  Find the perfect professionals to join your team remotely or on-site
                 </p>
               </Card>
             </Link>

@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
+import { ServiceAreasAccordion } from "@/components/ui/ServiceAreasAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -79,20 +80,24 @@ export default async function ServicePage({ params }: PageProps) {
               {service.longDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
-              >
-                Schedule Free Consultation
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
-              >
-                Learn Our Methodology
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl"
+                >
+                  Schedule Free Consultation
+                </Button>
+              </Link>
+              <Link href="#methodology">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
+                >
+                  Learn Our Methodology
+                </Button>
+              </Link>
             </div>
           </div>
         </Container>
@@ -132,32 +137,42 @@ export default async function ServicePage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* 3. Our services/solutions Section */}
+      {/* 3. Service Areas / Service Capabilities Section */}
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
           <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Service Capabilities</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+              {service.serviceAreas && service.serviceAreas.length > 0
+                ? 'Comprehensive Service Delivery'
+                : 'Service Capabilities'}
+            </h2>
             <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-              Comprehensive and specialized {service.title} solutions built
-              around your business's specific requirements.
+              {service.serviceAreas && service.serviceAreas.length > 0
+                ? `Detailed breakdown of our ${service.title} expertise and deliverables.`
+                : `Comprehensive and specialized ${service.title} solutions built around your business's specific requirements.`}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {service.features.map((feature, index) => (
-              <Card key={index} hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl">
-                <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
-                  <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
+          {/* Conditional: Show ServiceAreasAccordion if data exists, otherwise show features grid */}
+          {service.serviceAreas && service.serviceAreas.length > 0 ? (
+            <ServiceAreasAccordion serviceAreas={service.serviceAreas} />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {service.features.map((feature, index) => (
+                <Card key={index} hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl">
+                  <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
+                    <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </Container>
       </Section>
 
@@ -281,13 +296,15 @@ export default async function ServicePage({ params }: PageProps) {
               Schedule your strategy session today.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
-              >
-                Schedule Consultation
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all"
+                >
+                  Schedule Consultation
+                </Button>
+              </Link>
               <Link href="/services">
                 <Button
                   variant="outline"
