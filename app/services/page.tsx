@@ -10,8 +10,11 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
-import { getAllServices } from "@/lib/services";
+import { getAllServices } from "@/lib/sanity/queries";
 import Link from "next/link";
+
+// Enable ISR - revalidate every 60 seconds
+export const revalidate = 60;
 
 export const metadata: Metadata = genMeta({
   title: "Professional Services Overview",
@@ -19,8 +22,8 @@ export const metadata: Metadata = genMeta({
     "Discover our full suite of financial, tax, and strategic business services designed to help you scale efficiently.",
 });
 
-export default function ServicesHubPage() {
-  const services = getAllServices();
+export default async function ServicesHubPage() {
+  const services = await getAllServices();
 
   const commonFAQ = [
     {
@@ -152,7 +155,7 @@ export default function ServicesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {services.map((service, index) => (
+            {services.map((service: any, index: number) => (
               <div key={service.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <Link href={`/services/${service.slug}`} className="group h-full block">
                   <Card hover className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">

@@ -1,0 +1,153 @@
+import { defineType, defineField } from 'sanity'
+
+export default defineType({
+    name: 'industry',
+    title: 'Industry',
+    type: 'document',
+    groups: [
+        { name: 'hero', title: 'Hero Section' },
+        { name: 'intro', title: 'Intro Section' },
+        { name: 'content', title: 'Main Content' },
+    ],
+    fields: [
+        defineField({
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+            group: 'hero',
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: 'slug',
+            title: 'Slug',
+            type: 'slug',
+            options: { source: 'title' },
+            group: 'hero',
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: 'description',
+            title: 'Short Description',
+            type: 'text',
+            rows: 3,
+            group: 'hero',
+        }),
+        defineField({
+            name: 'longDescription',
+            title: 'Long Description',
+            type: 'text',
+            rows: 4,
+            group: 'hero',
+        }),
+        defineField({
+            name: 'icon',
+            title: 'Icon Name',
+            type: 'string',
+            group: 'hero',
+        }),
+        defineField({
+            name: 'heroImage',
+            title: 'Hero Image',
+            type: 'image',
+            options: { hotspot: true },
+            group: 'hero',
+        }),
+        defineField({
+            name: 'image',
+            title: 'Intro Image',
+            type: 'image',
+            options: { hotspot: true },
+            group: 'intro',
+        }),
+        defineField({
+            name: 'introTitle',
+            title: 'Intro Title',
+            type: 'string',
+            group: 'intro',
+        }),
+        defineField({
+            name: 'introContent',
+            title: 'Intro Content',
+            type: 'text',
+            group: 'intro',
+        }),
+        defineField({
+            name: 'introStats',
+            title: 'Intro Stats',
+            type: 'array',
+            of: [{ type: 'stat' }],
+            group: 'intro',
+        }),
+        // Industry Specific: Sub-Industries
+        defineField({
+            name: 'subIndustries',
+            title: 'Sub-Industries',
+            type: 'array',
+            group: 'content',
+            of: [
+                {
+                    type: 'object',
+                    name: 'subIndustry',
+                    fields: [
+                        defineField({ name: 'name', type: 'string', title: 'Name' }),
+                        defineField({ name: 'focus', type: 'string', title: 'Focus' }),
+                        defineField({ name: 'bookkeeping', type: 'array', title: 'Bookkeeping', of: [{ type: 'string' }] }),
+                        defineField({ name: 'accounting', type: 'array', title: 'Accounting', of: [{ type: 'string' }] }),
+                        defineField({ name: 'payroll', type: 'array', title: 'Payroll', of: [{ type: 'string' }] }),
+                        defineField({ name: 'taxPreparation', type: 'array', title: 'Tax Preparation', of: [{ type: 'string' }] }),
+                        defineField({ name: 'softwareStack', type: 'array', title: 'Software Stack', of: [{ type: 'string' }] }),
+                    ],
+                },
+            ],
+        }),
+        defineField({
+            name: 'industryBenefits',
+            title: 'Industry Benefits',
+            type: 'array',
+            of: [{ type: 'feature' }],
+            group: 'content',
+        }),
+        defineField({
+            name: 'gettingStarted',
+            title: 'Getting Started Steps',
+            type: 'array',
+            of: [{ type: 'processStep' }],
+            group: 'content',
+        }),
+        // Fallback/standard fields
+        defineField({
+            name: 'features',
+            title: 'Features (General)',
+            type: 'array',
+            of: [{ type: 'feature' }],
+            group: 'content',
+        }),
+        defineField({
+            name: 'process',
+            title: 'Process (General)',
+            type: 'array',
+            of: [{ type: 'processStep' }],
+            group: 'content',
+        }),
+        defineField({
+            name: 'whyChooseUs',
+            title: 'Why Choose Us (General)',
+            type: 'array',
+            of: [{ type: 'feature' }],
+            group: 'content',
+        }),
+        defineField({
+            name: 'testimonial',
+            title: 'Testimonial',
+            type: 'testimonial',
+            group: 'content',
+        }),
+        defineField({
+            name: 'faqs',
+            title: 'FAQs',
+            type: 'array',
+            of: [{ type: 'faq' }],
+            group: 'content',
+        }),
+    ],
+})
