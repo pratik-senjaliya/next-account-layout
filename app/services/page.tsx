@@ -10,20 +10,39 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
-import { getAllServices } from "@/lib/sanity/queries";
+import { getAllServices, getServicesPage } from "@/lib/sanity/queries";
 import Link from "next/link";
 
 // Enable ISR - revalidate every 60 seconds
 export const revalidate = 60;
 
-export const metadata: Metadata = genMeta({
-  title: "Professional Services Overview",
-  description:
-    "Discover our full suite of financial, tax, and strategic business services designed to help you scale efficiently.",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const sanityData = await getServicesPage().catch(() => null);
+
+  if (sanityData?.seo) {
+    return genMeta({
+      title: sanityData.seo.metaTitle || "Professional Services Overview",
+      description: sanityData.seo.metaDescription,
+      keywords: sanityData.seo.metaKeywords,
+      ogImage: sanityData.seo.openGraphImage
+    });
+  }
+
+  return genMeta({
+    title: "Professional Services Overview",
+    description:
+      "Discover our full suite of financial, tax, and strategic business services designed to help you scale efficiently.",
+  });
+}
 
 export default async function ServicesHubPage() {
-  const services = await getAllServices();
+  const [services = [], pageData] = await Promise.all([
+    getAllServices().catch(() => []),
+    getServicesPage().catch(() => null)
+  ]);
+
+  const title = pageData?.title || "Comprehensive Financial \nSolutions for Growth";
+  const description = pageData?.description || "From daily bookkeeping to executive-level strategic guidance, we provide the expertise your business needs at every stage.";
 
   const commonFAQ = [
     {
@@ -74,13 +93,11 @@ export default async function ServicesHubPage() {
             className="mb-8 text-primary-200"
           />
           <div className="max-w-4xl animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-              Comprehensive Financial <br />
-              <span className="text-secondary-400">Solutions for Growth</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight whitespace-pre-line">
+              {title}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed">
-              From daily bookkeeping to executive-level strategic guidance,
-              we provide the expertise your business needs at every stage.
+            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed whitespace-pre-line">
+              {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link href="/contact">
@@ -155,7 +172,7 @@ export default async function ServicesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {services.map((service: any, index: number) => (
+            {services?.map((service: any, index: number) => (
               <div key={service.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <Link href={`/services/${service.slug}`} className="group h-full block">
                   <Card hover className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">

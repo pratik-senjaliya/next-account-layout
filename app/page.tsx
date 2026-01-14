@@ -11,17 +11,31 @@ import { FAQ } from "@/components/ui/FAQ";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { getHomePage, getAllPosts } from "@/lib/sanity/queries";
-import { blogPosts } from "@/lib/blog";
+import { client } from "@/lib/sanity/client";
+import { BlogPost, getAllBlogPosts as getStaticPosts, blogPosts } from "@/lib/blog";
 
 // Enable ISR
 export const revalidate = 60;
 
-export const metadata: Metadata = genMeta({
-  title: "Home",
-  description:
-    "Professional services and solutions for your business. Modern, reliable, and efficient solutions tailored to help your business succeed.",
-  keywords: ["business", "services", "professional", "solutions", "home"],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const sanityData = await getHomePage().catch(() => null);
+
+  if (sanityData?.seo) {
+    return genMeta({
+      title: sanityData.seo.metaTitle,
+      description: sanityData.seo.metaDescription,
+      keywords: sanityData.seo.metaKeywords,
+      ogImage: sanityData.seo.openGraphImage
+    });
+  }
+
+  return genMeta({
+    title: "Home",
+    description:
+      "We help entrepreneurs master their business with professional support, comprehensive solutions, and real-time insights.",
+    keywords: ["business", "consulting", "growth", "entrepreneur", "support"],
+  });
+}
 
 export default async function HomePage() {
   const [sanityData, sanityPosts] = await Promise.all([

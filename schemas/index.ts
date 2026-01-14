@@ -6,6 +6,7 @@ import feature from './objects/feature'
 import testimonial from './objects/testimonial'
 import processStep from './objects/processStep'
 import stat from './objects/stat'
+import seo from './objects/seo'
 
 // Documents
 import post from './post'
@@ -15,6 +16,10 @@ import hireStaff from './hireStaff'
 import homePage from './homePage'
 import aboutPage from './aboutPage'
 import contactSubmission from './contactSubmission'
+import contactPage from './contactPage'
+import servicesPage from './servicesPage'
+import industriesPage from './industriesPage'
+import hireStaffPage from './hireStaffPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -24,6 +29,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         testimonial,
         processStep,
         stat,
+        seo,
 
         // Documents
         post,
@@ -33,5 +39,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         homePage,
         aboutPage,
         contactSubmission,
+        contactPage,
+        servicesPage,
+        industriesPage,
+        hireStaffPage,
     ],
 }

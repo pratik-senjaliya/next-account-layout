@@ -12,8 +12,17 @@ export default defineType({
         { name: 'partners', title: 'Partners' },
         { name: 'blog', title: 'Blog Section' },
         { name: 'faq', title: 'FAQ Section' },
+        { name: 'seo', title: 'SEO' },
     ],
     fields: [
+        // SEO
+        defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo',
+            group: 'seo',
+        }),
+
         // Hero Section
         defineField({
             name: 'heroTitle',

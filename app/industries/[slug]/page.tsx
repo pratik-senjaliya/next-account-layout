@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 import { getIndustryBySlug, getAllIndustrySlugs } from "@/lib/sanity/queries";
+import { client } from "@/lib/sanity/client";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
@@ -22,16 +23,39 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const industry = await getIndustryBySlug(slug);
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const query = `*[_type == "industry" && slug.current == $slug][0]{
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    },
+    title,
+    longDescription
+  }`;
+  const industry = await client.fetch(query, { slug: params.slug });
 
-  if (!industry) return {};
+  if (industry?.seo) {
+    return genMeta({
+      title: industry.seo.metaTitle || industry.title,
+      description: industry.seo.metaDescription || industry.longDescription,
+      keywords: industry.seo.metaKeywords,
+      ogImage: industry.seo.openGraphImage
+    });
+  }
 
-  return genMeta({
-    title: industry.title,
-    description: industry.longDescription,
-  });
+  if (industry) {
+    return genMeta({
+      title: industry.title,
+      description: industry.longDescription,
+    });
+  }
+
+  return {
+    title: "Industry Not Found",
+  };
 }
 
 export async function generateStaticParams() {

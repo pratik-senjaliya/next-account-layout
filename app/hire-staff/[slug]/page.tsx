@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 import { getHireStaffBySlug, getAllHireStaffSlugs } from "@/lib/sanity/queries";
+import { client } from "@/lib/sanity/client";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
@@ -23,16 +24,39 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const position = await getHireStaffBySlug(slug);
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const query = `*[_type == "hireStaff" && slug.current == $slug][0]{
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    },
+    title,
+    description
+  }`;
+  const role = await client.fetch(query, { slug: params.slug });
 
-  if (!position) return {};
+  if (role?.seo) {
+    return genMeta({
+      title: role.seo.metaTitle || role.title,
+      description: role.seo.metaDescription || role.description,
+      keywords: role.seo.metaKeywords,
+      ogImage: role.seo.openGraphImage
+    });
+  }
 
-  return genMeta({
-    title: position.title,
-    description: position.longDescription,
-  });
+  if (role) {
+    return genMeta({
+      title: `Hire ${role.title}`,
+      description: role.description,
+    });
+  }
+
+  return {
+    title: "Role Not Found",
+  };
 }
 
 export async function generateStaticParams() {

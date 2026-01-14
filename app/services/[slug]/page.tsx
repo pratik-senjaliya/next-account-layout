@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 import { getServiceBySlug, getAllServiceSlugs } from "@/lib/sanity/queries";
+import { client } from "@/lib/sanity/client";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
@@ -21,20 +22,39 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const service = await getServiceBySlug(slug);
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const query = `*[_type == "service" && slug.current == $slug][0] {
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    },
+    title,
+    description
+  }`;
+  const service = await client.fetch(query, { slug: params.slug });
 
-  if (!service) {
-    return {
-      title: 'Service Not Found',
-      description: 'The requested service could not be found.',
-    };
+  if (service?.seo) {
+    return genMeta({
+      title: service.seo.metaTitle || service.title,
+      description: service.seo.metaDescription || service.description,
+      keywords: service.seo.metaKeywords,
+      ogImage: service.seo.openGraphImage
+    });
+  }
+
+  if (service) {
+    return genMeta({
+      title: service.title,
+      description: service.description,
+    });
   }
 
   return genMeta({
-    title: service.title,
-    description: service.longDescription,
+    title: "Service Not Found",
+    description: "The requested service could not be found.",
   });
 }
 

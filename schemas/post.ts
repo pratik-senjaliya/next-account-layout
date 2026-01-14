@@ -6,6 +6,11 @@ export default defineType({
     type: 'document',
     fields: [
         defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo',
+        }),
+        defineField({
             name: 'title',
             title: 'Title',
             type: 'string',

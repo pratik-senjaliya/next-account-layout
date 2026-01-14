@@ -253,6 +253,12 @@ export async function getAllHireStaffSlugs(): Promise<string[]> {
 // GROQ query to get home page data
 export async function getHomePage() {
   const query = `*[_type == "homePage"][0] {
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    },
     heroTitle,
     heroTitleHighlight,
     heroDescription,
@@ -289,6 +295,12 @@ export async function getHomePage() {
 
 export async function getAboutPage() {
   const query = `*[_type == "aboutPage"][0] {
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    },
     heroTitle,
     heroTitleHighlight,
     heroDescription,
@@ -306,5 +318,67 @@ export async function getAboutPage() {
     valuesDescription,
     values
   }`
+  return client.fetch(query)
+}
+
+// ==================== CONTACT PAGE ====================
+
+export async function getContactPage() {
+  const query = `*[_type == "contactPage"][0] {
+      seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        "openGraphImage": openGraphImage.asset->url
+      },
+      title,
+      description,
+      phone,
+      email,
+      address,
+      businessHours
+    }`
+  return client.fetch(query)
+}
+
+export async function getServicesPage() {
+  const query = `*[_type == "servicesPage"][0] {
+      seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        "openGraphImage": openGraphImage.asset->url
+      },
+      title,
+      description
+    }`
+  return client.fetch(query)
+}
+
+export async function getIndustriesPage() {
+  const query = `*[_type == "industriesPage"][0] {
+      seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        "openGraphImage": openGraphImage.asset->url
+      },
+      title,
+      description
+    }`
+  return client.fetch(query)
+}
+
+export async function getHireStaffPage() {
+  const query = `*[_type == "hireStaffPage"][0] {
+      seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        "openGraphImage": openGraphImage.asset->url
+      },
+      title,
+      description
+    }`
   return client.fetch(query)
 }

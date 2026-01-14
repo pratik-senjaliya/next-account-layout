@@ -10,8 +10,17 @@ export default defineType({
         { name: 'timeline', title: 'Timeline' },
         { name: 'mission', title: 'Mission' },
         { name: 'values', title: 'Values' },
+        { name: 'seo', title: 'SEO' },
     ],
     fields: [
+        // SEO
+        defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo',
+            group: 'seo',
+        }),
+
         // Hero Section
         defineField({
             name: 'heroTitle',

@@ -50,7 +50,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
   return {
     title: fullTitle,
     description,
-    keywords: keywords.length > 0 ? keywords.join(", ") : undefined,
+    keywords: (keywords || []).length > 0 ? (keywords || []).join(", ") : undefined,
     authors: author ? [{ name: author }] : undefined,
     creator: author,
     publisher: author,

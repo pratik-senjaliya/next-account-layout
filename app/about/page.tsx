@@ -12,12 +12,25 @@ import { getAboutPage } from "@/lib/sanity/queries";
 // Enable ISR
 export const revalidate = 60;
 
-export const metadata: Metadata = genMeta({
-  title: "About Us",
-  description:
-    "Learn about our company, mission, values, and the team dedicated to helping businesses succeed. Over 15 years of experience delivering professional services.",
-  keywords: ["about", "company", "mission", "values", "team", "history"],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const sanityData = await getAboutPage().catch(() => null);
+
+  if (sanityData?.seo) {
+    return genMeta({
+      title: sanityData.seo.metaTitle || "About Us",
+      description: sanityData.seo.metaDescription,
+      keywords: sanityData.seo.metaKeywords,
+      ogImage: sanityData.seo.openGraphImage
+    });
+  }
+
+  return genMeta({
+    title: "About Us",
+    description:
+      "Learn about our company, mission, values, and the team dedicated to helping businesses succeed. Over 15 years of experience delivering professional services.",
+    keywords: ["about", "company", "mission", "values", "team", "history"],
+  });
+}
 
 export default async function AboutPage() {
   const sanityData = await getAboutPage().catch(() => null);

@@ -7,21 +7,42 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { getAllIndustries } from "@/lib/sanity/queries";
+import { getAllIndustries, getIndustriesPage } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 
 // Enable ISR - revalidate every 60 seconds
 export const revalidate = 60;
 
-export const metadata: Metadata = genMeta({
-  title: "Industries We Serve",
-  description:
-    "Specialized financial expertise for healthcare, retail, construction, tech, and more.",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const sanityData = await getIndustriesPage().catch(() => null);
+
+  if (sanityData?.seo) {
+    return genMeta({
+      title: sanityData.seo.metaTitle || "Industries We Serve",
+      description: sanityData.seo.metaDescription,
+      keywords: sanityData.seo.metaKeywords,
+      ogImage: sanityData.seo.openGraphImage
+    });
+  }
+
+  return genMeta({
+    title: "Industries We Serve",
+    description:
+      "Specialized financial expertise for healthcare, retail, construction, tech, and more.",
+  });
+}
 
 export default async function IndustriesHubPage() {
-  const industries = await getAllIndustries();
+  const [industries = [], pageData] = await Promise.all([
+    getAllIndustries().catch(() => []),
+    getIndustriesPage().catch(() => null)
+  ]);
+
+
+
+  const title = pageData?.title || "Specialized Expertise for \nYour Industry";
+  const description = pageData?.description || "We understand that every industry has unique financial challenges. Our specialized teams bring deep sector knowledge to your business.";
 
   return (
     <>
@@ -47,13 +68,11 @@ export default async function IndustriesHubPage() {
             className="mb-8 text-primary-200"
           />
           <div className="max-w-4xl animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-              Specialized Expertise for <br />
-              <span className="text-secondary-400">Your Industry</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight whitespace-pre-line">
+              {title}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed">
-              We understand that every industry has unique financial challenges.
-              Our specialized teams bring deep sector knowledge to your business.
+            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed whitespace-pre-line">
+              {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link href="/contact">
@@ -91,7 +110,7 @@ export default async function IndustriesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industries.map((industry: any, index: number) => (
+            {industries?.map((industry: any, index: number) => (
               <div key={industry.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <Link
                   href={`/industries/${industry.slug}`}

@@ -8,8 +8,17 @@ export default defineType({
         { name: 'hero', title: 'Hero Section' },
         { name: 'intro', title: 'Intro Section' },
         { name: 'content', title: 'Main Content' },
+        { name: 'seo', title: 'SEO' },
     ],
     fields: [
+        // SEO
+        defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo',
+            group: 'seo',
+        }),
+
         defineField({
             name: 'title',
             title: 'Title',

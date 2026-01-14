@@ -7,21 +7,40 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { getAllHireStaff } from "@/lib/sanity/queries";
+import { getAllHireStaff, getHireStaffPage } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 
 // Enable ISR - revalidate every 60 seconds
 export const revalidate = 60;
 
-export const metadata: Metadata = genMeta({
-  title: "Hire Offshore Staff",
-  description:
-    "Scale your team with top-tier offshore accounting, tax, and finance professionals.",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const sanityData = await getHireStaffPage().catch(() => null);
+
+  if (sanityData?.seo) {
+    return genMeta({
+      title: sanityData.seo.metaTitle || "Hire Offshore Staff",
+      description: sanityData.seo.metaDescription,
+      keywords: sanityData.seo.metaKeywords,
+      ogImage: sanityData.seo.openGraphImage
+    });
+  }
+
+  return genMeta({
+    title: "Hire Offshore Staff",
+    description:
+      "Scale your team with top-tier offshore accounting, tax, and finance professionals.",
+  });
+}
 
 export default async function HireStaffHubPage() {
-  const hireStaffPositions = await getAllHireStaff();
+  const [hireStaffPositions = [], pageData] = await Promise.all([
+    getAllHireStaff().catch(() => []),
+    getHireStaffPage().catch(() => null)
+  ]);
+
+  const title = pageData?.title || "Build Your Dream Team \nWithout Bounds";
+  const description = pageData?.description || "Access a global pool of vetted, credentialed, and experienced accounting professionals ready to integrate with your firm.";
 
   return (
     <>
@@ -47,13 +66,11 @@ export default async function HireStaffHubPage() {
             className="mb-8 text-primary-200"
           />
           <div className="max-w-4xl animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-              Build Your Dream Team <br />
-              <span className="text-secondary-400">Without Bounds</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight whitespace-pre-line">
+              {title}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed">
-              Access a global pool of vetted, credentialed, and experienced
-              accounting professionals ready to integrate with your firm.
+            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl leading-relaxed whitespace-pre-line">
+              {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link href="/contact">
@@ -91,7 +108,7 @@ export default async function HireStaffHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hireStaffPositions.map((position: any) => (
+            {hireStaffPositions?.map((position: any) => (
               <Link
                 key={position.id}
                 href={`/hire-staff/${position.slug}`}
