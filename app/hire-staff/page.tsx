@@ -7,9 +7,12 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { hireStaffPositions } from "@/lib/hire-staff";
+import { getAllHireStaff } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { ScrollButton } from "@/components/ui/ScrollButton";
+
+// Enable ISR - revalidate every 60 seconds
+export const revalidate = 60;
 
 export const metadata: Metadata = genMeta({
   title: "Hire Offshore Staff",
@@ -17,7 +20,9 @@ export const metadata: Metadata = genMeta({
     "Scale your team with top-tier offshore accounting, tax, and finance professionals.",
 });
 
-export default function HireStaffHubPage() {
+export default async function HireStaffHubPage() {
+  const hireStaffPositions = await getAllHireStaff();
+
   return (
     <>
       {/* 1. Hero Section */}
@@ -86,7 +91,7 @@ export default function HireStaffHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hireStaffPositions.map((position) => (
+            {hireStaffPositions.map((position: any) => (
               <Link
                 key={position.id}
                 href={`/hire-staff/${position.slug}`}

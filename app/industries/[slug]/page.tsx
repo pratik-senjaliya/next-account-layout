@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
-import { getIndustryBySlug, getAllIndustries } from "@/lib/industries";
+import { getIndustryBySlug, getAllIndustrySlugs } from "@/lib/sanity/queries";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
@@ -15,13 +15,16 @@ import { SubIndustryAccordion } from "@/components/ui/SubIndustryAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
+// Enable ISR - revalidate every 60 seconds
+export const revalidate = 60;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const industry = getIndustryBySlug(slug);
+  const industry = await getIndustryBySlug(slug);
 
   if (!industry) return {};
 
@@ -32,15 +35,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  const industrys = getAllIndustries();
-  return industrys.map((industry) => ({
-    slug: industry.slug,
+  const slugs = await getAllIndustrySlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 export default async function IndustryPage({ params }: PageProps) {
   const { slug } = await params;
-  const industry = getIndustryBySlug(slug);
+  const industry = await getIndustryBySlug(slug);
 
   if (!industry) {
     notFound();
@@ -116,7 +119,7 @@ export default async function IndustryPage({ params }: PageProps) {
                 {industry.intro.content}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                {industry.intro.stats.map((stat, i) => (
+                {industry.intro.stats.map((stat: { label: string; value: string }, i: number) => (
                   <div key={i} className="p-6 bg-neutral-50 rounded-2xl border-l-4 border-primary-600">
                     <div className="text-4xl font-bold text-primary-700 mb-2">{stat.value}</div>
                     <p className="text-sm text-neutral-500 uppercase font-bold tracking-wider">{stat.label}</p>
@@ -169,7 +172,7 @@ export default async function IndustryPage({ params }: PageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
             <div className="hidden lg:block absolute top-[60px] left-0 w-full h-1 bg-neutral-100 -z-10"></div>
-            {(industry.gettingStarted && industry.gettingStarted.length > 0 ? industry.gettingStarted : industry.process).map((step, index) => (
+            {(industry.gettingStarted && industry.gettingStarted.length > 0 ? industry.gettingStarted : industry.process).map((step: { step: string; title: string; description: string }, index: number) => (
               <div key={index} className="text-center group animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <div className="w-24 h-24 bg-white border-8 border-primary-50 text-primary-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-8 group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all duration-500 shadow-xl">
                   {step.step}
@@ -192,7 +195,7 @@ export default async function IndustryPage({ params }: PageProps) {
               <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {industry.title} <br />Advantage</h2>
               <div className="space-y-12">
-                {(industry.industryBenefits && industry.industryBenefits.length > 0 ? industry.industryBenefits : industry.whyChooseUs).map((item, i) => (
+                {(industry.industryBenefits && industry.industryBenefits.length > 0 ? industry.industryBenefits : industry.whyChooseUs).map((item: { title: string; description: string }, i: number) => (
                   <div key={i} className="flex gap-8 group animate-fade-in-up" style={{ animationDelay: `${i * 0.15 + 0.2}s` }}>
                     <div className="flex-shrink-0 w-16 h-16 bg-white/5 rounded-[20px] flex items-center justify-center text-secondary-400 border border-white/10 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300">
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

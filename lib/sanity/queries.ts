@@ -112,3 +112,137 @@ export async function getAllServiceSlugs(): Promise<string[]> {
   const query = `*[_type == "service"].slug.current`
   return client.fetch(query)
 }
+
+// ==================== INDUSTRIES ====================
+
+// GROQ query to get all industries
+export async function getAllIndustries() {
+  const query = `*[_type == "industry"] | order(title asc) {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    description,
+    longDescription,
+    icon,
+    "heroImage": heroImage.asset->url,
+    "image": image.asset->url,
+    "intro": {
+      "title": introTitle,
+      "content": introContent,
+      "stats": introStats
+    },
+    subIndustries,
+    industryBenefits,
+    gettingStarted,
+    features,
+    process,
+    whyChooseUs,
+    testimonial,
+    faqs
+  }`
+
+  return client.fetch(query)
+}
+
+// GROQ query to get a single industry by slug
+export async function getIndustryBySlug(slug: string) {
+  const query = `*[_type == "industry" && slug.current == $slug][0] {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    description,
+    longDescription,
+    icon,
+    "heroImage": heroImage.asset->url,
+    "image": image.asset->url,
+    "intro": {
+      "title": introTitle,
+      "content": introContent,
+      "stats": introStats
+    },
+    subIndustries,
+    industryBenefits,
+    gettingStarted,
+    features,
+    process,
+    whyChooseUs,
+    testimonial,
+    faqs
+  }`
+
+  return client.fetch(query, { slug })
+}
+
+// Get all industry slugs for generateStaticParams
+export async function getAllIndustrySlugs(): Promise<string[]> {
+  const query = `*[_type == "industry"].slug.current`
+  return client.fetch(query)
+}
+
+// ==================== HIRE STAFF ====================
+
+// GROQ query to get all hire staff positions
+export async function getAllHireStaff() {
+  const query = `*[_type == "hireStaff"] | order(title asc) {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    description,
+    longDescription,
+    icon,
+    "heroImage": heroImage.asset->url,
+    "image": image.asset->url,
+    "intro": {
+      "title": introTitle,
+      "content": introContent,
+      "stats": introStats
+    },
+    experienceLevels,
+    softwareCategories,
+    trial,
+    features,
+    gettingStarted,
+    whyChooseUs,
+    testimonial,
+    faqs,
+    process
+  }`
+
+  return client.fetch(query)
+}
+
+// GROQ query to get a single hire staff position by slug
+export async function getHireStaffBySlug(slug: string) {
+  const query = `*[_type == "hireStaff" && slug.current == $slug][0] {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    description,
+    longDescription,
+    icon,
+    "heroImage": heroImage.asset->url,
+    "image": image.asset->url,
+    "intro": {
+      "title": introTitle,
+      "content": introContent,
+      "stats": introStats
+    },
+    experienceLevels,
+    softwareCategories,
+    trial,
+    features,
+    gettingStarted,
+    whyChooseUs,
+    testimonial,
+    faqs,
+    process
+  }`
+
+  return client.fetch(query, { slug })
+}
+
+// Get all hire staff slugs for generateStaticParams
+export async function getAllHireStaffSlugs(): Promise<string[]> {
+  const query = `*[_type == "hireStaff"].slug.current`
+  return client.fetch(query)
+}

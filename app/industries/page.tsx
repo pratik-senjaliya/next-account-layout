@@ -7,9 +7,12 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { industries } from "@/lib/industries";
+import { getAllIndustries } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { ScrollButton } from "@/components/ui/ScrollButton";
+
+// Enable ISR - revalidate every 60 seconds
+export const revalidate = 60;
 
 export const metadata: Metadata = genMeta({
   title: "Industries We Serve",
@@ -17,7 +20,9 @@ export const metadata: Metadata = genMeta({
     "Specialized financial expertise for healthcare, retail, construction, tech, and more.",
 });
 
-export default function IndustriesHubPage() {
+export default async function IndustriesHubPage() {
+  const industries = await getAllIndustries();
+
   return (
     <>
       {/* 1. Hero Section */}
@@ -86,7 +91,7 @@ export default function IndustriesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industries.map((industry, index) => (
+            {industries.map((industry: any, index: number) => (
               <div key={industry.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <Link
                   href={`/industries/${industry.slug}`}
