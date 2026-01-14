@@ -313,75 +313,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="space-y-20 md:space-y-28">
-            {data.features?.map((feature: any, index: number) => (
-              <div
-                key={index}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up"
-              >
-                <div
-                  className={
-                    index % 2 === 1
-                      ? "relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first"
-                      : "relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg"
-                  }
-                >
-                  {/* For layout purposes, if it's odd index, we want image first on LG, so we apply order-first to image container. 
-                      Wait, logic:
-                      Even index (0, 2): Text Left, Image Right.
-                      Odd index (1, 3): Image Left, Text Right.
-                      
-                      My code above:
-                      index % 2 === 1 (Odd): Apply lg:order-first to the image container?
-                      Wait, the map structure needs to carefully place the divs.
-                      Let's restructure the loop to be clear.
-                  */}
-                  {index % 2 === 0 ? (
-                    // Even: Text then Image. But here I am inside the map.
-                    // I should render Text Div then Image Div.
-                    // BUT for responsive switching, usually we use flex-col-reverse or order classes.
-                    // The original code had separate blocks.
-                    // Let's keep it simple: conditionally render the order of divs?
-                    // No, cleaner to use `order` classes on flex/grid children.
-                    // Grid default is order normal.
-                    // If I want Image Left (Odd), I give Image `lg:order-first`.
-                    // The text div is the other one.
 
-                    // Actually, I can't easily swap the *content* of the divs if I just iterate. 
-                    // I will render Text Div and Image Div, and apply classes to swap them visually.
-                    <></>
-                  ) : null}
-                </div>
-
-                {/* Let's try a better approach: Render Text and Image, and swap using classes */}
-                <div className={index % 2 === 1 ? "lg:order-last" : ""}>
-                  <FeatureCard {...feature} />
-                </div>
-
-                {/* 
-                     Wait, this is getting complex because I don't want to use conditional rendering of the *entire block* 
-                     if I can avoid it. 
-                     
-                     Original:
-                     Feature 1 (Even, 0): Text, Image.
-                     Feature 2 (Odd, 1): Image, Text.
-                     
-                     If I render:
-                     <div className="grid ...">
-                        <div className={index % 2 === 1 ? "lg:order-2" : "lg:order-1"}> Text </div>
-                        <div className={index % 2 === 1 ? "lg:order-1" : "lg:order-2"}> Image </div>
-                     </div>
-                     
-                     This works for grid if I use order classes.
-                 */}
-
-              </div>
-            ))}
-            {/* 
-                 RETRYING THE MAPPING LOGIC ABOVE 
-             */}
-          </div>
-          {/* Let's redo the loop with the correct logic safely. */}
           <div className="space-y-20 md:space-y-28">
             {data.features?.map((feature: any, index: number) => (
               <div
