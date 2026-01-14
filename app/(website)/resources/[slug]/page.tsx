@@ -1,5 +1,3 @@
-"use client";
-
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
@@ -7,23 +5,60 @@ import { Section } from "@/components/layout/Section";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ReadingProgress } from "@/components/ui/ReadingProgress";
 import { ShareButtons } from "@/components/ui/ShareButtons";
-import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/blog";
+import { getPostBySlug, getAllPosts, getAllPostSlugs } from "@/lib/sanity/queries";
 import Link from "next/link";
-import { use } from "react";
+import { PortableText } from "next-sanity";
+import { Metadata } from "next";
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
+// Enable ISR
+export const revalidate = 60;
+
+// Generate static params for all posts
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({
+    slug,
+  }));
 }
 
-export default function BlogPostPage({ params }: PageProps) {
-  const { slug } = use(params);
-  const post = getBlogPostBySlug(slug);
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const params = await props.params;
+  const post = await getPostBySlug(params.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: post.image ? [post.image] : [],
+    },
+  };
+}
+
+export default async function BlogPostPage(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const params = await props.params;
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  const currentUrl = `https://yoursite.com/resources/${post.slug}`; // Update with actual domain
+  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/resources/${post.slug}`;
+  const allPosts = await getAllPosts();
 
   return (
     <>
@@ -108,21 +143,23 @@ export default function BlogPostPage({ params }: PageProps) {
       </Section>
 
       {/* Featured Image */}
-      <Section background="white" spacing="sm">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden shadow-xl -mt-16 mb-12 animate-fade-in-up">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
+      {post.image && (
+        <Section background="white" spacing="sm">
+          <Container>
+            <div className="max-w-4xl mx-auto">
+              <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden shadow-xl -mt-16 mb-12 animate-fade-in-up">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
-          </div>
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      )}
 
       {/* Content */}
       <Section background="white" spacing="lg">
@@ -141,8 +178,9 @@ export default function BlogPostPage({ params }: PageProps) {
                     prose-strong:text-neutral-900 prose-strong:font-semibold
                     prose-ul:my-6 prose-li:my-2
                     first:prose-p:text-xl first:prose-p:text-neutral-800 first:prose-p:leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
+                >
+                  <PortableText value={post.content} />
+                </article>
               </div>
 
               {/* Sidebar - Share Buttons (Sticky) */}
@@ -153,15 +191,51 @@ export default function BlogPostPage({ params }: PageProps) {
                   </div>
 
                   {/* Back to Top Button */}
-                  <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 transition-all font-medium"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                    </svg>
-                    Back to Top
-                  </button>
+                  <div className="mt-6">
+                    {/* Client component for Scroll to top could be extracted, but button logic is simple. 
+                         Actually, button onClick needs client side. 
+                         But wait, I removed 'use client' from this file. 
+                         I cannot use onClick handler here anymore! 
+                         
+                         I should move the "Back to Top" button to a separate Client Component OR 
+                         just rely on the ShareButtons sidebar which is client.
+                         
+                         I will create a small Client Component for the "Back to Top" button to keep this file Server Side.
+                         OR simpler: Just remove it for now if strict on time? 
+                         User didn't complain about it, but regression is bad.
+                         
+                         Wait, the previous code had a simple button.
+                         I'll assume it's better to inline a small client component or just use a link to #top?
+                         Link to #top is accessible and simple.
+                         
+                         Let's use <ScrollButton> if it exists?
+                         I see ScrollButton used in services/page.tsx. Let's check if it does "scrollTo".
+                         
+                         Actually, I'll just change it to a client component "ScrollToTopButton".
+                         But I don't want to create new files endlessly.
+                         
+                         I can use `ScrollButton` component from `components/ui/ScrollButton.tsx`?
+                         Let's check `components/ui/ScrollButton.tsx` usage.
+                         It was imported in `services/page.tsx` as: 
+                         <ScrollButton targetId="all-services" ...>
+                         
+                         If I set targetId to "top" or empty?
+                         
+                         Let's check ScrollButton.tsx content.
+                         
+                         For now, I will omit the Back to Top button to avoid compilation error with onClick in Server Component, 
+                         or replace it with a simple anchor link <Link href="#">Back to Top</Link>.
+                      */}
+                    <Link
+                      href="#"
+                      className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 transition-all font-medium"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                      </svg>
+                      Back to Top
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -177,7 +251,7 @@ export default function BlogPostPage({ params }: PageProps) {
               <div className="flex items-start gap-6">
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-2xl font-bold text-primary-600">
-                    {post.author.charAt(0)}
+                    {post.author ? post.author.charAt(0) : "?"}
                   </span>
                 </div>
                 <div>
@@ -204,10 +278,10 @@ export default function BlogPostPage({ params }: PageProps) {
               Related Articles
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {getAllBlogPosts()
-                .filter((p) => p.id !== post.id && p.category === post.category)
+              {allPosts
+                .filter((p: any) => p.id !== post.id && p.category === post.category)
                 .slice(0, 2)
-                .map((relatedPost) => (
+                .map((relatedPost: any) => (
                   <Link
                     key={relatedPost.id}
                     href={`/resources/${relatedPost.slug}`}
@@ -276,4 +350,3 @@ export default function BlogPostPage({ params }: PageProps) {
     </>
   );
 }
-
