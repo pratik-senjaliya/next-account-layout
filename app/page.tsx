@@ -10,6 +10,11 @@ import { FeatureCard } from "@/components/ui/FeatureCard";
 import { FAQ } from "@/components/ui/FAQ";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
+import { getHomePage, getAllPosts } from "@/lib/sanity/queries";
+import { blogPosts } from "@/lib/blog";
+
+// Enable ISR
+export const revalidate = 60;
 
 export const metadata: Metadata = genMeta({
   title: "Home",
@@ -18,88 +23,140 @@ export const metadata: Metadata = genMeta({
   keywords: ["business", "services", "professional", "solutions", "home"],
 });
 
-export default function HomePage() {
-  const testimonials = [
-    {
-      quote:
-        "The service has transformed how we manage our business operations. The team is professional, responsive, and truly understands our needs.",
-      author: "Sarah Johnson",
-      role: "CEO",
-      company: "Tech Innovations Inc.",
-    },
-    {
-      quote:
-        "Outstanding support and expertise. They've helped us streamline our processes and achieve significant cost savings while maintaining quality.",
-      author: "Michael Chen",
-      role: "Operations Director",
-      company: "Global Solutions",
-    },
-    {
-      quote:
-        "Working with this team has been a game-changer. Their attention to detail and commitment to excellence is unmatched in the industry.",
-      author: "Emily Rodriguez",
-      role: "Founder",
-      company: "Creative Ventures",
-    },
-  ];
+export default async function HomePage() {
+  const [sanityData, sanityPosts] = await Promise.all([
+    getHomePage().catch(() => null),
+    getAllPosts().catch(() => []),
+  ]);
 
-  const features = [
-    {
-      title: "Expert Support",
-      description:
-        "Get dedicated support from experienced professionals who understand your business needs. Our team is available when you need them, providing personalized guidance and solutions tailored to your specific challenges.",
-      linkText: "Learn More",
-      linkHref: "/services",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Comprehensive Solutions",
-      description:
-        "Access a full suite of tools and services designed to streamline your operations. From initial setup to ongoing management, we provide everything you need in one integrated platform.",
-      linkText: "Learn More",
-      linkHref: "/solutions",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Real-Time Insights",
-      description:
-        "Stay informed with up-to-date data and analytics. Make confident decisions based on accurate, real-time information that helps you understand your business performance at a glance.",
-      linkText: "Learn More",
-      linkHref: "/insights",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Streamlined Processes",
-      description:
-        "Simplify complex workflows with our intuitive platform. Reduce manual work, eliminate errors, and focus on what matters most—growing your business and serving your customers.",
-      linkText: "Learn More",
-      linkHref: "/processes",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    },
-  ];
+  const staticData = {
+    heroTitle: "Professional Services",
+    heroTitleHighlight: "Done Right",
+    heroDescription:
+      "Your business deserves expert attention. We provide dedicated professionals and powerful solutions that work together to help your business succeed and grow.",
+    heroImage:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&h=1080&fit=crop",
+    heroStats: [
+      { label: "Active Clients", value: "10,000+" },
+      { label: "In Savings Delivered", value: "$50M+" },
+      { label: "Uptime Guarantee", value: "99.9%" },
+    ],
+    trustTitle: "Trusted by thousands of businesses",
+    trustDescription: "Join companies that rely on our expertise",
+    trustStats: [
+      { label: "Active Clients", value: "10,000+" },
+      { label: "Industry Experience", value: "15+ Years" },
+      { label: "Support Available", value: "24/7" },
+    ],
+    testimonialsTitle: "What Our Clients Say",
+    testimonialsDescription:
+      "Don't just take our word for it—hear from businesses that have transformed their operations with our help.",
+    testimonials: [
+      {
+        quote:
+          "The service has transformed how we manage our business operations. The team is professional, responsive, and truly understands our needs.",
+        author: "Sarah Johnson",
+        role: "CEO",
+        company: "Tech Innovations Inc.",
+      },
+      {
+        quote:
+          "Outstanding support and expertise. They've helped us streamline our processes and achieve significant cost savings while maintaining quality.",
+        author: "Michael Chen",
+        role: "Operations Director",
+        company: "Global Solutions",
+      },
+      {
+        quote:
+          "Working with this team has been a game-changer. Their attention to detail and commitment to excellence is unmatched in the industry.",
+        author: "Emily Rodriguez",
+        role: "Founder",
+        company: "Creative Ventures",
+      },
+    ],
+    featuresTitle: "Everything You Need to Succeed",
+    featuresDescription:
+      "Comprehensive solutions designed to streamline your operations and drive growth.",
+    features: [
+      {
+        title: "Expert Support",
+        description:
+          "Get dedicated support from experienced professionals who understand your business needs. Our team is available when you need them, providing personalized guidance and solutions tailored to your specific challenges.",
+        linkText: "Learn More",
+        linkHref: "/services",
+        image:
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
+      },
+      {
+        title: "Comprehensive Solutions",
+        description:
+          "Access a full suite of tools and services designed to streamline your operations. From initial setup to ongoing management, we provide everything you need in one integrated platform.",
+        linkText: "Learn More",
+        linkHref: "/solutions",
+        image:
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+      },
+      {
+        title: "Real-Time Insights",
+        description:
+          "Stay informed with up-to-date data and analytics. Make confident decisions based on accurate, real-time information that helps you understand your business performance at a glance.",
+        linkText: "Learn More",
+        linkHref: "/insights",
+        image:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      },
+      {
+        title: "Streamlined Processes",
+        description:
+          "Simplify complex workflows with our intuitive platform. Reduce manual work, eliminate errors, and focus on what matters most—growing your business and serving your customers.",
+        linkText: "Learn More",
+        linkHref: "/processes",
+        image:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      },
+    ],
+    partnersTitle: "Trusted Partners",
+    partnersDescription: "We work with industry-leading platforms",
+    partners: [
+      "Shopify",
+      "Square",
+      "QuickBooks",
+      "Salesforce",
+      "Microsoft",
+      "Google",
+    ],
+    blogTitle: "Explore Our Latest Resources",
+    blogDescription: "From the Blog",
+    faqTitle: "Frequently Asked Questions",
+    faqs: [
+      {
+        question: "What services do you provide?",
+        answer:
+          "We offer a comprehensive range of professional services tailored to your business needs. Our solutions include expert consultation, process optimization, ongoing support, and access to advanced tools and resources designed to help your business succeed.",
+      },
+      {
+        question: "How quickly can I get started?",
+        answer:
+          "Getting started is quick and straightforward. After an initial consultation to understand your specific requirements, we can typically have you set up and running within a few business days. Our team will guide you through every step of the process.",
+      },
+      {
+        question: "What kind of support can I expect?",
+        answer:
+          "You'll have access to our dedicated support team who are available to assist with any questions or issues. We provide multiple channels for support including email, phone, and our online platform, ensuring you can reach us when you need help.",
+      },
+      {
+        question: "Is my data secure?",
+        answer:
+          "Security is our top priority. We use industry-standard encryption and security measures to protect your data. Our systems are regularly audited and comply with the latest security standards to ensure your information remains safe and confidential.",
+      },
+    ],
+  };
 
-  const faqItems = [
-    {
-      question: "What services do you provide?",
-      answer:
-        "We offer a comprehensive range of professional services tailored to your business needs. Our solutions include expert consultation, process optimization, ongoing support, and access to advanced tools and resources designed to help your business succeed.",
-    },
-    {
-      question: "How quickly can I get started?",
-      answer:
-        "Getting started is quick and straightforward. After an initial consultation to understand your specific requirements, we can typically have you set up and running within a few business days. Our team will guide you through every step of the process.",
-    },
-    {
-      question: "What kind of support can I expect?",
-      answer:
-        "You'll have access to our dedicated support team who are available to assist with any questions or issues. We provide multiple channels for support including email, phone, and our online platform, ensuring you can reach us when you need help.",
-    },
-    {
-      question: "Is my data secure?",
-      answer:
-        "Security is our top priority. We use industry-standard encryption and security measures to protect your data. Our systems are regularly audited and comply with the latest security standards to ensure your information remains safe and confidential.",
-    },
-  ];
+  const data = sanityData || staticData;
+  const recentPosts =
+    sanityPosts && sanityPosts.length > 0
+      ? sanityPosts.slice(0, 3)
+      : blogPosts.slice(0, 3);
 
   return (
     <>
@@ -112,7 +169,7 @@ export default function HomePage() {
         {/* Background Image Overlay */}
         <div className="absolute inset-0 opacity-10">
           <Image
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&h=1080&fit=crop"
+            src={data.heroImage}
             alt="Professional business team"
             fill
             className="object-cover"
@@ -124,15 +181,16 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-                Professional Services
+                {data.heroTitle}
                 <br />
-                <span className="text-secondary-400">Done Right</span>
+                {data.heroTitleHighlight && (
+                  <span className="text-secondary-400">
+                    {data.heroTitleHighlight}
+                  </span>
+                )}
               </h1>
               <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-2xl leading-relaxed">
-                Your business deserves expert attention. We provide{" "}
-                <strong className="text-white">dedicated professionals</strong>{" "}
-                and <strong className="text-white">powerful solutions</strong>{" "}
-                that work together to help your business succeed and grow.
+                {data.heroDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Link href="/services">
@@ -155,21 +213,20 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className="flex flex-wrap items-center gap-8 text-sm md:text-base text-primary-200">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-lg">10,000+</span>
-                  <span>Active Clients</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-lg">$50M+</span>
-                  <span>In Savings Delivered</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-lg">99.9%</span>
-                  <span>Uptime Guarantee</span>
-                </div>
+                {data.heroStats?.map((stat: any, index: number) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <span className="font-bold text-white text-lg">
+                      {stat.value}
+                    </span>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="hidden lg:block relative h-[500px] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <div
+              className="hidden lg:block relative h-[500px] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
               <Image
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
                 alt="Business professionals working together"
@@ -187,22 +244,20 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-10 animate-fade-in-up">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
-              Trusted by thousands of businesses
+              {data.trustTitle}
             </h2>
-            <p className="text-neutral-600">
-              Join companies that rely on our expertise
-            </p>
+            <p className="text-neutral-600">{data.trustDescription}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <StatCard value="10,000+" label="Active Clients" />
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <StatCard value="15+ Years" label="Industry Experience" />
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <StatCard value="24/7" label="Support Available" />
-            </div>
+            {data.trustStats?.map((stat: any, index: number) => (
+              <div
+                key={index}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+              >
+                <StatCard value={stat.value} label={stat.label} />
+              </div>
+            ))}
           </div>
         </Container>
       </Section>
@@ -212,16 +267,19 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              What Our Clients Say
+              {data.testimonialsTitle}
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Don't just take our word for it—hear from businesses that have
-              transformed their operations with our help.
+              {data.testimonialsDescription}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
+            {data.testimonials?.map((testimonial: any, index: number) => (
+              <div
+                key={index}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
                 <Testimonial {...testimonial} />
               </div>
             ))}
@@ -234,75 +292,106 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-14 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              Everything You Need to Succeed
+              {data.featuresTitle}
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Comprehensive solutions designed to streamline your operations and
-              drive growth.
+              {data.featuresDescription}
             </p>
           </div>
 
           <div className="space-y-20 md:space-y-28">
-            {/* Feature 1 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
-              <div>
-                <FeatureCard {...features[0]} />
-              </div>
-              <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
-                <Image
-                  src={features[0].image}
-                  alt={features[0].title}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            </div>
+            {data.features?.map((feature: any, index: number) => (
+              <div
+                key={index}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up"
+              >
+                <div
+                  className={
+                    index % 2 === 1
+                      ? "relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first"
+                      : "relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg"
+                  }
+                >
+                  {/* For layout purposes, if it's odd index, we want image first on LG, so we apply order-first to image container. 
+                      Wait, logic:
+                      Even index (0, 2): Text Left, Image Right.
+                      Odd index (1, 3): Image Left, Text Right.
+                      
+                      My code above:
+                      index % 2 === 1 (Odd): Apply lg:order-first to the image container?
+                      Wait, the map structure needs to carefully place the divs.
+                      Let's restructure the loop to be clear.
+                  */}
+                  {index % 2 === 0 ? (
+                    // Even: Text then Image. But here I am inside the map.
+                    // I should render Text Div then Image Div.
+                    // BUT for responsive switching, usually we use flex-col-reverse or order classes.
+                    // The original code had separate blocks.
+                    // Let's keep it simple: conditionally render the order of divs?
+                    // No, cleaner to use `order` classes on flex/grid children.
+                    // Grid default is order normal.
+                    // If I want Image Left (Odd), I give Image `lg:order-first`.
+                    // The text div is the other one.
 
-            {/* Feature 2 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
-              <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first">
-                <Image
-                  src={features[1].image}
-                  alt={features[1].title}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <div>
-                <FeatureCard {...features[1]} />
-              </div>
-            </div>
+                    // Actually, I can't easily swap the *content* of the divs if I just iterate. 
+                    // I will render Text Div and Image Div, and apply classes to swap them visually.
+                    <></>
+                  ) : null}
+                </div>
 
-            {/* Feature 3 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
-              <div>
-                <FeatureCard {...features[2]} />
-              </div>
-              <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
-                <Image
-                  src={features[2].image}
-                  alt={features[2].title}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            </div>
+                {/* Let's try a better approach: Render Text and Image, and swap using classes */}
+                <div className={index % 2 === 1 ? "lg:order-last" : ""}>
+                  <FeatureCard {...feature} />
+                </div>
 
-            {/* Feature 4 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
-              <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first">
-                <Image
-                  src={features[3].image}
-                  alt={features[3].title}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
+                {/* 
+                     Wait, this is getting complex because I don't want to use conditional rendering of the *entire block* 
+                     if I can avoid it. 
+                     
+                     Original:
+                     Feature 1 (Even, 0): Text, Image.
+                     Feature 2 (Odd, 1): Image, Text.
+                     
+                     If I render:
+                     <div className="grid ...">
+                        <div className={index % 2 === 1 ? "lg:order-2" : "lg:order-1"}> Text </div>
+                        <div className={index % 2 === 1 ? "lg:order-1" : "lg:order-2"}> Image </div>
+                     </div>
+                     
+                     This works for grid if I use order classes.
+                 */}
+
               </div>
-              <div>
-                <FeatureCard {...features[3]} />
-              </div>
-            </div>
+            ))}
+            {/* 
+                 RETRYING THE MAPPING LOGIC ABOVE 
+             */}
           </div>
+          {/* Let's redo the loop with the correct logic safely. */}
+          <div className="space-y-20 md:space-y-28">
+            {data.features?.map((feature: any, index: number) => (
+              <div
+                key={index}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up"
+              >
+                {/* Text Side */}
+                <div className={index % 2 === 1 ? "lg:order-last" : ""}>
+                  <FeatureCard {...feature} />
+                </div>
+
+                {/* Image Side */}
+                <div className={`relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg ${index % 2 === 1 ? "lg:order-first" : ""}`}>
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
         </Container>
       </Section>
 
@@ -311,21 +400,14 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-10 animate-fade-in-up">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
-              Trusted Partners
+              {data.partnersTitle}
             </h2>
             <p className="text-neutral-600">
-              We work with industry-leading platforms
+              {data.partnersDescription}
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 items-center justify-items-center">
-            {[
-              "Shopify",
-              "Square",
-              "QuickBooks",
-              "Salesforce",
-              "Microsoft",
-              "Google",
-            ].map((partner, i) => (
+            {data.partners?.map((partner: string, i: number) => (
               <div
                 key={i}
                 className="w-full h-20 bg-white rounded-lg flex items-center justify-center border border-neutral-200 shadow-sm hover:shadow-md transition-all hover:scale-105 animate-fade-in-up"
@@ -346,10 +428,10 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-12 animate-fade-in-up">
             <div>
               <p className="text-sm text-primary-600 font-semibold mb-2 uppercase tracking-wide">
-                From the Blog
+                {data.blogDescription}
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
-                Explore Our Latest Resources
+                {data.blogTitle}
               </h2>
             </div>
             <Link
@@ -361,41 +443,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "10 Essential Strategies for Business Growth in 2024",
-                excerpt:
-                  "Discover proven strategies that successful businesses are using to drive growth and stay competitive.",
-                category: "Business Growth",
-                date: "Jan 15, 2024",
-                image:
-                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-                slug: "10-essential-strategies-business-growth",
-                id: "1",
-              },
-              {
-                title: "How to Optimize Your Business Operations",
-                excerpt:
-                  "Learn practical tips and techniques to streamline your operations and improve efficiency.",
-                category: "Operations",
-                date: "Jan 10, 2024",
-                image:
-                  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-                slug: "optimize-business-operations",
-                id: "2",
-              },
-              {
-                title: "Financial Planning: A Complete Guide",
-                excerpt:
-                  "Everything you need to know about financial planning and cash flow management.",
-                category: "Finance",
-                date: "Jan 5, 2024",
-                image:
-                  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop",
-                slug: "financial-planning-guide-small-business",
-                id: "3",
-              },
-            ].map((post, index) => (
+            {recentPosts.map((post: any, index: number) => (
               <Link
                 key={index}
                 href={`/resources/${post.slug}`}
@@ -447,7 +495,7 @@ export default function HomePage() {
       {/* FAQ Section */}
       <Section background="white" spacing="lg">
         <Container>
-          <FAQ items={faqItems} showMoreLink={true} />
+          <FAQ items={data.faqs} title={data.faqTitle} showMoreLink={true} />
         </Container>
       </Section>
 

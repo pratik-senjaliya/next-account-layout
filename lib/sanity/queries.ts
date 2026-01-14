@@ -242,7 +242,45 @@ export async function getHireStaffBySlug(slug: string) {
 }
 
 // Get all hire staff slugs for generateStaticParams
+// Get all hire staff slugs for generateStaticParams
 export async function getAllHireStaffSlugs(): Promise<string[]> {
   const query = `*[_type == "hireStaff"].slug.current`
+  return client.fetch(query)
+}
+
+// ==================== HOME PAGE ====================
+
+// GROQ query to get home page data
+export async function getHomePage() {
+  const query = `*[_type == "homePage"][0] {
+    heroTitle,
+    heroTitleHighlight,
+    heroDescription,
+    "heroImage": heroImage.asset->url,
+    heroStats,
+    trustTitle,
+    trustDescription,
+    trustStats,
+    testimonialsTitle,
+    testimonialsDescription,
+    testimonials,
+    featuresTitle,
+    featuresDescription,
+    features[] {
+      title,
+      description,
+      linkText,
+      linkHref,
+      "image": image.asset->url
+    },
+    partnersTitle,
+    partnersDescription,
+    partners,
+    blogTitle,
+    blogDescription,
+    faqTitle,
+    faqs
+  }`
+
   return client.fetch(query)
 }

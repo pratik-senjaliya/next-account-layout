@@ -12,6 +12,7 @@ import post from './post'
 import service from './service'
 import industry from './industry'
 import hireStaff from './hireStaff'
+import homePage from './homePage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -27,5 +28,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         service,
         industry,
         hireStaff,
+        homePage,
     ],
 }
