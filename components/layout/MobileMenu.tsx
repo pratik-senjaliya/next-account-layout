@@ -270,14 +270,28 @@ export const MobileMenu: React.FC<{
                         isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
                       )}
                     >
+                      {/* View All [Category] Link */}
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        className="flex items-center gap-3 px-8 py-3 text-sm font-bold text-primary-700 bg-primary-50/50 hover:bg-primary-50 transition-colors border-l-4 border-primary-500"
+                      >
+                        <div className="text-primary-600">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                          </svg>
+                        </div>
+                        <span>View All {item.name}</span>
+                      </Link>
+
                       {item.submenu.map((subItem) => (
                         <Link
                           key={subItem.href}
                           href={subItem.href}
                           onClick={onClose}
-                          className="flex items-center gap-3 px-8 py-3 text-sm text-neutral-600 hover:text-primary-600 hover:bg-primary-50 transition-colors"
+                          className="flex items-center gap-3 px-8 py-3 text-sm text-neutral-600 hover:text-primary-600 hover:bg-neutral-100 transition-colors border-l-4 border-transparent hover:border-primary-200"
                         >
-                          <div className="text-primary-500">
+                          <div className="text-neutral-400 group-hover:text-primary-500">
                             {subItem.icon}
                           </div>
                           <span>{subItem.name}</span>

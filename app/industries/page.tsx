@@ -76,7 +76,7 @@ export default function IndustriesHubPage() {
       {/* 2. Industry List */}
       <Section background="gray" spacing="lg" id="industry-list">
         <Container>
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl font-bold text-neutral-900 mb-6">
               Sectors We Serve
             </h2>
@@ -86,51 +86,52 @@ export default function IndustriesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industries.map((industry) => (
-              <Link
-                key={industry.id}
-                href={`/industries/${industry.slug}`}
-                className="group"
-              >
-                <Card
-                  hover
-                  className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden"
+            {industries.map((industry, index) => (
+              <div key={industry.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
+                <Link
+                  href={`/industries/${industry.slug}`}
+                  className="group block h-full"
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={industry.image}
-                      alt={industry.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors"></div>
-                  </div>
-                  <div className="p-8 flex flex-col flex-grow">
-                    <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
-                      {industry.title}
-                    </h3>
-                    <p className="text-neutral-600 mb-8 flex-grow leading-relaxed">
-                      {industry.description}
-                    </p>
-                    <div className="flex items-center text-primary-600 font-bold gap-2 group-hover:gap-4 transition-all">
-                      <span>View Solutions</span>
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
+                  <Card
+                    hover
+                    className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <Image
+                        src={industry.image}
+                        alt={industry.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors"></div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
+                    <div className="p-8 flex flex-col flex-grow">
+                      <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
+                        {industry.title}
+                      </h3>
+                      <p className="text-neutral-600 mb-8 flex-grow leading-relaxed">
+                        {industry.description}
+                      </p>
+                      <div className="flex items-center text-primary-600 font-bold gap-2 group-hover:gap-4 transition-all">
+                        <span>View Solutions</span>
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              </div>
             ))}
           </div>
         </Container>

@@ -199,14 +199,21 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showTopBanner, setShowTopBanner] = useState(true);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const handleMouseEnter = (menuName: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setHoveredMenu(menuName);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setHoveredMenu(null);
+    }, 200);
+  };
 
   return (
     <>
@@ -248,52 +255,6 @@ export const Header: React.FC = () => {
         </div>
       )}
 
-      {/* Top Contact Bar
-      <div className="bg-neutral-900 text-neutral-300 text-sm py-2.5 hidden md:block">
-        <div className="container-custom">
-          <div className="flex items-center gap-6">
-            <a
-              href="mailto:info@yoursite.com"
-              className="hover:text-white transition-colors flex items-center gap-2"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              info@yoursite.com
-            </a>
-            <a
-              href="tel:+1234567890"
-              className="hover:text-white transition-colors flex items-center gap-2"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              +1 (234) 567-8900
-            </a>
-          </div>
-        </div>
-      </div> */}
-
       {/* Main Header */}
       <header
         className={cn(
@@ -318,8 +279,8 @@ export const Header: React.FC = () => {
                     <div
                       key={item.href}
                       className="relative"
-                      onMouseEnter={() => setHoveredMenu(item.name)}
-                      onMouseLeave={() => setHoveredMenu(null)}
+                      onMouseEnter={() => handleMouseEnter(item.name)}
+                      onMouseLeave={handleMouseLeave}
                     >
                       <Link
                         href={item.href}
@@ -355,10 +316,10 @@ export const Header: React.FC = () => {
                             <div className="col-span-8">
                               <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
                                 <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
-                                  Our Services
+                                  Our {item.name}
                                 </h3>
                                 <Link
-                                  href="/services"
+                                  href={item.href}
                                   className="text-xs font-semibold text-primary-600 hover:text-primary-700 underline flex items-center gap-1"
                                 >
                                   View Hub

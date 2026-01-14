@@ -106,7 +106,7 @@ export default function ServicesHubPage() {
       <Section background="white" spacing="lg">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="animate-fade-in-left">
+            <div className="animate-fade-in-up">
               <span className="text-primary-600 font-semibold uppercase tracking-wider text-sm mb-4 block">Our Philosophy</span>
               <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-8 font-primary">
                 Excellence in Financial <br />Partnership
@@ -129,7 +129,7 @@ export default function ServicesHubPage() {
                 </div>
               </div>
             </div>
-            <div className="relative h-[500px] rounded-[40px] overflow-hidden shadow-2xl animate-fade-in-right transform lg:rotate-2 hover:rotate-0 transition-transform duration-500">
+            <div className="relative h-[500px] rounded-[40px] overflow-hidden shadow-2xl animate-fade-in-up transform lg:rotate-2 hover:rotate-0 transition-transform duration-500" style={{ animationDelay: "0.2s" }}>
               <Image
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=1000&fit=crop"
                 alt="Our leadership team"
@@ -144,7 +144,7 @@ export default function ServicesHubPage() {
       {/* 3. Our Services/Solutions Section */}
       <Section background="gray" spacing="lg" id="all-services">
         <Container>
-          <div className="text-center mb-20 max-w-3xl mx-auto">
+          <div className="text-center mb-20 max-w-3xl mx-auto animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 font-primary">Our Core Expertise</h2>
             <p className="text-lg text-neutral-600">
               Deep specialized knowledge across five critical pillars of business financial success.
@@ -153,45 +153,49 @@ export default function ServicesHubPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {services.map((service, index) => (
-              <Link key={service.id} href={`/services/${service.slug}`} className="group">
-                <Card hover className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                  <div className="relative h-56 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors"></div>
-                  </div>
-                  <div className="p-8 flex flex-col flex-grow">
-                    <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-neutral-600 mb-8 flex-grow leading-relaxed">
-                      {service.description}
-                    </p>
-                    <div className="flex items-center text-primary-600 font-bold gap-2 group-hover:gap-4 transition-all">
-                      <span>Explore Details</span>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+              <div key={service.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
+                <Link href={`/services/${service.slug}`} className="group h-full block">
+                  <Card hover className="h-full flex flex-col p-0 border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors"></div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
+                    <div className="p-8 flex flex-col flex-grow">
+                      <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-neutral-600 mb-8 flex-grow leading-relaxed">
+                        {service.description}
+                      </p>
+                      <div className="flex items-center text-primary-600 font-bold gap-2 group-hover:gap-4 transition-all">
+                        <span>Explore Details</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              </div>
             ))}
             {/* Custom Solution Card */}
-            <Card className="h-full flex flex-col justify-center items-center bg-primary-900 text-white p-10 text-center border-none shadow-xl transform lg:scale-105">
-              <div className="w-16 h-16 bg-secondary-500 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Enterprise Needs?</h3>
-              <p className="text-primary-100 mb-8">We offer custom-built financial solutions for high-complexity organizations.</p>
-              <Button variant="secondary" className="w-full py-4 text-lg">Talk to a Partner</Button>
-            </Card>
+            <div className="animate-fade-in-up h-full" style={{ animationDelay: "0.6s" }}>
+              <Card className="h-full flex flex-col justify-center items-center bg-primary-900 text-white p-10 text-center border-none shadow-xl transform lg:scale-105">
+                <div className="w-16 h-16 bg-secondary-500 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Enterprise Needs?</h3>
+                <p className="text-primary-100 mb-8">We offer custom-built financial solutions for high-complexity organizations.</p>
+                <Button variant="secondary" className="w-full py-4 text-lg">Talk to a Partner</Button>
+              </Card>
+            </div>
           </div>
         </Container>
       </Section>
@@ -199,7 +203,7 @@ export default function ServicesHubPage() {
       {/* 4. Our Process Section */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">How We Partner With You</h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
               Our refined onboarding and engagement process ensures clarity and results from day one.
@@ -209,7 +213,7 @@ export default function ServicesHubPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             <div className="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-neutral-100 -z-10"></div>
             {genericProcess.map((step, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md transition-all text-center group">
+              <div key={index} className="bg-white p-8 rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md transition-all text-center group animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
                   {step.step}
                 </div>

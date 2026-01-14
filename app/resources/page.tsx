@@ -70,7 +70,7 @@ export default function ResourcesPage() {
       {/* Search Bar */}
       <Section background="white" spacing="sm" className="pt-8">
         <Container>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <div className="relative">
               <input
                 type="search"
@@ -90,14 +90,14 @@ export default function ResourcesPage() {
       {/* Categories Filter */}
       <Section background="white" spacing="sm">
         <Container>
-          <div className="flex flex-wrap gap-3 justify-center animate-fade-in-up">
+          <div className="flex flex-wrap gap-3 justify-center animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${selectedCategory === category
-                    ? "bg-primary-600 text-white shadow-lg scale-105"
-                    : "border-2 border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600"
+                  ? "bg-primary-600 text-white shadow-lg scale-105"
+                  : "border-2 border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600"
                   }`}
               >
                 {category}
@@ -111,52 +111,54 @@ export default function ResourcesPage() {
       {featuredPost && (
         <Section background="white" spacing="md">
           <Container>
-            <Link href={`/resources/${featuredPost.slug}`}>
-              <Card hover className="overflow-hidden group cursor-pointer">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="relative h-64 md:h-full min-h-[300px]">
-                    <Image
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-4 py-2 bg-secondary-500 text-white rounded-full text-sm font-bold shadow-lg">
-                        Featured
-                      </span>
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+              <Link href={`/resources/${featuredPost.slug}`}>
+                <Card hover className="overflow-hidden group cursor-pointer">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="relative h-64 md:h-full min-h-[300px]">
+                      <Image
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-4 py-2 bg-secondary-500 text-white rounded-full text-sm font-bold shadow-lg">
+                          Featured
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-8 flex flex-col justify-center">
+                      <div className="flex items-center gap-3 mb-4 text-sm text-neutral-500">
+                        <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-lg font-medium">
+                          {featuredPost.category}
+                        </span>
+                        <span>{featuredPost.date}</span>
+                        <span>•</span>
+                        <span>{featuredPost.readTime}</span>
+                      </div>
+                      <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="text-lg text-neutral-600 mb-6 line-clamp-3">
+                        {featuredPost.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-neutral-500">
+                          By {featuredPost.author}
+                        </span>
+                        <span className="text-primary-600 font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                          Read More
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="p-8 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-4 text-sm text-neutral-500">
-                      <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-lg font-medium">
-                        {featuredPost.category}
-                      </span>
-                      <span>{featuredPost.date}</span>
-                      <span>•</span>
-                      <span>{featuredPost.readTime}</span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-lg text-neutral-600 mb-6 line-clamp-3">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-neutral-500">
-                        By {featuredPost.author}
-                      </span>
-                      <span className="text-primary-600 font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                        Read More
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </Link>
+                </Card>
+              </Link>
+            </div>
           </Container>
         </Section>
       )}

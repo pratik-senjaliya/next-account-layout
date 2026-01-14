@@ -185,7 +185,7 @@ export default function HomePage() {
       {/* Trust Indicators */}
       <Section background="white" spacing="md">
         <Container>
-          <div className="text-center mb-10">
+          <div className="text-center mb-10 animate-fade-in-up">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
               Trusted by thousands of businesses
             </h2>
@@ -194,9 +194,15 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            <StatCard value="10,000+" label="Active Clients" />
-            <StatCard value="15+ Years" label="Industry Experience" />
-            <StatCard value="24/7" label="Support Available" />
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+              <StatCard value="10,000+" label="Active Clients" />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <StatCard value="15+ Years" label="Industry Experience" />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+              <StatCard value="24/7" label="Support Available" />
+            </div>
           </div>
         </Container>
       </Section>
@@ -204,7 +210,7 @@ export default function HomePage() {
       {/* Testimonials */}
       <Section background="gray" spacing="lg">
         <Container>
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               What Our Clients Say
             </h2>
@@ -215,7 +221,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <Testimonial {...testimonial} />
               </div>
             ))}
@@ -226,7 +232,7 @@ export default function HomePage() {
       {/* Features Section */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="text-center mb-14">
+          <div className="text-center mb-14 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               Everything You Need to Succeed
             </h2>
@@ -238,7 +244,7 @@ export default function HomePage() {
 
           <div className="space-y-20 md:space-y-28">
             {/* Feature 1 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
               <div>
                 <FeatureCard {...features[0]} />
               </div>
@@ -247,19 +253,19 @@ export default function HomePage() {
                   src={features[0].image}
                   alt={features[0].title}
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
             </div>
 
             {/* Feature 2 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
               <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first">
                 <Image
                   src={features[1].image}
                   alt={features[1].title}
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div>
@@ -268,7 +274,7 @@ export default function HomePage() {
             </div>
 
             {/* Feature 3 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
               <div>
                 <FeatureCard {...features[2]} />
               </div>
@@ -277,19 +283,19 @@ export default function HomePage() {
                   src={features[2].image}
                   alt={features[2].title}
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
             </div>
 
             {/* Feature 4 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center animate-fade-in-up">
               <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg lg:order-first">
                 <Image
                   src={features[3].image}
                   alt={features[3].title}
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div>

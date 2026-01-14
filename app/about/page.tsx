@@ -103,7 +103,7 @@ export default function AboutPage() {
             ]}
             className="mb-6 text-primary-200"
           />
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
               We Help Entrepreneurs
               <br />
@@ -121,7 +121,7 @@ export default function AboutPage() {
       {/* What We Do */}
       <Section background="white" spacing="lg">
         <Container>
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               What We Do
             </h2>
@@ -138,7 +138,8 @@ export default function AboutPage() {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-6 bg-neutral-50 rounded-lg"
+                className="text-center p-6 bg-neutral-50 rounded-lg animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">
                   {stat.value}
@@ -153,7 +154,7 @@ export default function AboutPage() {
       {/* How We Got Here */}
       <Section background="gray" spacing="lg">
         <Container>
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               How We Got Here
             </h2>
@@ -164,7 +165,8 @@ export default function AboutPage() {
               {timeline.map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-6 items-start pb-6 border-b border-neutral-200 last:border-0"
+                  className="flex gap-6 items-start pb-6 border-b border-neutral-200 last:border-0 animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="text-2xl font-bold text-primary-600 min-w-[80px]">
                     {item.year}
@@ -185,7 +187,7 @@ export default function AboutPage() {
       <Section background="white" spacing="lg">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="animate-fade-in-up">
               <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
                 Why We're Here
               </h2>
@@ -205,12 +207,12 @@ export default function AboutPage() {
                 what we're about.
               </p>
             </div>
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               <Image
                 src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop"
                 alt="Our mission"
                 fill
-                className="object-cover"
+                className="object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
           </div>
@@ -220,7 +222,7 @@ export default function AboutPage() {
       {/* Our Values */}
       <Section background="gray" spacing="lg">
         <Container>
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
               Our Values
             </h2>
@@ -233,14 +235,16 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value, index) => (
-              <Card key={index} hover className="p-6">
-                <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-neutral-600 leading-relaxed">
-                  {value.description}
-                </p>
-              </Card>
+              <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
+                <Card hover className="p-6 h-full">
+                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-neutral-600 leading-relaxed">
+                    {value.description}
+                  </p>
+                </Card>
+              </div>
             ))}
           </div>
         </Container>

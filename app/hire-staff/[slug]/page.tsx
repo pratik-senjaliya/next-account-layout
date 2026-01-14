@@ -142,7 +142,7 @@ export default async function HireStaffPage({ params }: PageProps) {
       {/* 3.5. Experience Levels Section - NEW */}
       <Section background="white" spacing="lg" className="py-24 md:py-32 bg-gradient-to-b from-neutral-50 to-white">
         <Container>
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
             <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Experience Levels</span>
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Choose Your Perfect Match</h2>
             <p className="text-lg text-neutral-600 leading-relaxed font-medium">
@@ -150,14 +150,16 @@ export default async function HireStaffPage({ params }: PageProps) {
             </p>
           </div>
 
-          <ExperienceTabs experienceLevels={position.experienceLevels} />
+          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <ExperienceTabs experienceLevels={position.experienceLevels} />
+          </div>
         </Container>
       </Section>
 
       {/* 4. Getting Started / Process Section - UPDATED */}
       <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
         <Container>
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 animate-fade-in-up">
             <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">How It Works</span>
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Getting Started</h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto font-medium">
@@ -168,7 +170,7 @@ export default async function HireStaffPage({ params }: PageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
             <div className="hidden lg:block absolute top-[60px] left-0 w-full h-1 bg-neutral-100 -z-10"></div>
             {position.gettingStarted.map((step, index) => (
-              <div key={index} className="text-center group">
+              <div key={index} className="text-center group animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
                 <div className="w-24 h-24 bg-white border-8 border-primary-50 text-primary-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-8 group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all duration-500 shadow-xl">
                   {step.step}
                 </div>
@@ -185,7 +187,7 @@ export default async function HireStaffPage({ params }: PageProps) {
       {/* 4.5. Software Integration Section - NEW */}
       <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
         <Container>
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
             <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Software Expertise</span>
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Seamless Integration</h2>
             <p className="text-lg text-neutral-600 leading-relaxed font-medium">
@@ -193,7 +195,9 @@ export default async function HireStaffPage({ params }: PageProps) {
             </p>
           </div>
 
-          <SoftwareGrid categories={position.softwareCategories} />
+          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <SoftwareGrid categories={position.softwareCategories} />
+          </div>
         </Container>
       </Section>
 
@@ -201,12 +205,12 @@ export default async function HireStaffPage({ params }: PageProps) {
       <Section background="primary" spacing="lg" className="bg-neutral-900 text-white py-24 md:py-32 overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
-            <div>
+            <div className="animate-fade-in-left">
               <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {position.title} <br />Advantage</h2>
               <div className="space-y-12">
                 {position.whyChooseUs.map((item, i) => (
-                  <div key={i} className="flex gap-8 group">
+                  <div key={i} className="flex gap-8 group animate-fade-in-up" style={{ animationDelay: `${i * 0.15 + 0.2}s` }}>
                     <div className="flex-shrink-0 w-16 h-16 bg-white/5 rounded-[20px] flex items-center justify-center text-secondary-400 border border-white/10 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300">
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -220,7 +224,7 @@ export default async function HireStaffPage({ params }: PageProps) {
                 ))}
               </div>
             </div>
-            <div className="relative h-[600px] lg:h-[700px]">
+            <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
               <div className="relative h-full rounded-[60px] overflow-hidden shadow-2xl border-8 border-white/5">
                 <Image
@@ -247,7 +251,7 @@ export default async function HireStaffPage({ params }: PageProps) {
       {/* 5.5. Risk-Free Trial Section - NEW */}
       <Section background="white" spacing="lg" className="py-24 md:py-32 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
         <Container>
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 mb-6">
               <span className="text-sm font-bold uppercase tracking-wider">{position.trial.duration} Risk-Free</span>
             </div>
@@ -282,7 +286,7 @@ export default async function HireStaffPage({ params }: PageProps) {
       {/* 6. Testimonial Section */}
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto animate-fade-in-up">
             <Testimonial
               quote={position.testimonial.quote}
               author={position.testimonial.author}
@@ -297,13 +301,15 @@ export default async function HireStaffPage({ params }: PageProps) {
       <Section background="white" spacing="lg" className="py-24 md:py-32">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 animate-fade-in-up">
               <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Expert Q&A</h2>
               <p className="text-lg text-neutral-600 font-medium">
                 Detailed answers to the most common questions regarding our {position.title} services.
               </p>
             </div>
-            <FAQ items={position.faqs} />
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <FAQ items={position.faqs} />
+            </div>
           </div>
         </Container>
       </Section>
