@@ -22,6 +22,27 @@ export interface Industry {
         company: string;
     };
     faqs: { question: string; answer: string }[];
+    // NEW: Sub-Industries Structure
+    subIndustries: {
+        name: string;
+        focus: string;
+        bookkeeping: string[];
+        accounting: string[];
+        payroll: string[];
+        taxPreparation: string[];
+        softwareStack: string[];
+    }[];
+    // NEW: Industry-Specific Benefits
+    industryBenefits: {
+        title: string;
+        description: string;
+    }[];
+    // NEW: Getting Started Steps
+    gettingStarted: {
+        step: string;
+        title: string;
+        description: string;
+    }[];
 }
 
 export const industries: Industry[] = [
@@ -71,6 +92,249 @@ export const industries: Industry[] = [
         faqs: [
             { question: "Are you HIPAA compliant?", answer: "Yes, we are fully HIPAA compliant. All staff undergo HIPAA training and our systems meet PHI protection standards." },
             { question: "Do you integrate with EMR systems?", answer: "Yes, we integrate with major EMR/PM platforms like Kareo, DrChrono, Athenahealth, and eClinicalWorks." }
+        ],
+        subIndustries: [
+            {
+                name: "General & Specialized Medical Practices",
+                focus: "Revenue Cycle Management and Insurance Reconciliation",
+                bookkeeping: [
+                    "Monthly bank and credit card reconciliations",
+                    "Recording insurance payments (ERA/EOB) and patient co-pays",
+                    "Managing vendor payables for lab services and medical supplies",
+                    "Tracking multiple revenue streams (insurance, patient payments, procedures)"
+                ],
+                accounting: [
+                    "Monthly Profit & Loss statements by location or department",
+                    "Revenue Cycle Management (RCM) oversight tracking denied claims and aging A/R",
+                    "Cash flow forecasting to manage insurance payment lag",
+                    "Accrual accounting for services rendered but not yet billed"
+                ],
+                payroll: [
+                    "Managing base salaries for clinicians and support staff",
+                    "Processing Physician Compensation based on RVUs or net collections",
+                    "Handling multi-state payroll for group practices with multiple locations",
+                    "Managing complex benefit structures (health insurance, malpractice, CME allowances)"
+                ],
+                taxPreparation: [
+                    "Form 1040 / 1120-S preparation for physician-owned practices",
+                    "Section 179 deductions for medical imaging or surgical equipment",
+                    "Tracking CME (Continuing Medical Education) and professional dues",
+                    "Managing S-Corp distributions and reasonable compensation"
+                ],
+                softwareStack: ["QuickBooks Online", "Sage Intacct", "AdvancedMD", "Athenahealth", "Kareo", "Gusto", "ADP", "Bill.com"]
+            },
+            {
+                name: "Dental & Orthodontic Clinics",
+                focus: "Treatment Plan Tracking and Lab Invoice Management",
+                bookkeeping: [
+                    "Tracking high-volume dental lab invoices",
+                    "Reconciling daily patient payments (insurance + patient portions)",
+                    "Managing merchant fees from various financing options (CareCredit, LendingClub)",
+                    "Recording treatment plan deposits and scheduling payments"
+                ],
+                accounting: [
+                    "Treatment plan profitability analysis (Crowns vs. Fillings vs. Implants)",
+                    "Tracking Case Fee liabilities for long-term orthodontic contracts",
+                    "Managing deferred revenue for pre-paid treatment plans",
+                    "Production vs. collection analysis"
+                ],
+                payroll: [
+                    "Incentive-based pay for hygienists (production bonuses)",
+                    "Handling multi-state payroll for group practices",
+                    "Processing commission structures for treatment coordinators"
+                ],
+                taxPreparation: [
+                    "Specialized depreciation for dental chairs and X-ray units",
+                    "State-specific dental tax compliance",
+                    "Managing equipment leases vs. purchases (Section 179 vs. bonus depreciation)"
+                ],
+                softwareStack: ["Dentrix", "Open Dental", "Eaglesoft", "QuickBooks Online", "Paychex", "Gusto"]
+            },
+            {
+                name: "Mental Health & Behavioral Therapy",
+                focus: "Session-Based Billing and OON Reimbursements",
+                bookkeeping: [
+                    "Managing session-based billing and scheduling integration",
+                    "Recording out-of-network (OON) reimbursements from insurance",
+                    "Tracking telehealth software subscriptions (Zoom, Doxy.me)",
+                    "Managing sliding-scale fee structures"
+                ],
+                accounting: [
+                    "Monitoring 'No-show' costs and utilization rates",
+                    "Tracking therapist productivity and session capacity",
+                    "Managing grant-funded programs for non-profit mental health centers"
+                ],
+                payroll: [
+                    "Flexible pay cycles for per-session contractors (1099) and salaried clinicians (W-2)",
+                    "Managing supervision stipends for licensed supervisors",
+                    "Handling CEU (Continuing Education Unit) reimbursements"
+                ],
+                taxPreparation: [
+                    "Home office deductions for telehealth providers",
+                    "Managing self-employment tax for solo practitioners",
+                    "Tracking professional liability insurance deductions"
+                ],
+                softwareStack: ["SimplePractice", "TherapyNotes", "TheraNest", "FreshBooks", "Xero", "Gusto"]
+            },
+            {
+                name: "Physical Therapy & Chiropractic Centers",
+                focus: "Visit Authorization Tracking and DME Sales",
+                bookkeeping: [
+                    "Reconciling high-frequency patient visits",
+                    "Tracking durable medical equipment (DME) sales (braces, pillows, supplements)",
+                    "Managing insurance authorization tracking",
+                    "Recording copays and deductibles"
+                ],
+                accounting: [
+                    "Calculating Revenue Per Visit benchmarks",
+                    "Tracking authorized visits remaining per patient",
+                    "Managing inventory for retail DME products",
+                    "Workers' comp billing reconciliation"
+                ],
+                payroll: [
+                    "Performance bonuses based on patient retention and volume",
+                    "Managing multi-location therapist scheduling",
+                    "Processing per-diem rates for contract therapists"
+                ],
+                taxPreparation: [
+                    "Depreciation of therapeutic equipment (ultrasound, laser therapy)",
+                    "Tracking massage therapy vs. clinical adjustments for sales tax purposes",
+                    "Managing retail sales tax on DME products"
+                ],
+                softwareStack: ["WebPT", "Jane App", "Clinicient", "Xero", "QuickBooks Online", "Staffology", "Gusto"]
+            },
+            {
+                name: "Dermatology & Medical Spas",
+                focus: "Dual-Entity Accounting (Medical vs. Retail/Wellness)",
+                bookkeeping: [
+                    "Complex retail inventory reconciliation (skincare products)",
+                    "Recording gift card sales vs. redemptions",
+                    "Managing consignment inventory for injectables (Botox, fillers)",
+                    "Tracking membership programs and package sales"
+                ],
+                accounting: [
+                    "Sales Tax Nexus tracking for cosmetic services vs. medical services",
+                    "Tracking high-margin cosmetic injection costs (COGS analysis)",
+                    "Managing revenue recognition for package deals and memberships",
+                    "Inventory valuation for skincare retail"
+                ],
+                payroll: [
+                    "Commission calculations for estheticians and injectors",
+                    "Tracking tips for service staff",
+                    "Managing medical vs. spa staff payroll allocation"
+                ],
+                taxPreparation: [
+                    "Managing Dual-Entity structures (Medical PC vs. Retail/Wellness LLC)",
+                    "Retail sales tax filings for product sales",
+                    "Nexus considerations for multi-state operations",
+                    "Equipment depreciation for laser systems"
+                ],
+                softwareStack: ["Zenoti", "Boulevard", "Vagaro", "QuickBooks Online", "Gusto", "ADP", "Avalara"]
+            },
+            {
+                name: "Outpatient & Diagnostic Centers",
+                focus: "Capital Equipment Tracking and Multi-Departmental Allocation",
+                bookkeeping: [
+                    "High-volume vendor management for reagents and diagnostic kits",
+                    "Reconciling global vs. technical billing components",
+                    "Managing multiple payer contracts and fee schedules"
+                ],
+                accounting: [
+                    "Capital expenditure (CapEx) tracking for MRI/CT machines",
+                    "Inter-departmental cost allocation (radiology, lab, cardiology)",
+                    "Managing equipment leases and service contracts"
+                ],
+                payroll: [
+                    "Managing 24/7 staffing shifts and on-call stipends",
+                    "Tracking radiologist and pathologist reading fees",
+                    "Processing shift differentials for overnight staff"
+                ],
+                taxPreparation: [
+                    "Multi-state nexus if diagnostic results cross state lines",
+                    "Complex tax structures for imaging partnerships",
+                    "Section 179 and bonus depreciation for medical equipment"
+                ],
+                softwareStack: ["Medikamart", "Epic", "Cerner", "Sage Intacct", "NetSuite", "ADP Comprehensive"]
+            },
+            {
+                name: "Home Healthcare Services",
+                focus: "Mileage Tracking and Medicaid/Medicare Billing",
+                bookkeeping: [
+                    "Managing travel and mileage reimbursements for field staff",
+                    "Reconciling Medicaid/Medicare daily billing cycles",
+                    "Tracking EVV (Electronic Visit Verification) integration"
+                ],
+                accounting: [
+                    "Cost-per-visit analysis by service type",
+                    "Managing grant-funded programs and restricted funds",
+                    "Tracking nurse and aide utilization rates"
+                ],
+                payroll: [
+                    "GPS-verified timekeeping integration for field staff",
+                    "Complex overtime for 24-hour live-in caregivers",
+                    "Managing weekend and holiday premium pay"
+                ],
+                taxPreparation: [
+                    "Tracking FICA exemptions for certain family caregivers",
+                    "Managing state-specific caregiver tax credits",
+                    "Handling 1099 vs. W-2 classification for caregivers"
+                ],
+                softwareStack: ["AlayaCare", "Homecare Homebase", "ClearCare", "QuickBooks Online", "Paycor", "ADP"]
+            },
+            {
+                name: "Pharmacy & Medical Supplies",
+                focus: "Inventory Valuation and PBM Reconciliations",
+                bookkeeping: [
+                    "Batch and expiry-date inventory tracking",
+                    "Reconciling PBM (Pharmacy Benefit Manager) clawbacks and reimbursements",
+                    "Managing DIR fees and pharmacy network reconciliations"
+                ],
+                accounting: [
+                    "Cost of Goods Sold (COGS) optimization with FIFO/LIFO",
+                    "Tracking high-value inventory turnover rates",
+                    "Managing 340B drug pricing program compliance"
+                ],
+                payroll: [
+                    "Managing pharmacist licensing stipends",
+                    "Hourly technician shift management",
+                    "Handling on-call pharmacist compensation"
+                ],
+                taxPreparation: [
+                    "Section 471 inventory valuation methods",
+                    "340B drug pricing program compliance and reporting",
+                    "Managing controlled substance inventory for DEA compliance"
+                ],
+                softwareStack: ["PioneerRx", "Liberty", "QS/1", "NetSuite", "TallyPrime", "ADP", "Paychex"]
+            }
+        ],
+        industryBenefits: [
+            {
+                title: "HIPAA Compliance & Data Security",
+                description: "SOC 2 Type II compliant delivery centers ensure all patient and practice data is handled with the highest level of security. We're fully compliant with HIPAA regulations and sign BAAs (Business Associate Agreements)."
+            },
+            {
+                title: "Healthcare Software Expertise",
+                description: "Deep proficiency in practice management systems like AdvancedMD, Athenahealth, Dentrix, SimplePractice, and more. We understand the unique integration between PM systems and accounting software."
+            },
+            {
+                title: "RCM & Insurance Knowledge",
+                description: "Understanding of insurance billing cycles, ERA/EOB processing, denial management, and the complexities of healthcare revenue recognition."
+            },
+            {
+                title: "Scalability for Multi-Location Practices",
+                description: "Handle accounting for single-provider practices up to multi-location group practices with consolidated reporting and location-level P&Ls."
+            },
+            {
+                title: "40-60% Cost Savings",
+                description: "Save significantly compared to hiring in-house healthcare accounting staff, while getting specialized expertise in medical practice accounting."
+            }
+        ],
+        gettingStarted: [
+            { step: "01", title: "Practice Assessment", description: "We review your practice type, PM system, payer mix, and specific accounting needs." },
+            { step: "02", title: "Software Integration", description: "Seamless connection with your PM/billing system and accounting platform." },
+            { step: "03", title: "Compliance Verification", description: "Ensure HIPAA BAA is in place and security protocols are established." },
+            { step: "04", title: "Onboarding", description: "Train our team on your specific practice workflows and reporting requirements." },
+            { step: "05", title: "Ongoing Support", description: "Daily bookkeeping, monthly financials, and strategic practice insights." }
         ]
     },
     {
@@ -116,6 +380,9 @@ export const industries: Industry[] = [
             role: "Owner",
             company: "Martinez Restaurant Group"
         },
+        subIndustries: [],
+        industryBenefits: [],
+        gettingStarted: [],
         faqs: [
             { question: "Do you work with restaurant POS systems?", answer: "Yes, we integrate with Toast, Square, Clover, Lightspeed, and most major restaurant POS platforms." },
             { question: "Can you handle multi-location consolidation?", answer: "Absolutely. We specialize in consolidating financials across multiple retail or restaurant locations." }
@@ -164,6 +431,9 @@ export const industries: Industry[] = [
             role: "President",
             company: "Richardson Construction"
         },
+        subIndustries: [],
+        industryBenefits: [],
+        gettingStarted: [],
         faqs: [
             { question: "Do you handle percentage-of-completion accounting?", answer: "Yes, we specialize in construction accounting including POC, WIP schedules, and job cost tracking." },
             { question: "Can you help with 1031 exchanges?", answer: "Absolutely. We provide the financial documentation and tracking required for successful like-kind exchanges." }
@@ -212,6 +482,9 @@ export const industries: Industry[] = [
             role: "CFO",
             company: "CloudSync Technologies"
         },
+        subIndustries: [],
+        industryBenefits: [],
+        gettingStarted: [],
         faqs: [
             { question: "Do you understand SaaS revenue recognition?", answer: "Yes, we specialize in ASC 606 compliance for subscription and usage-based revenue models." },
             { question: "Can you integrate with Stripe and Shopify?", answer: "Absolutely. We integrate with all major payment processors and e-commerce platforms." }
@@ -260,6 +533,9 @@ export const industries: Industry[] = [
             role: "Managing Partner",
             company: "Anderson & Associates Law"
         },
+        subIndustries: [],
+        industryBenefits: [],
+        gettingStarted: [],
         faqs: [
             { question: "Do you work with law firm trust accounts?", answer: "Yes, we are experienced with IOLTA accounting and law firm-specific compliance requirements." },
             { question: "Can you track profitability by project?", answer: "Absolutely. We specialize in project-level profitability analysis for service-based businesses." }
@@ -308,6 +584,9 @@ export const industries: Industry[] = [
             role: "CEO",
             company: "Precision Manufacturing Corp"
         },
+        subIndustries: [],
+        industryBenefits: [],
+        gettingStarted: [],
         faqs: [
             { question: "Do you work with manufacturing ERPs?", answer: "Yes, we integrate with NetSuite, SAP Business One, Epicor, and other manufacturing ERP platforms." },
             { question: "Can you handle complex cost accounting?", answer: "Absolutely. We specialize in job costing, process costing, and activity-based costing for manufacturers." }

@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
+import { SubIndustryAccordion } from "@/components/ui/SubIndustryAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -130,50 +131,39 @@ export default async function IndustryPage({ params }: PageProps) {
             </div>
           </div>
         </Container>
-      </Section>
 
-      {/* 3. Our industrys/solutions Section */}
-      <Section background="gray" spacing="lg" className="py-24 md:py-32">
-        <Container>
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Service Capabilities</h2>
-            <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-              Comprehensive and specialized {industry.title} solutions built
-              around your business's specific requirements.
-            </p>
-          </div>
+        {/* 3. Sub-Industries Section - NEW */}
+        {industry.subIndustries && industry.subIndustries.length > 0 && (
+          <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
+            <Container>
+              <div className="text-center mb-16 max-w-3xl mx-auto">
+                <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Sub-Industries</span>
+                <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Specialized Expertise</h2>
+                <p className="text-lg text-neutral-600 leading-relaxed font-medium">
+                  Comprehensive accounting, payroll, and tax services tailored to each sub-sector of {industry.title}.
+                </p>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {industry.features.map((feature, index) => (
-              <Card key={index} hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl">
-                <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
-                  <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
+              <SubIndustryAccordion subIndustries={industry.subIndustries} />
+            </Container>
+          </Section>
+        )}
+
       </Section>
 
       {/* 4. Our Process Section */}
       <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
         <Container>
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Proven Implementation</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Getting Started</h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto font-medium">
               We follow a rigorous methodology to ensure your {industry.title} transition is effortless and effective.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
             <div className="hidden lg:block absolute top-[60px] left-0 w-full h-1 bg-neutral-100 -z-10"></div>
-            {industry.process.map((step, index) => (
+            {(industry.gettingStarted && industry.gettingStarted.length > 0 ? industry.gettingStarted : industry.process).map((step, index) => (
               <div key={index} className="text-center group">
                 <div className="w-24 h-24 bg-white border-8 border-primary-50 text-primary-600 rounded-full flex items-center justify-center text-4xl font-bold mx-auto mb-8 group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all duration-500 shadow-xl">
                   {step.step}
@@ -196,7 +186,7 @@ export default async function IndustryPage({ params }: PageProps) {
               <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {industry.title} <br />Advantage</h2>
               <div className="space-y-12">
-                {industry.whyChooseUs.map((item, i) => (
+                {(industry.industryBenefits && industry.industryBenefits.length > 0 ? industry.industryBenefits : industry.whyChooseUs).map((item, i) => (
                   <div key={i} className="flex gap-8 group">
                     <div className="flex-shrink-0 w-16 h-16 bg-white/5 rounded-[20px] flex items-center justify-center text-secondary-400 border border-white/10 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300">
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
