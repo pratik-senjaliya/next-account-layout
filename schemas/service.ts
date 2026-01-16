@@ -108,7 +108,18 @@ export default defineType({
                     fields: [
                         defineField({ name: 'name', type: 'string', title: 'Name' }),
                         defineField({ name: 'focus', type: 'string', title: 'Focus' }),
-                        defineField({ name: 'tasks', type: 'array', title: 'Tasks', of: [{ type: 'string' }] }),
+                        defineField({
+                            name: 'sections',
+                            title: 'Sections',
+                            type: 'array',
+                            of: [{
+                                type: 'object',
+                                fields: [
+                                    defineField({ name: 'title', type: 'string', title: 'Section Title' }),
+                                    defineField({ name: 'tasks', type: 'array', title: 'Tasks', of: [{ type: 'string' }] })
+                                ]
+                            }]
+                        })
                     ],
                 },
             ],

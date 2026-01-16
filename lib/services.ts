@@ -16,7 +16,10 @@ export interface Service {
   serviceAreas?: {
     name: string;
     focus: string;
-    tasks: string[];
+    sections: {
+      title: string;
+      tasks: string[];
+    }[];
   }[];
   process: { step: string; title: string; description: string }[];
   whyChooseUs: { title: string; description: string }[];
@@ -138,63 +141,148 @@ export const services: Service[] = [
       {
         name: "Bookkeeping & Ledger Maintenance",
         focus: "Transitioning from messy data to a clean, Audit-Ready General Ledger",
-        tasks: [
-          "Chart of Accounts (COA) optimization: Mapping COA to industry standards (e.g., specialized accounts for Real Estate or SaaS)",
-          "Chart of Accounts (COA) optimization: Cleaning up redundant or 'ghost' accounts to streamline reporting",
-          "Daily transaction processing with real-time coding of bank and credit card feeds",
-          "Micro-Task: Splitting single transactions into multiple categories (e.g., a Staples receipt split between Office Supplies and Computer Hardware)",
-          "Micro-Task: Recording owner-paid business expenses through Accountable Plans",
-          "Cloud ecosystem management: Setting up and syncing third-party apps (Hubdoc, Dext, or Expensify) with the main ledger",
-          "Monitoring bank feed health and resolving broken connections immediately"
+        sections: [
+          {
+            title: "Chart of Accounts (COA) Optimization",
+            tasks: [
+              "Mapping COA to industry standards (e.g., specialized accounts for Real Estate or SaaS)",
+              "Cleaning up redundant or \"ghost\" accounts to streamline reporting"
+            ]
+          },
+          {
+            title: "Daily Transaction Processing",
+            tasks: [
+              "Real-time coding of bank and credit card feeds",
+              "Splitting single transactions into multiple categories (e.g., a Staples receipt split between Office Supplies and Computer Hardware)",
+              "Recording owner-paid business expenses (Accountable Plans)"
+            ]
+          },
+          {
+            title: "Cloud Ecosystem Management",
+            tasks: [
+              "Setting up and syncing third-party apps (Hubdoc, Dext, or Expensify) with the main ledger",
+              "Monitoring bank feed health and resolving \"broken\" connections immediately"
+            ]
+          }
         ]
       },
       {
         name: "Accounts Payable: Procure-to-Pay (P2P)",
         focus: "Fraud prevention, vendor happiness, and cash flow timing",
-        tasks: [
-          "Vendor onboarding and compliance: Collecting and verifying IRS Form W-9 for all new vendors",
-          "Maintaining a master vendor list to prevent duplicate payments",
-          "The 3-Way Matching Workflow: Verifying that the Purchase Order (PO) matches the Receiving Report, which matches the Vendor Invoice",
-          "Expense management: Auditing employee expense reports for policy compliance and valid receipts",
-          "Allocating corporate credit card spend to specific projects or departments",
-          "Payment strategy: Identifying Early Payment Discounts to save client money",
-          "Weekly Payable Aging reviews to decide which bills to pay based on available cash"
+        sections: [
+          {
+            title: "Vendor Onboarding & Compliance",
+            tasks: [
+              "Collecting and verifying IRS Form W-9 for all new vendors",
+              "Maintaining a master vendor list to prevent duplicate payments"
+            ]
+          },
+          {
+            title: "The 3-Way Matching Workflow",
+            tasks: [
+              "Verifying that the Purchase Order (PO) matches the Receiving Report, which matches the Vendor Invoice"
+            ]
+          },
+          {
+            title: "Expense Management",
+            tasks: [
+              "Auditing employee expense reports for policy compliance and valid receipts",
+              "Allocating corporate credit card spend to specific projects or departments"
+            ]
+          },
+          {
+            title: "Payment Strategy",
+            tasks: [
+              "Identifying \"Early Payment Discounts\" to save client money",
+              "Weekly \"Payable Aging\" reviews to decide which bills to pay based on available cash"
+            ]
+          }
         ]
       },
       {
         name: "Accounts Receivable: Order-to-Cash (O2C)",
         focus: "Accelerating cash inflow and reducing Bad Debt",
-        tasks: [
-          "Revenue recognition and invoicing: Managing Deferred Revenue for subscription-based models",
-          "Creating Progress Billings for long-term construction or consulting projects",
-          "Collection and dunning services: Setting up automated Gentle Nudge emails for invoices 1, 7, and 15 days overdue",
-          "Micro-Task: Documenting collection notes (calls made, promises to pay) directly in the accounting software",
-          "Cash application: Applying partial payments to specific invoice line items",
-          "Recording and reconciling merchant fees (Stripe/Square) so the Gross Revenue remains accurate",
-          "Customer credit management: Reviewing Aged Receivables to flag high-risk customers before new orders are fulfilled"
+        sections: [
+          {
+            title: "Revenue Recognition & Invoicing",
+            tasks: [
+              "Managing \"Deferred Revenue\" for subscription-based models",
+              "Creating \"Progress Billings\" for long-term construction or consulting projects"
+            ]
+          },
+          {
+            title: "Collection & Dunning Services",
+            tasks: [
+              "Setting up automated \"Gentle Nudge\" emails for invoices 1, 7, and 15 days overdue",
+              "Documenting collection notes (calls made, promises to pay) directly in the accounting software"
+            ]
+          },
+          {
+            title: "Cash Application",
+            tasks: [
+              "Applying partial payments to specific invoice line items",
+              "Recording and reconciling merchant fees (Stripe/Square) so the \"Gross Revenue\" remains accurate"
+            ]
+          },
+          {
+            title: "Customer Credit Management",
+            tasks: [
+              "Reviewing \"Aged Receivables\" to flag high-risk customers before new orders are fulfilled"
+            ]
+          }
         ]
       },
       {
         name: "Reconciliations & Month-End Excellence",
         focus: "Ensuring the Balance Sheet is 100% accurate every 30 days",
-        tasks: [
-          "Advanced reconciliations: Merchant Account Sync (reconciling Net Deposits from Amazon/Shopify to Gross Sales)",
-          "Loan and Lease Reconciliation: Splitting monthly payments into Principal and Interest based on amortization schedules",
-          "Inter-company Due To/From: Ensuring balances between parent and subsidiary companies net to zero",
-          "Month-end adjustments: Recording Accruals (expenses incurred but not yet invoiced)",
-          "Recording Prepaid Expenses (like annual insurance) and amortizing them monthly",
-          "Micro-Task: Adjusting Journal Entries (AJEs) for depreciation and amortization",
-          "Generating a Management Reporting Package (P&L, Balance Sheet, Cash Flow)",
-          "Micro-Task: Performing Trend Analysis to spot unusual spikes in expenses (e.g., why is Utilities 40% higher this month?)"
+        sections: [
+          {
+            title: "Advanced Reconciliations",
+            tasks: [
+              "Merchant Account Sync: Reconciling \"Net Deposits\" from Amazon/Shopify to \"Gross Sales\"",
+              "Loan & Lease Reconciliation: Splitting monthly payments into Principal and Interest based on amortization schedules",
+              "Inter-company \"Due To/From\": Ensuring balances between parent and subsidiary companies net to zero"
+            ]
+          },
+          {
+            title: "Month-End Adjustments",
+            tasks: [
+              "Recording Accruals (expenses incurred but not yet invoiced)",
+              "Recording Prepaid Expenses (like annual insurance) and amortizing them monthly",
+              "Adjusting Journal Entries (AJEs) for depreciation and amortization"
+            ]
+          },
+          {
+            title: "Reporting & Review",
+            tasks: [
+              "Generating a \"Management Reporting Package\" (P&L, Balance Sheet, Cash Flow)",
+              "Performing a \"Trend Analysis\" to spot unusual spikes in expenses (e.g., why is \"Utilities\" 40% higher this month?)"
+            ]
+          }
         ]
       },
       {
         name: "Catch-up & Clean-up Services",
         focus: "Bringing historical data up to date for taxes or funding",
-        tasks: [
-          "Backlog processing: Entering data from previous months or years from bank statements",
-          "Balance Sheet forensic review: Investigating old balances in Uncategorized Assets or Opening Balance Equity",
-          "Audit-ready packaging: Preparing a Permanent File of all high-value contracts and asset purchases for future audits"
+        sections: [
+          {
+            title: "Backlog Processing",
+            tasks: [
+              "Entering data from previous months or years from bank statements"
+            ]
+          },
+          {
+            title: "Balance Sheet Forensic Review",
+            tasks: [
+              "Investigating old balances in \"Uncategorized Assets\" or \"Opening Balance Equity\""
+            ]
+          },
+          {
+            title: "Audit-Ready Packaging",
+            tasks: [
+              "Preparing a \"Permanent File\" of all high-value contracts and asset purchases for future audits"
+            ]
+          }
         ]
       }
     ]
@@ -307,59 +395,129 @@ export const services: Service[] = [
       {
         name: "Individual Tax Preparation (Form 1040)",
         focus: "Accuracy, optimization of credits, and seamless data flow",
-        tasks: [
-          "Workpaper preparation and indexing: Organizing digital shoeboxes into bookmarked, hyperlinked PDF workpapers",
-          "Cross-referencing source documents (W-2, 1099, 1098) with the draft tax return",
-          "Schedule C: Profit/Loss from Business (Self-employed) with home office and auto-expense calculation",
-          "Schedule D: Capital Gains/Losses reconciliation from brokerage statements (1099-B)",
-          "Schedule E: Rental property income and expense tracking (including depreciation)",
-          "Itemized Deductions (Schedule A) vs. Standard Deduction comparison",
-          "Calculation of Child Tax Credits (CTC), Education Credits (1098-T), and Energy Credits"
+        sections: [
+          {
+            title: "Workpaper Preparation & Indexing",
+            tasks: [
+              "Organizing digital \"shoeboxes\" into bookmarked, hyperlinked PDF workpapers",
+              "Cross-referencing source documents (W-2, 1099, 1098) with the draft tax return"
+            ]
+          },
+          {
+            title: "Income & Investment Reporting",
+            tasks: [
+              "Schedule C: Profit/Loss from Business (Self-employed) with home office and auto-expense calculation",
+              "Schedule D: Capital Gains/Losses reconciliation from brokerage statements (1099-B)",
+              "Schedule E: Rental property income and expense tracking (including depreciation)"
+            ]
+          },
+          {
+            title: "Credits & Deductions Optimization",
+            tasks: [
+              "Itemized Deductions (Schedule A) vs. Standard Deduction comparison",
+              "Calculation of Child Tax Credits (CTC), Education Credits (1098-T), and Energy Credits"
+            ]
+          }
         ]
       },
       {
         name: "Business Tax Compliance (1065, 1120, 1120S)",
         focus: "Precision in book-to-tax adjustments and shareholder reporting",
-        tasks: [
-          "Form 1120/1120S: Federal and State Corporate/S-Corp income tax returns",
-          "Form 1065: Partnership returns with complex capital account maintenance",
-          "M-1 and M-3 Reconciliations: Bridging the gap between financial net income and taxable income",
-          "Fixed Asset and Depreciation: MACRS vs. Section 179/Bonus Depreciation optimization",
-          "Shareholder Basis Tracking: Maintaining accurate basis logs to ensure tax-free distributions",
-          "Bulk 1099-NEC/MISC preparation and electronic filing for contractors"
+        sections: [
+          {
+            title: "Entity-Specific Preparation",
+            tasks: [
+              "Form 1120/1120S: Federal and State Corporate/S-Corp income tax returns",
+              "Form 1065: Partnership returns with complex capital account maintenance"
+            ]
+          },
+          {
+            title: "Technical Tax Tasks",
+            tasks: [
+              "M-1 & M-3 Reconciliations: Bridging the gap between financial net income and taxable income",
+              "Fixed Asset & Depreciation: MACRS vs. Section 179/Bonus Depreciation optimization",
+              "Shareholder Basis Tracking: Maintaining accurate basis logs to ensure tax-free distributions"
+            ]
+          },
+          {
+            title: "Year-End Information Returns",
+            tasks: [
+              "Bulk 1099-NEC/MISC preparation and electronic filing for contractors"
+            ]
+          }
         ]
       },
       {
         name: "International Tax Compliance (Inbound & Outbound)",
         focus: "Specialized expertise in high-penalty IRS disclosure forms",
-        tasks: [
-          "Form 5472 and 1120: Reporting transactions between US corporations and 25% foreign shareholders",
-          "FIRPTA Compliance: Forms 8288/8288-A for foreign persons selling US real estate",
-          "Form 5471: Information returns for US persons with respect to certain Foreign Corporations (CFCs)",
-          "Form 8865: Reporting interests in Foreign Partnerships",
-          "GILTI and Subpart F: Calculation of Global Intangible Low-Taxed Income",
-          "FBAR (FinCEN 114): Reporting foreign bank and financial accounts",
-          "Form 8938 (FATCA): Statement of specified foreign financial assets",
-          "Form 2555: Foreign Earned Income Exclusion for US expats"
+        sections: [
+          {
+            title: "Inbound (Foreign-Owned US Entities)",
+            tasks: [
+              "Form 5472 & 1120: Reporting transactions between US corporations and 25% foreign shareholders",
+              "FIRPTA Compliance: Forms 8288/8288-A for foreign persons selling US real estate"
+            ]
+          },
+          {
+            title: "Outbound (US Entities/Persons Overseas)",
+            tasks: [
+              "Form 5471: Information returns for US persons with respect to certain Foreign Corporations (CFCs)",
+              "Form 8865: Reporting interests in Foreign Partnerships",
+              "GILTI & Subpart F: Calculation of Global Intangible Low-Taxed Income"
+            ]
+          },
+          {
+            title: "Individual International Reporting",
+            tasks: [
+              "FBAR (FinCEN 114): Reporting foreign bank and financial accounts",
+              "Form 8938 (FATCA): Statement of specified foreign financial assets",
+              "Form 2555: Foreign Earned Income Exclusion for US expats"
+            ]
+          }
         ]
       },
       {
         name: "Indirect Tax (Sales & Use Tax)",
         focus: "Multi-state Nexus protection for E-commerce and Retail",
-        tasks: [
-          "Nexus identification: Economic and Physical Nexus studies to determine state filing obligations",
-          "Registration for State Sales Tax permits",
-          "Monthly, Quarterly, and Annual Sales Tax return preparation and remittance via Avalara or TaxJar",
-          "Audit support: Gathering documentation for State Sales Tax audits and responding to nexus inquiries"
+        sections: [
+          {
+            title: "Nexus Identification",
+            tasks: [
+              "Economic and Physical Nexus studies to determine state filing obligations"
+            ]
+          },
+          {
+            title: "Compliance & Filing",
+            tasks: [
+              "Registration for State Sales Tax permits",
+              "Monthly, Quarterly, and Annual Sales Tax return preparation and remittance via Avalara or TaxJar"
+            ]
+          },
+          {
+            title: "Audit Support",
+            tasks: [
+              "Gathering documentation for State Sales Tax audits and responding to nexus inquiries"
+            ]
+          }
         ]
       },
       {
         name: "Specialized Statutory & Trust Filings",
         focus: "Niche tax areas for high-net-worth and non-profit clients",
-        tasks: [
-          "Form 990 / 990-PF: Annual information returns for Non-profits and Private Foundations",
-          "Form 1041: Fiduciary income tax returns and beneficiary K-1 issuance",
-          "Form 706/709: Estate and Gift tax return preparation"
+        sections: [
+          {
+            title: "Exempt Organizations",
+            tasks: [
+              "Form 990 / 990-PF: Annual information returns for Non-profits and Private Foundations"
+            ]
+          },
+          {
+            title: "Trust & Estate Taxation",
+            tasks: [
+              "Form 1041: Fiduciary income tax returns and beneficiary K-1 issuance",
+              "Form 706/709: Estate and Gift tax return preparation"
+            ]
+          }
         ]
       }
     ]
@@ -472,59 +630,124 @@ export const services: Service[] = [
       {
         name: "Full-Cycle Payroll Processing",
         focus: "Timely and accurate pay delivery for diverse workforces",
-        tasks: [
-          "Processing payroll for all frequencies (Weekly, Bi-weekly, Semi-monthly, and Monthly)",
-          "Handling multiple pay types: Salary, Hourly (Regular/Overtime), Commissions, and Bonuses",
-          "Micro-Task: Managing Final Paycheck requirements for terminated employees (meeting state-specific immediate payment laws)",
-          "Syncing time-tracking software (TSheets, ClockShark) with the payroll system",
-          "Micro-Task: Auditing manual timesheets for Buddy Punching or missing supervisor approvals",
-          "Coordinating Direct Deposit (ACH) files and printing physical checks (where required)",
-          "Loading and managing Pay Cards for unbanked employees"
+        sections: [
+          {
+            title: "Pay Cycle Management",
+            tasks: [
+              "Processing payroll for all frequencies (Weekly, Bi-weekly, Semi-monthly, and Monthly)",
+              "Handling multiple pay types: Salary, Hourly (Regular/Overtime), Commissions, and Bonuses",
+              "Managing \"Final Paycheck\" requirements for terminated employees (meeting state-specific immediate payment laws)"
+            ]
+          },
+          {
+            title: "Data Integration & Entry",
+            tasks: [
+              "Syncing time-tracking software (TSheets, ClockShark) with the payroll system",
+              "Auditing manual timesheets for \"Buddy Punching\" or missing supervisor approvals"
+            ]
+          },
+          {
+            title: "Payment Distribution",
+            tasks: [
+              "Coordinating Direct Deposit (ACH) files and printing physical checks (where required)",
+              "Loading and managing \"Pay Cards\" for unbanked employees"
+            ]
+          }
         ]
       },
       {
         name: "Multi-State Payroll Tax Compliance",
         focus: "Navigating the complexity of 50 different state tax jurisdictions",
-        tasks: [
-          "Calculating and initiating payments for 941 (Quarterly Federal Tax) and 940 (Annual FUTA)",
-          "Reconciling total tax deposits against payroll reports to ensure zero variance",
-          "Managing State Unemployment Insurance (SUI) rates and local city/county taxes",
-          "Micro-Task: Registering for new state tax IDs when a client hires their first remote employee in a new state",
-          "Filing New Hire Reporting forms with state agencies within 20 days of hire",
-          "Responding to Notice of Tax Rate changes from state unemployment agencies"
+        sections: [
+          {
+            title: "Federal Tax Obligations",
+            tasks: [
+              "Calculating and initiating payments for 941 (Quarterly Federal Tax) and 940 (Annual FUTA)",
+              "Reconciling total tax deposits against payroll reports to ensure zero variance"
+            ]
+          },
+          {
+            title: "State & Local Tax (SIT/SUI)",
+            tasks: [
+              "Managing State Unemployment Insurance (SUI) rates and local city/county taxes",
+              "Registering for new state tax IDs when a client hires their first remote employee in a new state"
+            ]
+          },
+          {
+            title: "Regulatory Reporting",
+            tasks: [
+              "Filing \"New Hire Reporting\" forms with state agencies within 20 days of hire",
+              "Responding to \"Notice of Tax Rate\" changes from state unemployment agencies"
+            ]
+          }
         ]
       },
       {
         name: "Benefits & Deduction Administration",
-        focus: "Precision in Gross-to-Net calculations",
-        tasks: [
-          "Tracking 401(k), 403(b), and Simple IRA deferrals and employer matching",
-          "Micro-Task: Uploading retirement contribution files to providers like Vanguard, Fidelity, or Guideline",
-          "Deducting Health, Dental, Vision, and HSA/FSA premiums based on plan enrollment",
-          "Processing court-ordered wage garnishments for child support, student loans, or tax levies",
-          "Micro-Task: Communicating with state agencies to confirm receipt of garnishment payments",
-          "Setting up Pay-as-you-go Workers' Comp integrations",
-          "Preparing the annual payroll audit reports for workers' comp insurance providers"
+        focus: "Precision in \"Gross-to-Net\" calculations",
+        sections: [
+          {
+            title: "Retirement & Insurance",
+            tasks: [
+              "Tracking 401(k), 403(b), and Simple IRA deferrals and employer matching",
+              "Uploading retirement contribution files to providers like Vanguard, Fidelity, or Guideline",
+              "Deducting Health, Dental, Vision, and HSA/FSA premiums based on plan enrollment"
+            ]
+          },
+          {
+            title: "Statutory Garnishments",
+            tasks: [
+              "Processing court-ordered wage garnishments for child support, student loans, or tax levies",
+              "Communicating with state agencies to confirm receipt of garnishment payments"
+            ]
+          },
+          {
+            title: "Workers' Compensation",
+            tasks: [
+              "Setting up \"Pay-as-you-go\" Workers' Comp integrations",
+              "Preparing the annual payroll audit reports for workers' comp insurance providers"
+            ]
+          }
         ]
       },
       {
         name: "Year-End Reporting & Reconciliation",
         focus: "Ensuring a stress-free January for the client",
-        tasks: [
-          "Reconciling annual payroll totals before generating W-2s (Employees) and 1099-NECs (Contractors)",
-          "Handling electronic filing (E-file) of W-3 and 1096 summary forms with the SSA/IRS",
-          "Performing year-end Reasonableness Tests to catch errors before the IRS does",
-          "Micro-Task: Ensuring taxable fringe benefits (like personal use of company car) are added to W-2s"
+        sections: [
+          {
+            title: "W-2 & 1099 Issuance",
+            tasks: [
+              "Reconciling annual payroll totals before generating W-2s (Employees) and 1099-NECs (Contractors)",
+              "Handling electronic filing (E-file) of W-3 and 1096 summary forms with the SSA/IRS"
+            ]
+          },
+          {
+            title: "Compliance Audits",
+            tasks: [
+              "Performing year-end \"Reasonableness Tests\" to catch errors before the IRS does",
+              "Ensuring taxable fringe benefits (like personal use of company car) are added to W-2s"
+            ]
+          }
         ]
       },
       {
         name: "HR Administrative Support",
-        focus: "The People side of the payroll process",
-        tasks: [
-          "Setting up new employee profiles in the HRIS (Human Resources Information System)",
-          "Micro-Task: Collecting and verifying Form I-9 and W-4 (Federal/State withholding certificates)",
-          "Training and supporting employees on how to access pay stubs and year-end tax forms",
-          "Updating address changes, bank details, and withholding status upon request"
+        focus: "The \"People\" side of the payroll process",
+        sections: [
+          {
+            title: "Onboarding & Offboarding",
+            tasks: [
+              "Setting up new employee profiles in the HRIS (Human Resources Information System)",
+              "Collecting and verifying Form I-9 and W-4 (Federal/State withholding certificates)"
+            ]
+          },
+          {
+            title: "Employee Self-Service (ESS)",
+            tasks: [
+              "Training and supporting employees on how to access pay stubs and year-end tax forms",
+              "Updating address changes, bank details, and withholding status upon request"
+            ]
+          }
         ]
       }
     ]
@@ -637,58 +860,128 @@ export const services: Service[] = [
       {
         name: "Audit Planning & Risk Assessment",
         focus: "Strategic groundwork to ensure a focused and efficient audit",
-        tasks: [
-          "Rolling forward the previous year's electronic audit files in software like CaseWare, AdvanceFlow, or CCH Axcess",
-          "Drafting Engagement Letters and Independence Confirmations for the audit team",
-          "Calculating Overall Materiality and Performance Materiality based on the chosen benchmark (e.g., Total Assets or Revenue)",
-          "Preparing Planning Analytics (Flux Analysis) to identify significant account balances and unusual trends",
-          "Documenting the Understanding of the Entity and identifying fraud risk factors",
-          "Creating and managing a detailed PBC Checklist to track document status and follow up on missing items"
+        sections: [
+          {
+            title: "Pre-Audit Engagement Support",
+            tasks: [
+              "Rolling forward the previous year's electronic audit files in software like CaseWare, AdvanceFlow, or CCH Axcess",
+              "Drafting Engagement Letters and Independence Confirmations for the audit team"
+            ]
+          },
+          {
+            title: "Materiality & Risk Identification",
+            tasks: [
+              "Calculating Overall Materiality and Performance Materiality based on the chosen benchmark (e.g., Total Assets or Revenue)",
+              "Preparing Planning Analytics (Flux Analysis) to identify significant account balances and unusual trends",
+              "Documenting the \"Understanding of the Entity\" and identifying fraud risk factors"
+            ]
+          },
+          {
+            title: "PBC (Provided by Client) Management",
+            tasks: [
+              "Creating and managing a detailed PBC Checklist to track document status and follow up on missing items"
+            ]
+          }
         ]
       },
       {
         name: "Substantive Testing & Execution",
-        focus: "The heavy lifting of verifying account balances",
-        tasks: [
-          "Using IDEA or ACL to perform statistical and non-statistical sampling",
-          "Vouching: Tracing samples from the General Ledger to source documents (Invoices, BOLs, Contracts)",
-          "Tracing: Selecting source documents and tracing them into the General Ledger to ensure completeness",
-          "Cash: Preparing bank reconciliations and performing Casting procedures on bank statements",
-          "Accounts Receivable: Managing the Confirmation Process (preparing, sending, and tracking responses via Confirmation.com)",
-          "Inventory: Reviewing physical inventory count sheets and performing Price Testing (lower of cost or market)",
-          "Search for Unrecorded Liabilities: Reviewing post-balance sheet payments to ensure proper period cutoff"
+        focus: "The \"Heavy Lifting\" of verifying account balances",
+        sections: [
+          {
+            title: "Sample Selection & Testing",
+            tasks: [
+              "Using IDEA or ACL to perform statistical and non-statistical sampling",
+              "Vouching: Tracing samples from the General Ledger to source documents (Invoices, BOLs, Contracts)",
+              "Tracing: Selecting source documents and tracing them into the General Ledger to ensure completeness"
+            ]
+          },
+          {
+            title: "Account-Specific Scrutiny",
+            tasks: [
+              "Cash: Preparing bank reconciliations and performing \"Casting\" procedures on bank statements",
+              "Accounts Receivable: Managing the Confirmation Process (preparing, sending, and tracking responses via Confirmation.com)",
+              "Inventory: Reviewing physical inventory count sheets and performing \"Price Testing\" (lower of cost or market)",
+              "Search for Unrecorded Liabilities: Reviewing post-balance sheet payments to ensure proper period cutoff"
+            ]
+          }
         ]
       },
       {
         name: "Internal Control & Compliance Testing",
-        focus: "Testing the plumbing of the organization",
-        tasks: [
-          "Documenting process walkthroughs (Sales, Payroll, Purchasing) through flowcharts and narratives",
-          "Identifying Key Controls within the transaction cycles",
-          "Testing the Operating Effectiveness of internal controls (e.g., verifying that all checks over $5,000 have two signatures)",
-          "Reporting control deficiencies (Significant Deficiencies vs. Material Weaknesses) to the onshore team",
-          "Verifying adherence to industry-specific regulations (e.g., HIPAA for Healthcare or HUD for Real Estate)"
+        focus: "Testing the \"Plumbing\" of the organization",
+        sections: [
+          {
+            title: "Walkthroughs & Narratives",
+            tasks: [
+              "Documenting process walkthroughs (Sales, Payroll, Purchasing) through flowcharts and narratives",
+              "Identifying \"Key Controls\" within the transaction cycles"
+            ]
+          },
+          {
+            title: "Control Testing (SOC/SOX)",
+            tasks: [
+              "Testing the Operating Effectiveness of internal controls (e.g., verifying that all checks over $5,000 have two signatures)",
+              "Reporting control deficiencies (Significant Deficiencies vs. Material Weaknesses) to the onshore team"
+            ]
+          },
+          {
+            title: "Compliance Audits",
+            tasks: [
+              "Verifying adherence to industry-specific regulations (e.g., HIPAA for Healthcare or HUD for Real Estate)"
+            ]
+          }
         ]
       },
       {
         name: "Financial Statement Preparation & Finalization",
-        focus: "The last mile of the audit engagement",
-        tasks: [
-          "Drafting the Full Disclosure Financial Statements (P&L, Balance Sheet, Cash Flow, Footnotes) as per US GAAP",
-          "Completing Disclosure Checklists to ensure every mandatory footnote is included",
-          "Performing a Mathematical Accuracy (Casting) check on the entire financial report",
-          "Indexing and Cross-Referencing: Linking every number in the financial statements back to the supporting lead schedule",
-          "Drafting the Management Letter Points (MLPs) and the Audit Summary Memo",
-          "Preparing the Representation Letter for management signature"
+        focus: "The \"Last Mile\" of the audit engagement",
+        sections: [
+          {
+            title: "Reporting & Disclosure",
+            tasks: [
+              "Drafting the Full Disclosure Financial Statements (P&L, Balance Sheet, Cash Flow, Footnotes) as per US GAAP",
+              "Completing Disclosure Checklists to ensure every mandatory footnote is included"
+            ]
+          },
+          {
+            title: "Tie-out & Quality Review",
+            tasks: [
+              "Performing a \"Mathematical Accuracy\" (Casting) check on the entire financial report",
+              "Indexing & Cross-Referencing: Linking every number in the financial statements back to the supporting lead schedule"
+            ]
+          },
+          {
+            title: "Completion Procedures",
+            tasks: [
+              "Drafting the Management Letter Points (MLPs) and the Audit Summary Memo",
+              "Preparing the \"Representation Letter\" for management signature"
+            ]
+          }
         ]
       },
       {
         name: "Specialized Audit Support (Niche Areas)",
         focus: "High-margin expertise for specific US requirements",
-        tasks: [
-          "Employee Benefit Plan (EBP) Audits: Testing participant eligibility, contributions, and distributions for 401(k) or 403(b) plans",
-          "Governmental and Single Audits: Support for Yellow Book audits and Uniform Guidance (Single Audit) compliance for non-profits receiving federal funds",
-          "Agreed-Upon Procedures (AUP): Performing specific testing on limited financial areas as requested by third parties (e.g., royalty audits or loan covenant compliance)"
+        sections: [
+          {
+            title: "Employee Benefit Plan (EBP) Audits",
+            tasks: [
+              "Testing participant eligibility, contributions, and distributions for 401(k) or 403(b) plans"
+            ]
+          },
+          {
+            title: "Governmental & Single Audits",
+            tasks: [
+              "Support for Yellow Book audits and Uniform Guidance (Single Audit) compliance for non-profits receiving federal funds"
+            ]
+          },
+          {
+            title: "Agreed-Upon Procedures (AUP)",
+            tasks: [
+              "Performing specific testing on limited financial areas as requested by third parties (e.g., royalty audits or loan covenant compliance)"
+            ]
+          }
         ]
       }
     ]
@@ -801,58 +1094,128 @@ export const services: Service[] = [
       {
         name: "Financial Planning & Analysis (FP&A)",
         focus: "Predicting the future through data-driven modeling",
-        tasks: [
-          "Developing annual bottom-up budgets aligned with departmental goals",
-          "Creating 12-month rolling forecasts that adapt as market conditions change",
-          "Micro-Task: Performing Variance Analysis (Budget vs. Actual) to explain why targets were missed or exceeded",
-          "Building dynamic models to test the impact of strategic moves (e.g., What happens if we increase prices by 5%?)",
-          "Hiring models to determine the ROI and break-even point of a new sales representative or developer",
-          "Creating 13-Week Cash Flow Projections to manage short-term liquidity and avoid cash crunches",
-          "Analyzing the Cash Conversion Cycle to speed up collections and optimize vendor payments"
+        sections: [
+          {
+            title: "Budgeting & Rolling Forecasts",
+            tasks: [
+              "Developing annual \"bottom-up\" budgets aligned with departmental goals",
+              "Creating 12-month rolling forecasts that adapt as market conditions change",
+              "Performing Variance Analysis (Budget vs. Actual) to explain why targets were missed or exceeded"
+            ]
+          },
+          {
+            title: "Scenario & \"What-If\" Modeling",
+            tasks: [
+              "Building dynamic models to test the impact of strategic moves (e.g., What happens if we increase prices by 5%?)",
+              "Hiring models to determine the ROI and \"break-even\" point of a new sales representative or developer"
+            ]
+          },
+          {
+            title: "Cash Flow Management",
+            tasks: [
+              "Creating 13-Week Cash Flow Projections to manage short-term liquidity and avoid \"cash crunches\"",
+              "Analyzing the \"Cash Conversion Cycle\" to speed up collections and optimize vendor payments"
+            ]
+          }
         ]
       },
       {
         name: "Strategic Advisory & Decision Support",
-        focus: "Acting as the Right Hand to the CEO/Owner",
-        tasks: [
-          "Product/Service Line Profitability: Identifying which offerings are high-margin and which are money-losers",
-          "Customer Profitability: Calculating the cost to serve specific clients vs. the revenue they generate",
-          "Break-Even Analysis: Calculating the precise revenue point where the business covers all fixed and variable costs",
-          "Pricing Strategy: Analyzing competitor pricing and market trends to advise on Optimal Price positioning",
-          "Preparing monthly Executive Summary decks for Board meetings or investors",
-          "Translating complex financial data into simple, actionable narratives for non-financial founders"
+        focus: "Acting as the \"Right Hand\" to the CEO/Owner",
+        sections: [
+          {
+            title: "Profitability & Margin Analysis",
+            tasks: [
+              "Product/Service Line Profitability: Identifying which offerings are high-margin and which are \"money-losers\"",
+              "Customer Profitability: Calculating the cost to serve specific clients vs. the revenue they generate"
+            ]
+          },
+          {
+            title: "Break-Even & Pricing Strategy",
+            tasks: [
+              "Calculating the precise revenue point where the business covers all fixed and variable costs",
+              "Analyzing competitor pricing and market trends to advise on \"Optimal Price\" positioning"
+            ]
+          },
+          {
+            title: "Board & Stakeholder Presentations",
+            tasks: [
+              "Preparing monthly \"Executive Summary\" decks for Board meetings or investors",
+              "Translating complex financial data into simple, actionable narratives for non-financial founders"
+            ]
+          }
         ]
       },
       {
         name: "Business Intelligence (BI) & KPI Dashboards",
         focus: "Real-time visibility into the health of the business",
-        tasks: [
-          "Building live dashboards using Power BI, Tableau, or Fathom that pull data directly from the ERP",
-          "Tracking Non-Financial KPIs (e.g., website traffic vs. sales conversion, customer churn rates)",
-          "For SaaS: Tracking MRR (Monthly Recurring Revenue), LTV (Lifetime Value), and CAC (Customer Acquisition Cost)",
-          "For E-commerce: Tracking ROAS (Return on Ad Spend) and Cart Abandonment impact on revenue",
-          "Comparing the client's financial ratios (Gross Margin, Operating Margin) against industry averages"
+        sections: [
+          {
+            title: "Custom Dashboard Development",
+            tasks: [
+              "Building live dashboards using Power BI, Tableau, or Fathom that pull data directly from the ERP",
+              "Tracking Non-Financial KPIs (e.g., website traffic vs. sales conversion, customer churn rates)"
+            ]
+          },
+          {
+            title: "Industry-Specific Metrics",
+            tasks: [
+              "For SaaS: Tracking MRR (Monthly Recurring Revenue), LTV (Lifetime Value), and CAC (Customer Acquisition Cost)",
+              "For E-commerce: Tracking ROAS (Return on Ad Spend) and Cart Abandonment impact on revenue"
+            ]
+          },
+          {
+            title: "Benchmarking",
+            tasks: [
+              "Comparing the client's financial ratios (Gross Margin, Operating Margin) against industry averages"
+            ]
+          }
         ]
       },
       {
         name: "Capital Structure & M&A Support",
         focus: "Helping the business find and manage money",
-        tasks: [
-          "Preparing Pro-Forma financial statements required for Bank Loans or Venture Capital",
-          "Managing the Financial Data Room for potential investors during the due diligence process",
-          "Buy-side Due Diligence: Reviewing the target company's books to find red flags",
-          "Sell-side Preparation: Cleaning up financials to maximize the company's valuation before a sale",
-          "Advising on whether to reinvest profits into R&D, pay off debt, or distribute dividends"
+        sections: [
+          {
+            title: "Fundraising Readiness",
+            tasks: [
+              "Preparing \"Pro-Forma\" financial statements required for Bank Loans or Venture Capital",
+              "Managing the \"Financial Data Room\" for potential investors during the due diligence process"
+            ]
+          },
+          {
+            title: "Mergers & Acquisitions (M&A)",
+            tasks: [
+              "Buy-side Due Diligence: Reviewing the target company's books to find \"red flags\"",
+              "Sell-side Preparation: Cleaning up financials to maximize the company's valuation before a sale"
+            ]
+          },
+          {
+            title: "Capital Allocation",
+            tasks: [
+              "Advising on whether to reinvest profits into R&D, pay off debt, or distribute dividends"
+            ]
+          }
         ]
       },
       {
         name: "Fractional Controller & Compliance Oversight",
-        focus: "Strengthening the internal financial backbone",
-        tasks: [
-          "Implementing Check and Balance procedures to prevent fraud and embezzlement",
-          "Developing a Month-End Close Checklist to ensure books are closed in under 5 days",
-          "Leading the relationship with external auditors and tax CPAs to ensure a smooth year-end",
-          "Ensuring the company stays compliant with ASC 606 (Revenue Recognition) and other US GAAP standards"
+        focus: "Strengthening the internal financial \"backbone\"",
+        sections: [
+          {
+            title: "Internal Control Enhancement",
+            tasks: [
+              "Implementing \"Check and Balance\" procedures to prevent fraud and embezzlement",
+              "Developing a \"Month-End Close Checklist\" to ensure books are closed in under 5 days"
+            ]
+          },
+          {
+            title: "Audit & Tax Liaison",
+            tasks: [
+              "Leading the relationship with external auditors and tax CPAs to ensure a smooth year-end",
+              "Ensuring the company stays compliant with ASC 606 (Revenue Recognition) and other US GAAP standards"
+            ]
+          }
         ]
       }
     ]

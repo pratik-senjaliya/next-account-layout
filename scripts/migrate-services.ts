@@ -1,4 +1,6 @@
-import 'dotenv/config'
+import * as dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
+dotenv.config()
 import { createClient } from '@sanity/client'
 import { services } from '../lib/services'
 
@@ -66,10 +68,16 @@ async function migrateServices() {
                     ...f
                 })),
 
-                // Service Areas (if exists)
+                // Service Areas (if exists) - now with nested sections
                 serviceAreas: (service.serviceAreas || []).map((sa: any) => ({
                     _key: generateKey(),
-                    ...sa
+                    name: sa.name,
+                    focus: sa.focus,
+                    sections: (sa.sections || []).map((section: any) => ({
+                        _key: generateKey(),
+                        title: section.title,
+                        tasks: section.tasks || []
+                    }))
                 })),
 
                 // Process steps

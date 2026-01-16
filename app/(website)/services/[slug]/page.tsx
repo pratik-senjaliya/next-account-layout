@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
-import { ServiceAreasAccordion } from "@/components/ui/ServiceAreasAccordion";
+import { ServiceSectionsAccordion } from "@/components/ui/ServiceSectionsAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
@@ -184,7 +184,7 @@ export default async function ServicePage({ params }: PageProps) {
           {/* Conditional: Show ServiceAreasAccordion if data exists, otherwise show features grid */}
           {service.serviceAreas && service.serviceAreas.length > 0 ? (
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <ServiceAreasAccordion serviceAreas={service.serviceAreas} />
+              <ServiceSectionsAccordion serviceAreas={service.serviceAreas} />
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
