@@ -103,8 +103,6 @@ export default defineType({
                         defineField({ name: 'title', type: 'string', title: 'Title' }),
                         defineField({ name: 'experience', type: 'string', title: 'Experience' }),
                         defineField({ name: 'responsibilities', type: 'array', title: 'Responsibilities', of: [{ type: 'string' }] }),
-                        defineField({ name: 'software', type: 'array', title: 'Software', of: [{ type: 'string' }] }),
-                        defineField({ name: 'idealFor', type: 'array', title: 'Ideal For', of: [{ type: 'string' }] }),
                     ],
                 },
             ],
@@ -118,10 +116,42 @@ export default defineType({
                 {
                     type: 'object',
                     name: 'softwareCategory',
+                    title: 'Software Category',
                     fields: [
-                        defineField({ name: 'category', type: 'string', title: 'Category' }),
-                        defineField({ name: 'platforms', type: 'array', title: 'Platforms', of: [{ type: 'string' }] }),
+                        { name: 'category', type: 'string', title: 'Category' },
+                        {
+                            name: 'platforms',
+                            type: 'array',
+                            title: 'Platforms',
+                            of: [{
+                                type: 'object',
+                                name: 'platform',
+                                title: 'Platform',
+                                fields: [
+                                    { name: 'name', type: 'string', title: 'Software Name' },
+                                    { name: 'logo', type: 'image', title: 'Logo', options: { hotspot: true } },
+                                ],
+                                preview: {
+                                    select: {
+                                        title: 'name',
+                                        media: 'logo'
+                                    }
+                                }
+                            }]
+                        },
                     ],
+                    preview: {
+                        select: {
+                            title: 'category',
+                            subtitle: 'platforms'
+                        },
+                        prepare({ title, subtitle }) {
+                            return {
+                                title: title || 'Unnamed Category',
+                                subtitle: subtitle ? `${subtitle.length} platform(s)` : 'No platforms'
+                            }
+                        }
+                    }
                 },
             ],
         }),

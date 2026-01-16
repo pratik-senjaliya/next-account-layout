@@ -228,7 +228,13 @@ export async function getHireStaffBySlug(slug: string) {
       "stats": introStats
     },
     experienceLevels,
-    softwareCategories,
+    softwareCategories[] {
+      category,
+      platforms[] {
+        name,
+        "logo": logo.asset->url
+      }
+    },
     trial,
     features,
     gettingStarted,

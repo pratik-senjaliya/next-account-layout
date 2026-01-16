@@ -12,7 +12,7 @@ import { ScrollButton } from "@/components/ui/ScrollButton";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
 import { Testimonial } from "@/components/ui/Testimonial";
-import { ExperienceTabs } from "@/components/ui/ExperienceTabs";
+import { ExperienceCards } from "@/components/ui/ExperienceCards";
 import { SoftwareGrid } from "@/components/ui/SoftwareGrid";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -178,12 +178,37 @@ export default async function HireStaffPage({ params }: PageProps) {
           </div>
 
           <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <ExperienceTabs experienceLevels={position.experienceLevels} />
+            <ExperienceCards experienceLevels={position.experienceLevels} />
           </div>
         </Container>
       </Section>
 
-      {/* 4. Getting Started / Process Section - UPDATED */}
+
+      {/* 3.5. Software Integration Section */}
+      <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
+        <Container>
+          <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
+            <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Software Expertise</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Seamless Integration</h2>
+            <p className="text-lg text-neutral-600 leading-relaxed font-medium">
+              Our professionals are proficient in all major platforms and tools. No need to change your existing workflow.
+            </p>
+          </div>
+
+          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            {position.softwareCategories && position.softwareCategories.length > 0 ? (
+              <SoftwareGrid categories={position.softwareCategories} />
+            ) : (
+              <div className="text-center py-12 bg-white rounded-xl border-2 border-dashed border-neutral-300">
+                <p className="text-neutral-500">Software categories will be displayed here once configured in CMS.</p>
+                <p className="text-sm text-neutral-400 mt-2">Please run the cleanup script and add software categories in Sanity Studio.</p>
+              </div>
+            )}
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4. Getting Started / Process Section */}
       <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
         <Container>
           <div className="text-center mb-20 animate-fade-in-up">
@@ -211,30 +236,13 @@ export default async function HireStaffPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* 4.5. Software Integration Section - NEW */}
-      <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
-        <Container>
-          <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
-            <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Software Expertise</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Seamless Integration</h2>
-            <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-              Our professionals are proficient in all major platforms and tools. No need to change your existing workflow.
-            </p>
-          </div>
-
-          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <SoftwareGrid categories={position.softwareCategories} />
-          </div>
-        </Container>
-      </Section>
-
       {/* 5. Why choose us Section */}
       <Section background="primary" spacing="lg" className="bg-neutral-900 text-white py-24 md:py-32 overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
             <div className="animate-fade-in-left">
               <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
-              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {position.title} <br />Advantage</h2>
+              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight text-white">The {position.title} <br />Advantage</h2>
               <div className="space-y-12">
                 {position.whyChooseUs.map((item: { title: string; description: string }, i: number) => (
                   <div key={i} className="flex gap-8 group animate-fade-in-up" style={{ animationDelay: `${i * 0.15 + 0.2}s` }}>

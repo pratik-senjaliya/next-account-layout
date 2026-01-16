@@ -241,7 +241,7 @@ export default async function ServicePage({ params }: PageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
             <div className="animate-fade-in-left">
               <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
-              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight">The {service.title} <br />Advantage</h2>
+              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight text-white">The {service.title} <br />Advantage</h2>
               <div className="space-y-12">
                 {service.whyChooseUs.map((item: { title: string; description: string }, index: number) => (
                   <div key={index} className="flex gap-8 group animate-fade-in-up" style={{ animationDelay: `${index * 0.15 + 0.2}s` }}>

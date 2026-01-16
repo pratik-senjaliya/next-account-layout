@@ -253,7 +253,7 @@ export default async function ServicesHubPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-secondary-400 font-semibold uppercase tracking-wider text-sm mb-4 block">The Value Proposition</span>
-              <h2 className="text-4xl md:text-5xl font-bold mb-10 leading-tight">Expertise You Can Trust, <br />Results You Can Measure</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-10 leading-tight text-white">Expertise You Can Trust, <br />Results You Can Measure</h2>
               <div className="space-y-10">
                 {[
                   { title: "Direct Access to Principals", desc: "No junior associates. You work directly with experienced financial leaders." },
@@ -267,7 +267,7 @@ export default async function ServicesHubPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <h4 className="text-xl font-bold mb-2 text-white">{item.title}</h4>
                       <p className="text-neutral-400 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
