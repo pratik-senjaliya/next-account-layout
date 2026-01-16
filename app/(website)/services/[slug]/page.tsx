@@ -107,26 +107,15 @@ export default async function ServicePage({ params }: PageProps) {
             <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
               {service.longDescription}
             </p>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <Link href="/contact">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
-                >
-                  Schedule Free Consultation
-                </Button>
-              </Link>
-              <Link href="#methodology">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10 px-12 py-5 text-lg font-bold"
-                >
-                  Learn Our Methodology
-                </Button>
-              </Link>
-            </div>
+            <Link href="/contact">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
+              >
+                Schedule Free Consultation
+              </Button>
+            </Link>
           </div>
         </Container>
       </Section>
