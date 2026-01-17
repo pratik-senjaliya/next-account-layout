@@ -15,7 +15,7 @@ interface BreadcrumbProps {
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className }) => {
   return (
     <nav
-      className={cn("flex items-center gap-2 text-sm text-neutral-600", className)}
+      className={cn("flex items-center gap-2 text-sm", className)}
       aria-label="Breadcrumb"
     >
       <ol className="flex items-center gap-2">
@@ -25,12 +25,12 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className }) => {
           return (
             <li key={index} className="flex items-center gap-2">
               {index > 0 && (
-                <span className="text-neutral-400" aria-hidden="true">
+                <span className="opacity-60" aria-hidden="true">
                   /
                 </span>
               )}
               {isLast ? (
-                <span className="text-neutral-900 font-medium" aria-current="page">
+                <span className="font-medium" aria-current="page">
                   {item.label}
                 </span>
               ) : item.href ? (
