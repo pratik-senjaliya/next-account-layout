@@ -27,8 +27,8 @@ const company = [
 ];
 
 const legal = [
-  { name: "Privacy Policy", href: "#privacy" },
-  { name: "Terms of Service", href: "#terms" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms of Service", href: "/terms-of-service" },
 ];
 
 export const Footer: React.FC = () => {

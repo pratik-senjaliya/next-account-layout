@@ -20,6 +20,8 @@ import contactPage from './contactPage'
 import servicesPage from './servicesPage'
 import industriesPage from './industriesPage'
 import hireStaffPage from './hireStaffPage'
+import privacyPolicy from './privacyPolicy'
+import termsOfService from './termsOfService'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -43,5 +45,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         servicesPage,
         industriesPage,
         hireStaffPage,
+        privacyPolicy,
+        termsOfService,
     ],
 }
