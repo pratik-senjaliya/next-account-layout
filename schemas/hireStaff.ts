@@ -129,12 +129,18 @@ export default defineType({
                                 title: 'Platform',
                                 fields: [
                                     { name: 'name', type: 'string', title: 'Software Name' },
-                                    { name: 'logo', type: 'image', title: 'Logo', options: { hotspot: true } },
+                                    { name: 'logo', type: 'image', title: 'Logo (Optional)', options: { hotspot: true } },
                                 ],
                                 preview: {
                                     select: {
-                                        title: 'name',
-                                        media: 'logo'
+                                        name: 'name',
+                                        logo: 'logo'
+                                    },
+                                    prepare({ name, logo }) {
+                                        return {
+                                            title: name || 'Unnamed Platform',
+                                            media: logo
+                                        }
                                     }
                                 }
                             }]
@@ -142,13 +148,14 @@ export default defineType({
                     ],
                     preview: {
                         select: {
-                            title: 'category',
-                            subtitle: 'platforms'
+                            category: 'category',
+                            platforms: 'platforms'
                         },
-                        prepare({ title, subtitle }) {
+                        prepare({ category, platforms }) {
+                            const count = platforms && Array.isArray(platforms) ? platforms.length : 0
                             return {
-                                title: title || 'Unnamed Category',
-                                subtitle: subtitle ? `${subtitle.length} platform(s)` : 'No platforms'
+                                title: category || 'Unnamed Category',
+                                subtitle: count > 0 ? `${count} platform(s)` : 'No platforms'
                             }
                         }
                     }
