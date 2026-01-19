@@ -12,9 +12,11 @@ import type { BlogPost } from "@/lib/blog";
 interface ResourcesClientProps {
     blogPosts: BlogPost[];
     categories: string[];
+    title?: string;
+    description?: string;
 }
 
-export function ResourcesClient({ blogPosts, categories }: ResourcesClientProps) {
+export function ResourcesClient({ blogPosts, categories, title, description }: ResourcesClientProps) {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -49,12 +51,10 @@ export function ResourcesClient({ blogPosts, categories }: ResourcesClientProps)
                     />
                     <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-                            Resources & Blog
+                            {title || "Resources & Blog"}
                         </h1>
                         <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-                            Explore our collection of articles, guides, and insights to help
-                            your business succeed. Expert advice, best practices, and industry
-                            trends.
+                            {description || "Explore our collection of articles, guides, and insights to help your business succeed. Expert advice, best practices, and industry trends."}
                         </p>
                     </div>
                 </Container>

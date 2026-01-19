@@ -43,7 +43,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title: role.seo.metaTitle || role.title,
       description: role.seo.metaDescription || role.description,
       keywords: role.seo.metaKeywords,
-      ogImage: role.seo.openGraphImage
+      ogImage: role.seo.openGraphImage,
+      slug: `/hire-staff/${params.slug}`
     });
   }
 
@@ -51,6 +52,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return genMeta({
       title: `Hire ${role.title}`,
       description: role.description,
+      slug: `/hire-staff/${params.slug}`
     });
   }
 

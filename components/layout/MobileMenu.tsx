@@ -11,7 +11,7 @@ const navigation = [
   { name: "About", href: "/about" },
   {
     name: "Services",
-    href: "/services",
+    href: "#",
     submenu: [
       {
         name: "Bookkeeping & Accounting",
@@ -62,7 +62,7 @@ const navigation = [
   },
   {
     name: "Hire Staff",
-    href: "/hire-staff",
+    href: "#",
     submenu: [
       {
         name: "Hire Bookkeeper/Accountant",
@@ -113,7 +113,7 @@ const navigation = [
   },
   {
     name: "Industries",
-    href: "/industries",
+    href: "#",
     submenu: [
       {
         name: "Medical & Health",
@@ -173,7 +173,6 @@ const navigation = [
     ],
   },
   { name: "Resources", href: "/resources" },
-  { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -270,19 +269,6 @@ export const MobileMenu: React.FC<{
                         isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
                       )}
                     >
-                      {/* View All [Category] Link */}
-                      <Link
-                        href={item.href}
-                        onClick={onClose}
-                        className="flex items-center gap-3 px-8 py-3 text-sm font-bold text-primary-700 bg-primary-50/50 hover:bg-primary-50 transition-colors border-l-4 border-primary-500"
-                      >
-                        <div className="text-primary-600">
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-                          </svg>
-                        </div>
-                        <span>View All {item.name}</span>
-                      </Link>
 
                       {item.submenu.map((subItem) => (
                         <Link

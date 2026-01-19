@@ -14,41 +14,52 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Your Company Name | Professional Services",
+    default: "Your Company Name | Professional Services & Solutions",
     template: "%s | Your Company Name",
   },
   description:
-    "Professional services and solutions for your business. Modern, reliable, and efficient.",
-  keywords: ["business", "services", "professional", "solutions"],
+    "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
+  keywords: ["business", "consulting", "professional services", "solutions", "strategy", "growth", "B2B"],
   authors: [{ name: "Your Company Name" }],
   creator: "Your Company Name",
   publisher: "Your Company Name",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"
   ),
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com",
     siteName: "Your Company Name",
-    title: "Your Company Name | Professional Services",
+    title: "Your Company Name | Professional Services & Solutions",
     description:
-      "Professional services and solutions for your business. Modern, reliable, and efficient.",
+      "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Your Company Name",
+        alt: "Your Company Name - Professional Services",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Company Name | Professional Services",
+    title: "Your Company Name | Professional Services & Solutions",
     description:
-      "Professional services and solutions for your business. Modern, reliable, and efficient.",
-    images: ["/og-image.jpg"],
+      "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
+    images: ["/og-image.png"],
+    creator: "@yourcompany",
   },
   robots: {
     index: true,

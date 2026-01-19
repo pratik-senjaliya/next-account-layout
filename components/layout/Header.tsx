@@ -12,7 +12,7 @@ const navigation = [
   { name: "About", href: "/about" },
   {
     name: "Services",
-    href: "/services",
+    href: "#",
     submenu: [
       {
         name: "Bookkeeping & Accounting",
@@ -68,7 +68,7 @@ const navigation = [
   },
   {
     name: "Hire Staff",
-    href: "/hire-staff",
+    href: "#",
     submenu: [
       {
         name: "Hire Bookkeeper/Accountant",
@@ -124,7 +124,7 @@ const navigation = [
   },
   {
     name: "Industries",
-    href: "/industries",
+    href: "#",
     submenu: [
       {
         name: "Medical and Health",
@@ -190,7 +190,6 @@ const navigation = [
     ],
   },
   { name: "Resources", href: "/resources" },
-  { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -318,12 +317,6 @@ export const Header: React.FC = () => {
                                 <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
                                   Our {item.name}
                                 </h3>
-                                <Link
-                                  href={item.href}
-                                  className="text-xs font-semibold text-primary-600 hover:text-primary-700 underline flex items-center gap-1"
-                                >
-                                  View Hub
-                                </Link>
                               </div>
                               <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                                 {item.submenu.map((subItem) => (

@@ -8,7 +8,10 @@ import { ShareButtons } from "@/components/ui/ShareButtons";
 import { getPostBySlug, getAllPosts, getAllPostSlugs } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
+import { generateMetadata as genMeta } from "@/lib/seo";
 import { Metadata } from "next";
+
+// ... existing imports
 
 // Enable ISR
 export const revalidate = 60;
@@ -33,18 +36,14 @@ export async function generateMetadata(props: {
     };
   }
 
-  return {
+  return genMeta({
     title: post.title,
     description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
-      images: post.image ? [post.image] : [],
-    },
-  };
+    ogType: "article",
+    ogImage: post.image,
+    author: post.author,
+    slug: `/resources/${params.slug}`
+  });
 }
 
 export default async function BlogPostPage(props: {

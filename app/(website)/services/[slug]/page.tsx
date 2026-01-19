@@ -41,7 +41,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title: service.seo.metaTitle || service.title,
       description: service.seo.metaDescription || service.description,
       keywords: service.seo.metaKeywords,
-      ogImage: service.seo.openGraphImage
+      ogImage: service.seo.openGraphImage,
+      slug: `/services/${params.slug}`
     });
   }
 
@@ -49,6 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return genMeta({
       title: service.title,
       description: service.description,
+      slug: `/services/${params.slug}`
     });
   }
 

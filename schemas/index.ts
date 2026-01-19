@@ -17,11 +17,10 @@ import homePage from './homePage'
 import aboutPage from './aboutPage'
 import contactSubmission from './contactSubmission'
 import contactPage from './contactPage'
-import servicesPage from './servicesPage'
-import industriesPage from './industriesPage'
-import hireStaffPage from './hireStaffPage'
 import privacyPolicy from './privacyPolicy'
 import termsOfService from './termsOfService'
+import blogPage from './blogPage'
+import settings from './settings'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -34,18 +33,17 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         seo,
 
         // Documents
-        post,
-        service,
-        industry,
-        hireStaff,
+        settings,
         homePage,
         aboutPage,
-        contactSubmission,
+        service,
+        hireStaff,
+        industry,
+        blogPage,
+        post,
         contactPage,
-        servicesPage,
-        industriesPage,
-        hireStaffPage,
         privacyPolicy,
         termsOfService,
+        contactSubmission,
     ],
 }

@@ -391,3 +391,31 @@ export async function getHireStaffPage() {
     }`
   return client.fetch(query)
 }
+
+export async function getBlogPage() {
+  const query = `*[_type == "blogPage"][0] {
+      seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        "openGraphImage": openGraphImage.asset->url
+      },
+      title,
+      description
+    }`
+  return client.fetch(query)
+}
+
+// ==================== SETTINGS ====================
+
+export async function getSettings() {
+  const query = `*[_type == "settings"][0] {
+    companyName,
+    footerDescription,
+    socialLinks[] {
+      platform,
+      url
+    }
+  }`
+  return client.fetch(query)
+}

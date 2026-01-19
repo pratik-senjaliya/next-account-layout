@@ -97,7 +97,7 @@ export default async function HomePage() {
         description:
           "Get dedicated support from experienced professionals who understand your business needs. Our team is available when you need them, providing personalized guidance and solutions tailored to your specific challenges.",
         linkText: "Learn More",
-        linkHref: "/services",
+        linkHref: "/contact",
         image:
           "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
       },
@@ -207,7 +207,7 @@ export default async function HomePage() {
                 {data.heroDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <Link href="/services">
+                <Link href="/contact">
                   <Button
                     variant="secondary"
                     size="lg"
@@ -479,7 +479,7 @@ export default async function HomePage() {
                   Schedule a Call
                 </Button>
               </Link>
-              <Link href="/services">
+              <Link href="/contact">
                 <Button
                   variant="outline"
                   size="lg"

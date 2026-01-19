@@ -13,7 +13,8 @@ export interface SEOConfig {
   ogImage?: string;
   ogType?: "website" | "article";
   twitterCard?: "summary" | "summary_large_image";
-  canonicalUrl?: string;
+  canonicalUrl?: string; // Explicit full URL
+  slug?: string; // Path relative to site root (e.g. "/services/web-dev")
   noindex?: boolean;
   nofollow?: boolean;
 }
@@ -35,17 +36,23 @@ export function generateMetadata(config: SEOConfig): Metadata {
     ogType = "website",
     twitterCard = "summary_large_image",
     canonicalUrl,
+    slug,
     noindex = false,
     nofollow = false,
   } = { ...defaultSEO, ...config };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com";
   const fullTitle = `${title} | ${defaultSEO.author || "Your Company"}`;
+
+  // Construct the current page URL
+  // Priority: 1. canonicalUrl (explicit override) 2. siteUrl + slug 3. siteUrl (home)
+  const currentUrl = canonicalUrl || (slug ? `${siteUrl}${slug.startsWith('/') ? slug : '/' + slug}` : siteUrl);
+
   const imageUrl = ogImage
     ? ogImage.startsWith("http")
       ? ogImage
       : `${siteUrl}${ogImage}`
-    : `${siteUrl}/og-image.jpg`;
+    : `${siteUrl}/og-image.png`;
 
   return {
     title: fullTitle,
@@ -69,7 +76,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       type: ogType,
       title: fullTitle,
       description,
-      url: canonicalUrl || siteUrl,
+      url: currentUrl,
       siteName: defaultSEO.author || "Your Company",
       images: [
         {
@@ -89,7 +96,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       creator: author ? `@${author}` : undefined,
     },
     alternates: {
-      canonical: canonicalUrl || siteUrl,
+      canonical: currentUrl,
     },
     metadataBase: new URL(siteUrl),
   };
@@ -98,39 +105,101 @@ export function generateMetadata(config: SEOConfig): Metadata {
 /**
  * Generate structured data (JSON-LD) for better SEO
  */
+/**
+ * Generate structured data (JSON-LD) for better SEO
+ */
 export function generateStructuredData(
-  type: "Organization" | "WebSite" | "Article" | "Product",
+  type: string,
   data: Record<string, any>
 ) {
-  const baseSchema = {
+  return {
     "@context": "https://schema.org",
     "@type": type,
     ...data,
   };
+}
 
-  return baseSchema;
+/**
+ * Generate Breadcrumb List Schema
+ */
+export function generateBreadcrumbSchema(items: { name: string; item: string }[]) {
+  return generateStructuredData("BreadcrumbList", {
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.item,
+    })),
+  });
+}
+
+/**
+ * Generate Article Schema for Blog Posts
+ */
+export function generateArticleSchema(post: {
+  title: string;
+  description: string;
+  image?: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+  url: string;
+}) {
+  return generateStructuredData("Article", {
+    headline: post.title,
+    description: post.description,
+    image: post.image,
+    datePublished: post.datePublished,
+    dateModified: post.dateModified || post.datePublished,
+    author: {
+      "@type": "Person",
+      name: post.authorName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Your Company Name",
+      logo: {
+        "@type": "ImageObject",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"}/icon.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": post.url,
+    },
+  });
 }
 
 /**
  * Common organization structured data
  */
 export function getOrganizationSchema() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com";
   return generateStructuredData("Organization", {
     name: "Your Company Name",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"}/logo.png`,
+    url: siteUrl,
+    logo: `${siteUrl}/icon.png`,
+    sameAs: [
+      "https://www.linkedin.com/company/yourcompany",
+      "https://twitter.com/yourcompany",
+      "https://www.facebook.com/yourcompany",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+1-XXX-XXX-XXXX",
-      contactType: "Customer Service",
-      email: "info@yoursite.com",
+      telephone: "+1-555-0123-4567",
+      contactType: "customer service",
+      contactOption: "TollFree",
+      areaServed: "US",
+      availableLanguage: "en",
     },
-    sameAs: [
-      // Add social media links
-      // "https://www.facebook.com/yourcompany",
-      // "https://www.twitter.com/yourcompany",
-      // "https://www.linkedin.com/company/yourcompany",
-    ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "123 Business Avenue, Suite 100",
+      addressLocality: "New York",
+      addressRegion: "NY",
+      postalCode: "10001",
+      addressCountry: "US",
+    },
   });
 }
 

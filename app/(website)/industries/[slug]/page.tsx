@@ -42,7 +42,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title: industry.seo.metaTitle || industry.title,
       description: industry.seo.metaDescription || industry.longDescription,
       keywords: industry.seo.metaKeywords,
-      ogImage: industry.seo.openGraphImage
+      ogImage: industry.seo.openGraphImage,
+      slug: `/industries/${params.slug}`
     });
   }
 
@@ -50,6 +51,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return genMeta({
       title: industry.title,
       description: industry.longDescription,
+      slug: `/industries/${params.slug}`
     });
   }
 

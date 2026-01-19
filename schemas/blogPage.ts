@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-    name: 'industriesPage',
-    title: 'Industries Page',
+    name: 'blogPage',
+    title: 'Blog Page',
     type: 'document',
     fields: [
         defineField({
@@ -12,15 +12,25 @@ export default defineType({
         }),
         defineField({
             name: 'title',
-            title: 'Page Title',
+            title: 'Hero Title',
             type: 'string',
-            initialValue: 'Industries We Serve'
+            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'description',
-            title: 'Page Description',
+            title: 'Hero Description',
             type: 'text',
-            initialValue: "Specialized expertise across various sectors."
-        })
+            rows: 3,
+        }),
     ],
+    preview: {
+        select: {
+            title: 'title',
+        },
+        prepare({ title }) {
+            return {
+                title: title || 'Blog Page',
+            }
+        },
+    },
 })
