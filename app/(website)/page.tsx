@@ -401,7 +401,7 @@ export default async function HomePage() {
             {recentPosts.map((post: any, index: number) => (
               <Link
                 key={index}
-                href={`/resources/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >

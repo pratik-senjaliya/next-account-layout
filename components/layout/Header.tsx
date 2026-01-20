@@ -130,7 +130,7 @@ export const Header: React.FC = () => {
       href: "#",
       submenu: navData?.services.map(service => ({
         name: service.title,
-        href: `/services/${service.slug}`,
+        href: `/${service.slug}`,  // Removed /services/ prefix
         description: service.description,
         icon: getIcon(service.icon),
       })) || [],
@@ -140,7 +140,7 @@ export const Header: React.FC = () => {
       href: "#",
       submenu: navData?.hireStaff.map(position => ({
         name: position.title,
-        href: `/hire-staff/${position.slug}`,
+        href: `/${position.slug}`,  // Removed /hire-staff/ prefix
         description: position.description,
         icon: getIcon(position.icon),
       })) || [],
@@ -150,7 +150,7 @@ export const Header: React.FC = () => {
       href: "#",
       submenu: navData?.industries.map(industry => ({
         name: industry.title,
-        href: `/industries/${industry.slug}`,
+        href: `/industries/${industry.slug}`,  // Kept /industries/ prefix
         description: industry.description,
         icon: getIcon(industry.icon),
       })) || [],

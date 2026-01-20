@@ -42,7 +42,7 @@ export async function generateMetadata(props: {
     ogType: "article",
     ogImage: post.image,
     author: post.author,
-    slug: `/resources/${params.slug}`
+    slug: `/blog/${params.slug}`
   });
 }
 
@@ -56,7 +56,7 @@ export default async function BlogPostPage(props: {
     notFound();
   }
 
-  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/resources/${post.slug}`;
+  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`;
   const allPosts = await getAllPosts();
 
   return (
@@ -283,7 +283,7 @@ export default async function BlogPostPage(props: {
                 .map((relatedPost: any) => (
                   <Link
                     key={relatedPost.id}
-                    href={`/resources/${relatedPost.slug}`}
+                    href={`/blog/${relatedPost.slug}`}
                     className="group"
                   >
                     <div className="bg-white rounded-lg border border-neutral-200 p-6 hover:shadow-lg transition-shadow">

@@ -105,7 +105,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                 <Section background="white" spacing="md">
                     <Container>
                         <div className="animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                            <Link href={`/resources/${featuredPost.slug}`}>
+                            <Link href={`/blog/${featuredPost.slug}`}>
                                 <Card hover className="overflow-hidden group cursor-pointer">
                                     <div className="grid md:grid-cols-2 gap-8">
                                         <div className="relative h-64 md:h-full min-h-[300px]">
@@ -164,7 +164,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                             {remainingPosts.map((post, index) => (
                                 <Link
                                     key={post.id}
-                                    href={`/resources/${post.slug}`}
+                                    href={`/blog/${post.slug}`}
                                     className="animate-fade-in-up group"
                                     style={{ animationDelay: `${index * 0.1}s` }}
                                 >

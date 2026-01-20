@@ -44,7 +44,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       description: role.seo.metaDescription || role.description,
       keywords: role.seo.metaKeywords,
       ogImage: role.seo.openGraphImage,
-      slug: `/hire-staff/${params.slug}`
+      slug: `/${params.slug}`
     });
   }
 
@@ -52,7 +52,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return genMeta({
       title: `Hire ${role.title}`,
       description: role.description,
-      slug: `/hire-staff/${params.slug}`
+      slug: `/${params.slug}`
     });
   }
 
@@ -98,7 +98,6 @@ export default async function HireStaffPage({ params }: PageProps) {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Hire Staff", href: "/hire-staff" },
               { label: position.title },
             ]}
             className="mb-8 text-primary-200"

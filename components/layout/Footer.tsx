@@ -111,7 +111,7 @@ export async function Footer() {
                 {services.map((item: any) => (
                   <li key={item.slug}>
                     <Link
-                      href={`/services/${item.slug}`}
+                      href={`/${item.slug}`}
                       className="text-sm hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
@@ -149,7 +149,7 @@ export async function Footer() {
                 {hireStaff.map((item: any) => (
                   <li key={item.slug}>
                     <Link
-                      href={`/hire-staff/${item.slug}`}
+                      href={`/${item.slug}`}
                       className="text-sm hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}

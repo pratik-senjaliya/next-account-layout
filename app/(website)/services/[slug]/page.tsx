@@ -42,7 +42,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       description: service.seo.metaDescription || service.description,
       keywords: service.seo.metaKeywords,
       ogImage: service.seo.openGraphImage,
-      slug: `/services/${params.slug}`
+      slug: `/${params.slug}`
     });
   }
 
@@ -50,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return genMeta({
       title: service.title,
       description: service.description,
-      slug: `/services/${params.slug}`
+      slug: `/${params.slug}`
     });
   }
 
@@ -97,7 +97,6 @@ export default async function ServicePage({ params }: PageProps) {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Services", href: "/services" },
               { label: service.title },
             ]}
             className="mb-8 text-primary-200"

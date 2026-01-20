@@ -18,9 +18,28 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.worldvectorlogo.com",
+      },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/services/:slug',
+        destination: '/:slug',
+        permanent: true, // 301 redirect
+      },
+      {
+        source: '/hire-staff/:slug',
+        destination: '/:slug',
+        permanent: true, // 301 redirect
+      },
+    ];
   },
 };
 
 export default nextConfig;
+
 

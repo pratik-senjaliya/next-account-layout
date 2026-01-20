@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/resources`,
+            url: `${baseUrl}/blog`,
             lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 0.9,
@@ -71,17 +71,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
-        {
-            url: `${baseUrl}/terms-of-service`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
+
     ]
 
     // Dynamic service pages
     const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
-        url: `${baseUrl}/services/${slug}`,
+        url: `${baseUrl}/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
@@ -97,7 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Dynamic hire staff pages
     const hireStaffRoutes: MetadataRoute.Sitemap = hireStaffSlugs.map((slug) => ({
-        url: `${baseUrl}/hire-staff/${slug}`,
+        url: `${baseUrl}/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
@@ -105,7 +100,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Dynamic blog post pages
     const postRoutes: MetadataRoute.Sitemap = postSlugs.map((slug) => ({
-        url: `${baseUrl}/resources/${slug}`,
+        url: `${baseUrl}/blog/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
