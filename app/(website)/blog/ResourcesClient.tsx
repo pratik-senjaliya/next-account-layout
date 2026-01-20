@@ -90,7 +90,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                             <Link href={`/blog/${featuredPost.slug}`}>
                                 <Card hover className="overflow-hidden group cursor-pointer">
                                     <div className="grid md:grid-cols-2 gap-8">
-                                        <div className="relative h-64 md:h-full min-h-[300px]">
+                                        <div className="relative h-64 md:h-full min-h-[18.75rem]">
                                             <Image
                                                 src={featuredPost.image}
                                                 alt={featuredPost.title}

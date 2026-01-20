@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: PageProps) {
       <Section
         background="white"
         spacing="xl"
-        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden py-24 md:py-32 lg:py-40"
+        className="relative bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white overflow-hidden py-20 md:py-24 lg:py-32"
       >
         <div className="absolute inset-0 opacity-20">
           <Image
@@ -122,7 +122,7 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
       {/* 2. Intro/About us Section */}
-      <Section background="white" spacing="lg" className="py-24 md:py-32">
+      <Section background="white" spacing="lg">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="animate-fade-in-left order-2 lg:order-1">
@@ -142,7 +142,7 @@ export default async function ServicePage({ params }: PageProps) {
                 ))}
               </div>
             </div>
-            <div className="relative h-[600px] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
+            <div className="relative h-[37.5rem] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
               <Image
                 src={service.image}
                 alt={`${service.title} specialists`}
@@ -158,7 +158,7 @@ export default async function ServicePage({ params }: PageProps) {
 
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
-          <div className="text-center mb-20 max-w-3xl mx-auto animate-fade-in-up">
+          <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
               {service.serviceAreas && service.serviceAreas.length > 0
                 ? 'Comprehensive Service Delivery'
@@ -199,7 +199,7 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
       {/* 3.5 Service Areas CTA */}
-      <Section background="gray" spacing="sm" className="py-16 bg-neutral-50">
+      <Section background="gray" spacing="sm" className="bg-neutral-50">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-2xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h3>
@@ -218,7 +218,7 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
       {/* 4. Our Process Section */}
-      <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
+      <Section background="white" spacing="lg" id="methodology">
         <Container>
           <div className="text-center mb-20 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Proven Implementation</h2>
@@ -245,7 +245,7 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
       {/* 5. Why choose us Section */}
-      <Section background="primary" spacing="lg" className="bg-neutral-900 text-white py-24 md:py-32 overflow-hidden">
+      <Section background="primary" spacing="lg" className="bg-neutral-900 text-white overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
             <div className="animate-fade-in-left">
@@ -278,7 +278,7 @@ export default async function ServicePage({ params }: PageProps) {
                 </Link>
               </div>
             </div>
-            <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right lg:order-2">
+            <div className="relative h-[37.5rem] lg:h-[43.75rem] animate-fade-in-right lg:order-2">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
               <div className="relative h-full rounded-[60px] overflow-hidden shadow-2xl border-8 border-white/5">
                 <Image
@@ -317,7 +317,7 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
       {/* 7. FAQ Section */}
-      <Section background="white" spacing="lg" className="py-24 md:py-32">
+      <Section background="white" spacing="lg">
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
@@ -337,15 +337,15 @@ export default async function ServicePage({ params }: PageProps) {
       <Section
         background="primary"
         spacing="xl"
-        className="bg-secondary-600 text-white text-center relative overflow-hidden py-32 md:py-40"
+        className="bg-secondary-600 text-white text-center relative overflow-hidden py-20 md:py-28"
       >
         <div className="absolute inset-0 bg-primary-900/20"></div>
         <Container className="relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-7xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
               Ready to Upgrade Your <br />{service.title}?
             </h2>
-            <p className="text-xl md:text-3xl mb-14 text-white/95 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl mb-10 text-white/95 leading-relaxed font-medium">
               Join elite businesses that trust our experts with their growth.
               Schedule your strategy session today.
             </p>
@@ -354,7 +354,7 @@ export default async function ServicePage({ params }: PageProps) {
                 <Button
                   variant={service.finalCTA?.variant || "secondary"}
                   size="lg"
-                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
+                  className="bg-white text-secondary-600 hover:bg-neutral-100 px-10 py-4 text-lg font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
                   {service.finalCTA?.text || "Get Started Today"}
                 </Button>

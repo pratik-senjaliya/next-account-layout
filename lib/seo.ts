@@ -20,10 +20,10 @@ export interface SEOConfig {
 }
 
 const defaultSEO: Partial<SEOConfig> = {
-  author: "Your Company Name",
+  author: "Xconcile",
   ogType: "website",
   twitterCard: "summary_large_image",
-  keywords: ["business", "services", "company"],
+  keywords: ["accounting", "financial services", "bookkeeping", "payroll", "tax preparation"],
 };
 
 export function generateMetadata(config: SEOConfig): Metadata {
@@ -42,7 +42,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
   } = { ...defaultSEO, ...config };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com";
-  const fullTitle = `${title} | ${defaultSEO.author || "Your Company"}`;
+  const fullTitle = `${title} | ${defaultSEO.author || "Xconcile"}`;
 
   // Construct the current page URL
   // Priority: 1. canonicalUrl (explicit override) 2. siteUrl + slug 3. siteUrl (home)
@@ -77,7 +77,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       title: fullTitle,
       description,
       url: currentUrl,
-      siteName: defaultSEO.author || "Your Company",
+      siteName: defaultSEO.author || "Xconcile",
       images: [
         {
           url: imageUrl,
@@ -157,10 +157,10 @@ export function generateArticleSchema(post: {
     },
     publisher: {
       "@type": "Organization",
-      name: "Your Company Name",
+      name: "Xconcile",
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"}/icon.png`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"}/favicon.ico`,
       },
     },
     mainEntityOfPage: {
@@ -176,13 +176,13 @@ export function generateArticleSchema(post: {
 export function getOrganizationSchema() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com";
   return generateStructuredData("Organization", {
-    name: "Your Company Name",
+    name: "Xconcile",
     url: siteUrl,
-    logo: `${siteUrl}/icon.png`,
+    logo: `${siteUrl}/favicon.ico`,
     sameAs: [
-      "https://www.linkedin.com/company/yourcompany",
-      "https://twitter.com/yourcompany",
-      "https://www.facebook.com/yourcompany",
+      "https://www.linkedin.com/company/xconcile",
+      "https://twitter.com/xconcile",
+      "https://www.facebook.com/xconcile",
     ],
     contactPoint: {
       "@type": "ContactPoint",

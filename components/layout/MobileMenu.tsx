@@ -5,6 +5,7 @@ import { NavLink } from "@/components/ui/NavLink";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 // Icon mapping helper (same as Header)
 const getIcon = (iconName: string) => {
@@ -153,7 +154,14 @@ export const MobileMenu: React.FC<{
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-neutral-200">
-            <span className="text-lg font-semibold text-neutral-900">Menu</span>
+            <Link href="/" className="relative h-8 w-32" onClick={onClose}>
+              <Image
+                src="/logo-horizontal.png"
+                alt="Xconcile"
+                fill
+                className="object-contain object-left"
+              />
+            </Link>
             <button
               onClick={onClose}
               className="p-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -208,7 +216,7 @@ export const MobileMenu: React.FC<{
                     <div
                       className={cn(
                         "overflow-hidden transition-all duration-300 ease-in-out bg-neutral-50",
-                        isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                        isExpanded ? "max-h-[62.5rem] opacity-100" : "max-h-0 opacity-0"
                       )}
                     >
                       {item.submenu.map((subItem) => (

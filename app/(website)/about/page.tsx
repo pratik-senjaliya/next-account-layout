@@ -236,7 +236,7 @@ export default async function AboutPage() {
                   className="flex gap-6 items-start pb-6 border-b border-neutral-200 last:border-0 animate-fade-in-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="text-2xl font-bold text-primary-600 min-w-[80px]">
+                  <div className="text-2xl font-bold text-primary-600 min-w-[5rem]">
                     {item.year}
                   </div>
                   <div className="flex-1 pt-1">

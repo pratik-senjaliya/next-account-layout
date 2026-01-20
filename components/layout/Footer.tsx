@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "./Container";
 import { getSettings, getAllServices, getAllIndustries, getAllHireStaff } from "@/lib/sanity/queries";
 
@@ -71,10 +72,15 @@ export async function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {/* Company Info & Social */}
             <div className="col-span-2 md:col-span-1">
-              <Link href="/" className="flex items-center mb-4 group">
-                <span className="text-2xl font-bold text-white group-hover:text-primary-500 transition-colors">
-                  {settings?.companyName || "YourCompany"}
-                </span>
+              <Link href="/" className="mb-6 block group">
+                <div className="relative h-10 w-40 transition-opacity duration-200 group-hover:opacity-90">
+                  <Image
+                    src="/logo-horizontal.png"
+                    alt="Xconcile"
+                    fill
+                    className="object-contain object-left"
+                  />
+                </div>
               </Link>
               <p className="text-sm mb-6 text-neutral-400 max-w-xs">
                 {settings?.footerDescription || "Professional accounting and financial services to help your business thrive."}
@@ -206,7 +212,7 @@ export async function Footer() {
         <div className="border-t border-neutral-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-neutral-500">
-              © {new Date().getFullYear()} {settings?.companyName || "YourCompany"}. All rights reserved.
+              © {new Date().getFullYear()} {settings?.companyName || "Xconcile"}. All rights reserved.
             </p>
 
             {/* eBranding Studio Attribution */}

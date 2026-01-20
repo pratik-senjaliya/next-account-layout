@@ -14,15 +14,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Your Company Name | Professional Services & Solutions",
-    template: "%s | Your Company Name",
+    default: "Xconcile | Professional Accounting & Financial Services",
+    template: "%s | Xconcile",
   },
   description:
     "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
   keywords: ["business", "consulting", "professional services", "solutions", "strategy", "growth", "B2B"],
-  authors: [{ name: "Your Company Name" }],
-  creator: "Your Company Name",
-  publisher: "Your Company Name",
+  authors: [{ name: "Xconcile" }],
+  creator: "Xconcile",
+  publisher: "Xconcile",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com"
   ),
@@ -31,17 +31,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com",
-    siteName: "Your Company Name",
-    title: "Your Company Name | Professional Services & Solutions",
+    siteName: "Xconcile",
+    title: "Xconcile | Professional Accounting & Financial Services",
     description:
       "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
     images: [
@@ -49,17 +44,17 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Your Company Name - Professional Services",
+        alt: "Xconcile - Professional Services",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Company Name | Professional Services & Solutions",
+    title: "Xconcile | Professional Accounting & Financial Services",
     description:
       "Strategic B2B partnerships and professional solutions for your business. We deliver expert guidance, global expertise, and innovative strategies for growth.",
     images: ["/og-image.png"],
-    creator: "@yourcompany",
+    creator: "@xconcile",
   },
   robots: {
     index: true,

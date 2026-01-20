@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, JSX } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { NavLink } from "@/components/ui/NavLink";
 import { Button } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
@@ -174,9 +175,15 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <span className="text-2xl md:text-3xl font-bold text-primary-700 group-hover:text-primary-800 transition-colors">
-                YourCompany
-              </span>
+              <div className="relative h-12 w-48 transition-transform duration-200 group-hover:scale-105">
+                <Image
+                  src="/logo-horizontal.png"
+                  alt="Xconcile"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -218,7 +225,7 @@ export const Header: React.FC = () => {
 
                       {/* Mega Menu */}
                       {hoveredMenu === item.name && item.submenu.length > 0 && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[800px] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[50rem] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                           <div className="grid grid-cols-12 gap-8">
                             {/* Services Column */}
                             <div className="col-span-8">

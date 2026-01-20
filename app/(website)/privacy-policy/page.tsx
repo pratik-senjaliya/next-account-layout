@@ -58,7 +58,7 @@ export default async function PrivacyPolicyPage() {
     return (
         <>
             {/* Hero Section */}
-            <Section background="white" spacing="lg" className="pt-32 pb-16 bg-gradient-to-b from-neutral-50 to-white">
+            <Section background="white" spacing="lg" className="pt-24 pb-12 bg-gradient-to-b from-neutral-50 to-white">
                 <Container>
                     <Breadcrumb
                         items={[
@@ -79,7 +79,7 @@ export default async function PrivacyPolicyPage() {
             </Section>
 
             {/* Content Section */}
-            <Section background="white" spacing="lg" className="py-16">
+            <Section background="white" spacing="lg">
                 <Container>
                     <div className="max-w-4xl mx-auto prose prose-lg prose-neutral
             prose-headings:font-bold prose-headings:text-neutral-900

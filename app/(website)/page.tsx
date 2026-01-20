@@ -238,7 +238,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div
-              className="hidden lg:block relative h-[500px] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up"
+              className="hidden lg:block relative h-[31.25rem] rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up"
               style={{ animationDelay: "0.2s" }}
             >
               <Image

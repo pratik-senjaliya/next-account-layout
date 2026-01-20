@@ -19,7 +19,7 @@ export function ExperienceCards({ experienceLevels }: ExperienceCardsProps) {
             {experienceLevels.map((level, index) => (
                 <div
                     key={level.level}
-                    className="relative rounded-xl border-2 border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-primary-600 hover:shadow-xl group"
+                    className="relative rounded-xl border-2 border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-primary-600 hover:shadow-xl group"
                 >
                     {/* Level Badge */}
                     <div className="inline-flex items-center px-4 py-2 bg-primary-50 rounded-lg mb-6">
