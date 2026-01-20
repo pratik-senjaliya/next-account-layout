@@ -351,27 +351,28 @@ export default async function HomePage() {
               {data.partnersDescription}
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center">
-            {data.partners?.map((partner: any, i: number) => (
-              <div
-                key={i}
-                className="relative w-full h-16 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 animate-fade-in-up flex items-center justify-center"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                {partner && partner.logo ? (
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name || "Partner Logo"}
-                    fill
-                    className="object-contain"
-                  />
-                ) : (
-                  <span className="text-sm font-semibold text-neutral-500 border border-neutral-300 rounded px-3 py-2">
-                    {partner?.name || (typeof partner === 'string' ? partner : "Partner")}
-                  </span>
-                )}
-              </div>
-            ))}
+          <div className="relative w-full overflow-hidden">
+            <div className="flex w-max animate-scroll gap-16 items-center hover:[animation-play-state:paused] py-4">
+              {[...(data.partners || []), ...(data.partners || [])].map((partner: any, i: number) => (
+                <div
+                  key={i}
+                  className="relative w-48 h-16 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 flex-shrink-0 flex items-center justify-center"
+                >
+                  {partner && partner.logo ? (
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name || "Partner Logo"}
+                      fill
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-neutral-500 border border-neutral-300 rounded px-3 py-2 whitespace-nowrap">
+                      {partner?.name || (typeof partner === 'string' ? partner : "Partner")}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </Section>

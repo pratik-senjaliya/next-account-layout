@@ -1,22 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Container } from "./Container";
-import { getSettings, getContactPage } from "@/lib/sanity/queries";
-
-import { industries } from "@/lib/industries";
-import { hireStaffPositions as hireStaff } from "@/lib/hire-staff";
-
-const services = [
-  { name: "Bookkeeping & Accounting", href: "/services/bookkeeping-accounting" },
-  { name: "Tax Preparation", href: "/services/tax-preparation" },
-  { name: "Payroll and Compliance", href: "/services/payroll-compliance" },
-  { name: "Audit & Assurance", href: "/services/audit-assurance" },
-  { name: "Virtual CFO & FP&A", href: "/services/virtual-cfo-fpa" },
-];
-
-const resources = [
-  { name: "Blog", href: "/resources" },
-];
+import { getSettings, getAllServices, getAllIndustries, getAllHireStaff } from "@/lib/sanity/queries";
 
 const company = [
   { name: "Home", href: "/" },
@@ -24,9 +9,8 @@ const company = [
   { name: "Contact", href: "/contact" },
 ];
 
-const legal = [
-  { name: "Privacy Policy", href: "/privacy-policy" },
-  { name: "Terms of Service", href: "/terms-of-service" },
+const resources = [
+  { name: "Blog", href: "/blog" },
 ];
 
 // Map platform names to SVG icons
@@ -61,198 +45,185 @@ const SocialIcon = ({ platform }: { platform: string }) => {
       </svg>
     );
   }
+
+  // Default icon
   return (
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm-1-9H9V6h2v1zm4 9h-2v-5h2v5zm0-6h-2V6h2v1z" />
+      <circle cx="12" cy="12" r="10" />
     </svg>
-  ); // Generic/Default icon
+  );
 };
 
-export const Footer = async () => {
-  const settings = await getSettings();
-  const contact = await getContactPage();
+export async function Footer() {
+  // Fetch dynamic data from Sanity
+  const [settings, services, industries, hireStaff] = await Promise.all([
+    getSettings().catch(() => null),
+    getAllServices().catch(() => []),
+    getAllIndustries().catch(() => []),
+    getAllHireStaff().catch(() => []),
+  ]);
 
   return (
     <footer className="bg-neutral-900 text-neutral-300">
-      {/* Main Footer Content */}
-      <div className="border-b border-neutral-800">
-        <Container>
-          <div className="py-12 md:py-16">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-8">
-              {/* Company Info - Spans 2 cols on large screens */}
-              <div className="col-span-2 lg:col-span-2">
-                <Link href="/" className="inline-block mb-4">
-                  <span className="text-2xl font-bold text-white">
-                    {settings?.companyName || "YourCompany"}
-                  </span>
-                </Link>
-                <p className="text-sm text-neutral-400 mb-6 max-w-sm leading-relaxed">
-                  {settings?.footerDescription || "Professional services and solutions for your business. Modern, reliable, and efficient."}
-                </p>
-                <div className="flex gap-3">
-                  {settings?.socialLinks?.map((link: { platform: string; url: string }, i: number) => (
-                    <a
-                      key={i}
-                      href={link.url}
-                      className="w-10 h-10 flex items-center justify-center bg-neutral-800 hover:bg-secondary-600 rounded-lg transition-colors"
-                      aria-label={link.platform}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <SocialIcon platform={link.platform} />
-                    </a>
-                  ))}
+      <Container>
+        {/* Main Footer Content */}
+        <div className="py-12 md:py-16">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+            {/* Company Info & Social */}
+            <div className="col-span-2 md:col-span-1">
+              <Link href="/" className="flex items-center mb-4 group">
+                <span className="text-2xl font-bold text-white group-hover:text-primary-500 transition-colors">
+                  {settings?.companyName || "YourCompany"}
+                </span>
+              </Link>
+              <p className="text-sm mb-6 text-neutral-400 max-w-xs">
+                {settings?.footerDescription || "Professional accounting and financial services to help your business thrive."}
+              </p>
 
-                  {/* Fallback if no socials configured */}
-                  {(!settings?.socialLinks || settings.socialLinks.length === 0) && (
-                    <div className="text-xs text-neutral-500 italic">Configure social links in CMS</div>
-                  )}
-                </div>
-              </div>
+              {/* Social Links */}
+              <div className="flex gap-3">
+                {settings?.socialLinks?.map((social: any, idx: number) => (
+                  <a
+                    key={idx}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-neutral-800 rounded-lg hover:bg-primary-600 text-neutral-400 hover:text-white transition-all transform hover:scale-110"
+                    aria-label={social.platform}
+                  >
+                    <SocialIcon platform={social.platform} />
+                  </a>
+                ))}
 
-              {/* Services */}
-              <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
-                  Services
-                </h3>
-                <ul className="space-y-3">
-                  {services.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="text-sm hover:text-white transition-colors text-neutral-400"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Industries */}
-              <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
-                  Industries
-                </h3>
-                <ul className="space-y-3">
-                  {industries.map((item) => (
-                    <li key={item.slug}>
-                      <Link
-                        href={`/industries/${item.slug}`}
-                        className="text-sm hover:text-white transition-colors text-neutral-400"
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Hire Staff */}
-              <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
-                  Hire Staff
-                </h3>
-                <ul className="space-y-3">
-                  {hireStaff.map((item) => (
-                    <li key={item.slug}>
-                      <Link
-                        href={`/hire-staff/${item.slug}`}
-                        className="text-sm hover:text-white transition-colors text-neutral-400"
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Company & Resources */}
-              <div>
-                <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
-                  Company
-                </h3>
-                <ul className="space-y-3">
-                  {company.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="text-sm hover:text-white transition-colors text-neutral-400"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                  <li className="pt-4 border-t border-neutral-800 mt-4">
-                    <span className="text-xs text-neutral-500 uppercase tracking-wider font-semibold block mb-3">Resources</span>
-                  </li>
-                  {resources.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="text-sm hover:text-white transition-colors text-neutral-400"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {/* Fallback if no socials configured */}
+                {(!settings?.socialLinks || settings.socialLinks.length === 0) && (
+                  <div className="text-xs text-neutral-500 italic">Configure social links in CMS</div>
+                )}
               </div>
             </div>
 
-            {/* Contact Info Section */}
-            <div className="mt-12 pt-8 border-t border-neutral-800">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div>
-                  <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">
-                    Get in Touch
-                  </h3>
-                  <div className="space-y-2">
-                    {contact?.phone && (
-                      <a
-                        href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`}
-                        className="block text-sm text-neutral-400 hover:text-white transition-colors"
-                      >
-                        {contact.phone}
-                      </a>
-                    )}
-                    {contact?.email && (
-                      <a
-                        href={`mailto:${contact.email}`}
-                        className="block text-sm text-neutral-400 hover:text-white transition-colors"
-                      >
-                        {contact.email}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
+            {/* Services */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                Services
+              </h3>
+              <ul className="space-y-3">
+                {services.map((item: any) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/services/${item.slug}`}
+                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Industries */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Industries
+              </h3>
+              <ul className="space-y-3">
+                {industries.map((item: any) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/industries/${item.slug}`}
+                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hire Staff */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Hire Staff
+              </h3>
+              <ul className="space-y-3">
+                {hireStaff.map((item: any) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/hire-staff/${item.slug}`}
+                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                Company
+              </h3>
+              <ul className="space-y-3">
+                {company.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+
+                {/* Resources/Blog */}
+                {resources.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+
+                {/* Privacy Policy */}
+                <li>
+                  <Link
+                    href="/privacy-policy"
+                    className="text-sm hover:text-white transition-colors text-neutral-400"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
-        </Container>
-      </div>
+        </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-neutral-800">
-        <Container>
-          <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-neutral-400">
+        {/* Bottom Bar */}
+        <div className="border-t border-neutral-800 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-neutral-500">
               © {new Date().getFullYear()} {settings?.companyName || "YourCompany"}. All rights reserved.
             </p>
-            <div className="flex flex-wrap items-center gap-4 md:gap-6">
-              {legal.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm hover:text-white transition-colors text-neutral-400"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+
+            {/* eBranding Studio Attribution */}
+            <p className="text-sm text-neutral-500">
+              Design & develop by{" "}
+              <a
+                href="https://ebranding.studio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-500 hover:text-primary-400 transition-colors font-medium"
+              >
+                eBranding Studio
+              </a>
+            </p>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </footer>
   );
-};
+}
