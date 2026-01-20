@@ -109,13 +109,13 @@ export default async function HireStaffPage({ params }: PageProps) {
             <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
               {position.longDescription}
             </p>
-            <Link href="/contact">
+            <Link href={position.heroCTA?.link || "/contact"}>
               <Button
-                variant="secondary"
+                variant={position.heroCTA?.variant || "secondary"}
                 size="lg"
                 className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
               >
-                Schedule Free Consultation
+                {position.heroCTA?.text || "Schedule Free Consultation"}
               </Button>
             </Link>
           </div>
@@ -174,6 +174,25 @@ export default async function HireStaffPage({ params }: PageProps) {
         </Container>
       </Section>
 
+      {/* 3.5 Content CTA */}
+      <Section background="gray" spacing="sm" className="py-16 bg-neutral-50">
+        <Container>
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h3>
+            <p className="text-lg text-neutral-600 mb-6">Get a customized quote for your business needs</p>
+            <Link href={position.introCTA?.link || "/contact"}>
+              <Button
+                variant={position.introCTA?.variant || "primary"}
+                size="lg"
+                className="px-12 py-4 text-lg font-bold shadow-lg"
+              >
+                {position.introCTA?.text || "Request a Quote"}
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
 
       {/* 3.5. Software Integration Section */}
       <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
@@ -198,6 +217,8 @@ export default async function HireStaffPage({ params }: PageProps) {
           </div>
         </Container>
       </Section>
+
+
 
       {/* 4. Getting Started / Process Section */}
       <Section background="white" spacing="lg" className="py-24 md:py-32" id="methodology">
@@ -249,6 +270,17 @@ export default async function HireStaffPage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
+              <div className="mt-12">
+                <Link href={position.whyChooseCTA?.link || "/contact"}>
+                  <Button
+                    variant={position.whyChooseCTA?.variant || "secondary"}
+                    size="lg"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-4 text-lg font-bold shadow-xl"
+                  >
+                    {position.whyChooseCTA?.text || "Talk to an Expert"}
+                  </Button>
+                </Link>
+              </div>
             </div>
             <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
@@ -275,40 +307,6 @@ export default async function HireStaffPage({ params }: PageProps) {
       </Section>
 
       {/* 5.5. Risk-Free Trial Section - NEW */}
-      <Section background="white" spacing="lg" className="py-24 md:py-32 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <Container>
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 mb-6">
-              <span className="text-sm font-bold uppercase tracking-wider">{position.trial.duration} Risk-Free</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">Try Before You Commit</h2>
-            <p className="text-xl md:text-2xl text-primary-100 mb-12 leading-relaxed max-w-3xl mx-auto">
-              {position.trial.description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="bg-white text-primary-600 hover:bg-neutral-100 shadow-2xl text-lg px-10 py-6 w-full sm:w-auto border-2 border-transparent"
-                >
-                  Start Your Free Trial
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary-600 text-lg px-10 py-6 w-full sm:w-auto"
-                >
-                  Schedule a Call
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
       {/* 6. Testimonial Section */}
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
@@ -328,13 +326,13 @@ export default async function HireStaffPage({ params }: PageProps) {
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Expert Q&A</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Frequently Asked Questions</h2>
               <p className="text-lg text-neutral-600 font-medium">
                 Detailed answers to the most common questions regarding our {position.title} services.
               </p>
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <FAQ items={position.faqs} />
+              <FAQ items={position.faqs} title="" />
             </div>
           </div>
         </Container>
@@ -357,22 +355,13 @@ export default async function HireStaffPage({ params }: PageProps) {
               Schedule your strategy session today.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Link href="/contact">
+              <Link href={position.finalCTA?.link || "/contact"}>
                 <Button
-                  variant="secondary"
+                  variant={position.finalCTA?.variant || "secondary"}
                   size="lg"
                   className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
-                  Schedule Consultation
-                </Button>
-              </Link>
-              <Link href="/hire-staff">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10 px-16 py-6 text-2xl font-bold rounded-2xl"
-                >
-                  See All Solutions
+                  {position.finalCTA?.text || "Get Started Today"}
                 </Button>
               </Link>
             </div>

@@ -12,6 +12,7 @@ export function ContactForm({ data }: { data: any }) {
         email: "",
         phone: "",
         company: "",
+        service: "tax-preparation",
         message: "",
     });
 
@@ -50,6 +51,7 @@ export function ContactForm({ data }: { data: any }) {
                 email: "",
                 phone: "",
                 company: "",
+                service: "tax-preparation",
                 message: "",
             });
         } catch (error) {
@@ -64,7 +66,7 @@ export function ContactForm({ data }: { data: any }) {
     };
 
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         setFormData({
             ...formData,
@@ -138,7 +140,7 @@ export function ContactForm({ data }: { data: any }) {
                                         htmlFor="email"
                                         className="block text-sm font-medium text-neutral-700 mb-2"
                                     >
-                                        Email Address *
+                                        Work Email *
                                     </label>
                                     <input
                                         type="email"
@@ -189,6 +191,30 @@ export function ContactForm({ data }: { data: any }) {
                                         className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50"
                                         placeholder="Your Company"
                                     />
+                                </div>
+
+                                <div>
+                                    <label
+                                        htmlFor="service"
+                                        className="block text-sm font-medium text-neutral-700 mb-2"
+                                    >
+                                        Service of Interest *
+                                    </label>
+                                    <select
+                                        id="service"
+                                        name="service"
+                                        required
+                                        value={formData.service}
+                                        onChange={handleChange}
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 appearance-none bg-white"
+                                    >
+                                        <option value="tax-preparation">Tax Preparation</option>
+                                        <option value="bookkeeping">Bookkeeping</option>
+                                        <option value="payroll">Payroll</option>
+                                        <option value="full-service-accounting">Full-Service Accounting</option>
+                                        <option value="other">Other</option>
+                                    </select>
                                 </div>
 
                                 <div>
@@ -357,8 +383,8 @@ export function ContactForm({ data }: { data: any }) {
                             )}
                         </div>
                     </div>
-                </Container>
-            </Section>
+                </Container >
+            </Section >
         </>
     );
 }

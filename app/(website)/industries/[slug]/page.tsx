@@ -109,13 +109,13 @@ export default async function IndustryPage({ params }: PageProps) {
             <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
               {industry.longDescription}
             </p>
-            <Link href="/contact">
+            <Link href={industry.heroCTA?.link || "/contact"}>
               <Button
-                variant="secondary"
+                variant={industry.heroCTA?.variant || "secondary"}
                 size="lg"
                 className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
               >
-                Schedule Free Consultation
+                {industry.heroCTA?.text || "Schedule Free Consultation"}
               </Button>
             </Link>
           </div>
@@ -157,7 +157,7 @@ export default async function IndustryPage({ params }: PageProps) {
 
         {/* 3. Sub-Industries Section - NEW */}
         {industry.subIndustries && industry.subIndustries.length > 0 && (
-          <Section background="gray" spacing="lg" className="py-24 md:py-32 bg-neutral-50">
+          <Section background="white" spacing="lg" className="pt-24 pb-8 md:pt-32 md:pb-12 bg-neutral-50">
             <Container>
               <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
                 <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-sm mb-4 block">Sub-Industries</span>
@@ -174,6 +174,25 @@ export default async function IndustryPage({ params }: PageProps) {
           </Section>
         )}
 
+      </Section>
+
+      {/* 3.5 Content CTA */}
+      <Section background="gray" spacing="sm" className="py-16 bg-neutral-50">
+        <Container>
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h3>
+            <p className="text-lg text-neutral-600 mb-6">Get a customized quote for your business needs</p>
+            <Link href={industry.introCTA?.link || "/contact"}>
+              <Button
+                variant={industry.introCTA?.variant || "primary"}
+                size="lg"
+                className="px-12 py-4 text-lg font-bold shadow-lg"
+              >
+                {industry.introCTA?.text || "Request a Quote"}
+              </Button>
+            </Link>
+          </div>
+        </Container>
       </Section>
 
       {/* 4. Our Process Section */}
@@ -225,6 +244,17 @@ export default async function IndustryPage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
+              <div className="mt-12">
+                <Link href={industry.whyChooseCTA?.link || "/contact"}>
+                  <Button
+                    variant={industry.whyChooseCTA?.variant || "secondary"}
+                    size="lg"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-4 text-lg font-bold shadow-xl"
+                  >
+                    {industry.whyChooseCTA?.text || "Talk to an Expert"}
+                  </Button>
+                </Link>
+              </div>
             </div>
             <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
@@ -269,13 +299,13 @@ export default async function IndustryPage({ params }: PageProps) {
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Expert Q&A</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Frequently Asked Questions</h2>
               <p className="text-lg text-neutral-600 font-medium">
                 Detailed answers to the most common questions regarding our {industry.title} industrys.
               </p>
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <FAQ items={industry.faqs} />
+              <FAQ items={industry.faqs} title="" />
             </div>
           </div>
         </Container>
@@ -298,22 +328,13 @@ export default async function IndustryPage({ params }: PageProps) {
               Schedule your strategy session today.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Link href="/contact">
+              <Link href={industry.finalCTA?.link || "/contact"}>
                 <Button
-                  variant="secondary"
+                  variant={industry.finalCTA?.variant || "secondary"}
                   size="lg"
                   className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
-                  Schedule Consultation
-                </Button>
-              </Link>
-              <Link href="/industrys">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10 px-16 py-6 text-2xl font-bold rounded-2xl"
-                >
-                  See All Solutions
+                  {industry.finalCTA?.text || "Get Started Today"}
                 </Button>
               </Link>
             </div>

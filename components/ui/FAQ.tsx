@@ -31,19 +31,23 @@ export const FAQ: React.FC<FAQProps> = ({
 
   return (
     <div className="w-full">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 sm:mb-0">
-          {title}
-        </h2>
-        {showMoreLink && (
-          <a
-            href={moreLinkHref}
-            className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
-          >
-            {moreLinkText}
-          </a>
-        )}
-      </div>
+      {(title || showMoreLink) && (
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+          {title && (
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 sm:mb-0">
+              {title}
+            </h2>
+          )}
+          {showMoreLink && (
+            <a
+              href={moreLinkHref}
+              className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
+            >
+              {moreLinkText}
+            </a>
+          )}
+        </div>
+      )}
 
       <div className="space-y-4">
         {items.map((item, index) => (

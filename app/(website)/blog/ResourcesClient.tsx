@@ -45,13 +45,13 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                     <Breadcrumb
                         items={[
                             { label: "Home", href: "/" },
-                            { label: "Resources" },
+                            { label: "Blog" },
                         ]}
                         className="mb-6 text-primary-200"
                     />
                     <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-                            {title || "Resources & Blog"}
+                            {title || "Blog & Insights"}
                         </h1>
                         <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
                             {description || "Explore our collection of articles, guides, and insights to help your business succeed. Expert advice, best practices, and industry trends."}
@@ -80,25 +80,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                 </Container>
             </Section>
 
-            {/* Categories Filter */}
-            <Section background="white" spacing="sm">
-                <Container>
-                    <div className="flex flex-wrap gap-3 justify-center animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setSelectedCategory(category)}
-                                className={`px-6 py-2.5 rounded-xl font-medium transition-all duration-300 ${selectedCategory === category
-                                    ? "bg-primary-600 text-white shadow-lg scale-105"
-                                    : "border-2 border-neutral-200 text-neutral-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600"
-                                    }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                </Container>
-            </Section>
+
 
             {/* Featured Post */}
             {featuredPost && (
@@ -123,9 +105,6 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                                         </div>
                                         <div className="p-8 flex flex-col justify-center">
                                             <div className="flex items-center gap-3 mb-4 text-sm text-neutral-500">
-                                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-lg font-medium">
-                                                    {featuredPost.category}
-                                                </span>
                                                 <span>{featuredPost.date}</span>
                                                 <span>•</span>
                                                 <span>{featuredPost.readTime}</span>
@@ -136,10 +115,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                                             <p className="text-lg text-neutral-600 mb-6 line-clamp-3">
                                                 {featuredPost.excerpt}
                                             </p>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-sm text-neutral-500">
-                                                    By {featuredPost.author}
-                                                </span>
+                                            <div className="flex items-center justify-end">
                                                 <span className="text-primary-600 font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                                                     Read More
                                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,9 +155,6 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                                         </div>
                                         <div className="p-6 pt-0">
                                             <div className="flex items-center gap-3 mb-3 text-sm text-neutral-500">
-                                                <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded text-xs font-medium">
-                                                    {post.category}
-                                                </span>
                                                 <span>{post.date}</span>
                                             </div>
                                             <h3 className="text-xl font-semibold text-neutral-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
@@ -190,10 +163,7 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                                             <p className="text-neutral-600 mb-4 line-clamp-3">
                                                 {post.excerpt}
                                             </p>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-sm text-neutral-500">
-                                                    By {post.author}
-                                                </span>
+                                            <div className="flex items-center justify-end">
                                                 <span className="text-primary-600 font-medium text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                                                     Read More
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

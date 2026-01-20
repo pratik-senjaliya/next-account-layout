@@ -167,6 +167,7 @@ export default defineType({
             title: 'Risk-Free Trial',
             type: 'object',
             group: 'details',
+            hidden: true, // Hidden - trial section removed from page
             fields: [
                 defineField({ name: 'duration', type: 'string' }),
                 defineField({ name: 'description', type: 'text' }),
@@ -205,6 +206,31 @@ export default defineType({
             title: 'FAQs',
             type: 'array',
             of: [{ type: 'faq' }],
+            group: 'content',
+        }),
+        // CTAs
+        defineField({
+            name: 'heroCTA',
+            title: 'Hero CTA',
+            type: 'cta',
+            group: 'hero',
+        }),
+        defineField({
+            name: 'introCTA',
+            title: 'After Intro CTA',
+            type: 'cta',
+            group: 'intro',
+        }),
+        defineField({
+            name: 'whyChooseCTA',
+            title: 'Why Choose Us CTA',
+            type: 'cta',
+            group: 'content',
+        }),
+        defineField({
+            name: 'finalCTA',
+            title: 'Final CTA',
+            type: 'cta',
             group: 'content',
         }),
         // Fallback

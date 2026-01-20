@@ -50,6 +50,7 @@ export default defineType({
             name: 'category',
             title: 'Category',
             type: 'string',
+            hidden: true, // Hidden but keep for data migration
         }),
         defineField({
             name: 'publishedAt',
@@ -60,17 +61,48 @@ export default defineType({
             name: 'author',
             title: 'Author',
             type: 'string',
+            hidden: true, // Hidden but keep for data migration
         }),
         defineField({
             name: 'authorRole',
             title: 'Author Role',
             type: 'string',
+            hidden: true, // Hidden but keep for data migration
         }),
         defineField({
             name: 'readTime',
             title: 'Read Time',
             type: 'string',
             description: 'e.g. "5 min read"',
+        }),
+        defineField({
+            name: 'faqs',
+            title: 'FAQs',
+            type: 'array',
+            of: [{
+                type: 'object',
+                fields: [
+                    {
+                        name: 'question',
+                        title: 'Question',
+                        type: 'string',
+                        validation: (Rule) => Rule.required(),
+                    },
+                    {
+                        name: 'answer',
+                        title: 'Answer',
+                        type: 'text',
+                        rows: 3,
+                        validation: (Rule) => Rule.required(),
+                    }
+                ],
+                preview: {
+                    select: {
+                        title: 'question',
+                        subtitle: 'answer'
+                    }
+                }
+            }],
         }),
     ],
 })

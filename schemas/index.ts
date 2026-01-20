@@ -7,6 +7,7 @@ import testimonial from './objects/testimonial'
 import processStep from './objects/processStep'
 import stat from './objects/stat'
 import seo from './objects/seo'
+import cta from './objects/cta'
 
 // Documents
 import post from './post'
@@ -31,6 +32,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         processStep,
         stat,
         seo,
+        cta,
 
         // Documents
         settings,

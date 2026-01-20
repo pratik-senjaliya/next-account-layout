@@ -5,6 +5,7 @@ import { Section } from "@/components/layout/Section";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ReadingProgress } from "@/components/ui/ReadingProgress";
 import { ShareButtons } from "@/components/ui/ShareButtons";
+import { FAQ } from "@/components/ui/FAQ";
 import { getPostBySlug, getAllPosts, getAllPostSlugs } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
@@ -73,37 +74,18 @@ export default async function BlogPostPage(props: {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Resources", href: "/resources" },
+              { label: "Blog", href: "/blog" },
               { label: post.title },
             ]}
             className="mb-6 text-primary-200"
           />
           <div className="max-w-4xl mx-auto animate-fade-in-up">
-            <div className="mb-6">
-              <span className="px-3 py-1 bg-secondary-500/20 text-secondary-300 rounded-full text-sm font-medium">
-                {post.category}
-              </span>
-            </div>
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
               {post.title}
             </h1>
+
             <div className="flex flex-wrap items-center gap-6 text-primary-200 text-sm">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                <span>{post.author}</span>
-              </div>
               <div className="flex items-center gap-2">
                 <svg
                   className="w-5 h-5"
@@ -242,32 +224,7 @@ export default async function BlogPostPage(props: {
         </Container>
       </Section>
 
-      {/* Author Info */}
-      <Section background="gray" spacing="md">
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl p-8 shadow-md animate-fade-in-up">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl font-bold text-primary-600">
-                    {post.author ? post.author.charAt(0) : "?"}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-1">
-                    {post.author}
-                  </h3>
-                  <p className="text-neutral-600 mb-4">{post.authorRole}</p>
-                  <p className="text-neutral-700">
-                    Expert insights and practical advice to help your business
-                    succeed.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+
 
       {/* Related Posts */}
       <Section background="white" spacing="lg">
@@ -278,7 +235,7 @@ export default async function BlogPostPage(props: {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {allPosts
-                .filter((p: any) => p.id !== post.id && p.category === post.category)
+                .filter((p: any) => p.id !== post.id)
                 .slice(0, 2)
                 .map((relatedPost: any) => (
                   <Link
@@ -316,6 +273,17 @@ export default async function BlogPostPage(props: {
           </div>
         </Container>
       </Section>
+
+      {/* FAQs Section */}
+      {post.faqs && post.faqs.length > 0 && (
+        <Section background="gray" spacing="lg">
+          <Container>
+            <div className="max-w-4xl mx-auto">
+              <FAQ items={post.faqs} />
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* CTA */}
       <Section

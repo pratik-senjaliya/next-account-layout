@@ -31,6 +31,20 @@ export default defineType({
             type: 'text',
         }),
         defineField({
+            name: 'service',
+            title: 'Service of Interest',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Tax Preparation', value: 'tax-preparation' },
+                    { title: 'Bookkeeping', value: 'bookkeeping' },
+                    { title: 'Payroll', value: 'payroll' },
+                    { title: 'Full-Service Accounting', value: 'full-service-accounting' },
+                    { title: 'Other', value: 'other' },
+                ],
+            },
+        }),
+        defineField({
             name: 'status',
             title: 'Status',
             type: 'string',

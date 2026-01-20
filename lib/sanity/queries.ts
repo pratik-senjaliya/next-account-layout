@@ -8,7 +8,6 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     title,
     "slug": slug.current,
     excerpt,
-    category,
     "date": publishedAt,
     author,
     authorRole,
@@ -28,12 +27,12 @@ export async function getPostBySlug(slug: string) {
     "slug": slug.current,
     excerpt,
     content,
-    category,
     "date": publishedAt,
     author,
     authorRole,
     "image": mainImage.asset->url,
-    readTime
+    readTime,
+    faqs
   }`
 
   return client.fetch(query, { slug })
@@ -101,7 +100,17 @@ export async function getServiceBySlug(slug: string) {
     process,
     whyChooseUs,
     testimonial,
-    faqs
+    faqs,
+    heroCTA,
+    introCTA,
+    whyChooseCTA,
+    finalCTA,
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    }
   }`
 
   return client.fetch(query, { slug })
@@ -167,7 +176,17 @@ export async function getIndustryBySlug(slug: string) {
     process,
     whyChooseUs,
     testimonial,
-    faqs
+    faqs,
+    heroCTA,
+    introCTA,
+    whyChooseCTA,
+    finalCTA,
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    }
   }`
 
   return client.fetch(query, { slug })
@@ -241,7 +260,17 @@ export async function getHireStaffBySlug(slug: string) {
     whyChooseUs,
     testimonial,
     faqs,
-    process
+    process,
+    heroCTA,
+    introCTA,
+    whyChooseCTA,
+    finalCTA,
+    seo {
+      metaTitle,
+      metaDescription,
+      metaKeywords,
+      "openGraphImage": openGraphImage.asset->url
+    }
   }`
 
   return client.fetch(query, { slug })

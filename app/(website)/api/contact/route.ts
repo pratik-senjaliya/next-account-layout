@@ -5,7 +5,7 @@ import { apiVersion, dataset, projectId } from '@/lib/sanity/env'
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
-        const { name, email, phone, company, message } = body
+        const { name, email, phone, company, service, message } = body
 
         // Basic server-side validation
         if (!name || !email || !message) {
@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
             email,
             phone,
             company,
+            service,
             message,
             status: 'new',
             submittedAt: new Date().toISOString(),

@@ -87,7 +87,7 @@ interface NavigationData {
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showTopBanner, setShowTopBanner] = useState(true);
+
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const [navData, setNavData] = useState<NavigationData | null>(null);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -161,43 +161,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* Top Promotional Banner */}
-      {showTopBanner && (
-        <div className="bg-yellow-400 text-neutral-900 text-sm py-2.5 relative">
-          <div className="container-custom">
-            <div className="flex items-center justify-center gap-4">
-              <p className="text-center">
-                <strong>Free Consultation</strong> when you start an annual plan
-                <Link
-                  href="/contact"
-                  className="ml-2 font-semibold underline hover:no-underline"
-                >
-                  Learn More →
-                </Link>
-              </p>
-              <button
-                onClick={() => setShowTopBanner(false)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-yellow-500 rounded transition-colors"
-                aria-label="Close banner"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
 
       {/* Main Header */}
       <header

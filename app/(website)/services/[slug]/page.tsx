@@ -108,13 +108,13 @@ export default async function ServicePage({ params }: PageProps) {
             <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
               {service.longDescription}
             </p>
-            <Link href="/contact">
+            <Link href={service.heroCTA?.link || "/contact"}>
               <Button
-                variant="secondary"
+                variant={service.heroCTA?.variant || "secondary"}
                 size="lg"
                 className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-5 text-lg font-bold shadow-xl border-2 border-transparent"
               >
-                Schedule Free Consultation
+                {service.heroCTA?.text || "Schedule Free Consultation"}
               </Button>
             </Link>
           </div>
@@ -155,7 +155,7 @@ export default async function ServicePage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* 3. Service Areas / Service Capabilities Section */}
+
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
           <div className="text-center mb-20 max-w-3xl mx-auto animate-fade-in-up">
@@ -195,6 +195,25 @@ export default async function ServicePage({ params }: PageProps) {
               ))}
             </div>
           )}
+        </Container>
+      </Section>
+
+      {/* 3.5 Service Areas CTA */}
+      <Section background="gray" spacing="sm" className="py-16 bg-neutral-50">
+        <Container>
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h3>
+            <p className="text-lg text-neutral-600 mb-6">Get a customized quote for your business needs</p>
+            <Link href={service.introCTA?.link || "/contact"}>
+              <Button
+                variant={service.introCTA?.variant || "primary"}
+                size="lg"
+                className="px-12 py-4 text-lg font-bold shadow-lg"
+              >
+                {service.introCTA?.text || "Request a Quote"}
+              </Button>
+            </Link>
+          </div>
         </Container>
       </Section>
 
@@ -247,8 +266,19 @@ export default async function ServicePage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
+              <div className="mt-12">
+                <Link href={service.whyChooseCTA?.link || "/contact"}>
+                  <Button
+                    variant={service.whyChooseCTA?.variant || "secondary"}
+                    size="lg"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-4 text-lg font-bold shadow-xl"
+                  >
+                    {service.whyChooseCTA?.text || "Talk to an Expert"}
+                  </Button>
+                </Link>
+              </div>
             </div>
-            <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right">
+            <div className="relative h-[600px] lg:h-[700px] animate-fade-in-right lg:order-2">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
               <div className="relative h-full rounded-[60px] overflow-hidden shadow-2xl border-8 border-white/5">
                 <Image
@@ -272,7 +302,7 @@ export default async function ServicePage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* 6. Testimonial Section */}
+
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
           <div className="max-w-5xl mx-auto animate-fade-in-up">
@@ -291,13 +321,13 @@ export default async function ServicePage({ params }: PageProps) {
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Expert Q&A</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">Frequently Asked Questions</h2>
               <p className="text-lg text-neutral-600 font-medium">
                 Detailed answers to the most common questions regarding our {service.title} services.
               </p>
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <FAQ items={service.faqs} />
+              <FAQ items={service.faqs} title="" />
             </div>
           </div>
         </Container>
@@ -320,22 +350,13 @@ export default async function ServicePage({ params }: PageProps) {
               Schedule your strategy session today.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Link href="/contact">
+              <Link href={service.finalCTA?.link || "/contact"}>
                 <Button
-                  variant="secondary"
+                  variant={service.finalCTA?.variant || "secondary"}
                   size="lg"
                   className="bg-white text-secondary-600 hover:bg-neutral-100 px-16 py-6 text-2xl font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
-                  Schedule Consultation
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10 px-16 py-6 text-2xl font-bold rounded-2xl"
-                >
-                  See All Solutions
+                  {service.finalCTA?.text || "Get Started Today"}
                 </Button>
               </Link>
             </div>
