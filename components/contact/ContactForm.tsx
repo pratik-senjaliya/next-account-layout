@@ -213,6 +213,8 @@ export function ContactForm({ data }: { data: any }) {
                                         <option value="bookkeeping">Bookkeeping</option>
                                         <option value="payroll">Payroll</option>
                                         <option value="full-service-accounting">Full-Service Accounting</option>
+                                        <option value="cfo-support">CFO Support</option>
+                                        <option value="account-cleanup">Account Cleanup</option>
                                         <option value="other">Other</option>
                                     </select>
                                 </div>
