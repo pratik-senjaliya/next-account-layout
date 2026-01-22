@@ -253,6 +253,45 @@ export default async function HomePage() {
         </Container>
       </Section>
 
+      {/* Introduction Section */}
+      {data.introductionTitle && (
+        <Section background="white" spacing="lg">
+          <Container>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Image - Left Side */}
+              <div className="relative h-[25rem] lg:h-[31.25rem] rounded-2xl overflow-hidden animate-fade-in-left">
+                {data.introductionImage ? (
+                  <Image
+                    src={data.introductionImage}
+                    alt={data.introductionTitle || "Introduction"}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                    <div className="text-primary-400 text-6xl">
+                      <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Content - Right Side */}
+              <div className="animate-fade-in-right">
+                <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6 leading-tight">
+                  {data.introductionTitle}
+                </h2>
+                <p className="text-lg text-neutral-600 leading-relaxed whitespace-pre-line">
+                  {data.introductionBody}
+                </p>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
+
       {/* Trust Indicators */}
       <Section background="white" spacing="md">
         <Container>

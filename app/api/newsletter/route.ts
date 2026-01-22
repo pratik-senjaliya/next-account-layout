@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
+import { createClient } from '@sanity/client';
+import { apiVersion, dataset, projectId } from '@/lib/sanity/env';
 
 export async function POST(request: Request) {
     try {
@@ -21,6 +22,24 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+
+        const token = process.env.SANITY_API_TOKEN;
+
+        if (!token) {
+            console.error('Missing SANITY_API_TOKEN');
+            return NextResponse.json(
+                { error: 'Internal Server Error: Missing API configuration' },
+                { status: 500 }
+            );
+        }
+
+        const client = createClient({
+            projectId,
+            dataset,
+            apiVersion,
+            token, // Write token is required
+            useCdn: false,
+        });
 
         // Check if email already exists
         const existingSubscription = await client.fetch(
@@ -49,15 +68,17 @@ export async function POST(request: Request) {
         }
 
         // Create new subscription
-        const result = await client.create({
+        const doc = {
             _type: 'newsletterSubscription',
             email,
             subscribedAt: new Date().toISOString(),
             status: 'active',
-        });
+        };
+
+        await client.create(doc);
 
         return NextResponse.json(
-            { message: 'Successfully subscribed to newsletter!', data: result },
+            { success: true, message: 'Successfully subscribed to newsletter!' },
             { status: 201 }
         );
     } catch (error) {

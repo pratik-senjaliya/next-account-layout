@@ -58,6 +58,28 @@ export default defineType({
             group: 'hero',
         }),
 
+        // Introduction Section
+        defineField({
+            name: 'introductionTitle',
+            title: 'Introduction Title',
+            type: 'string',
+            group: 'hero',
+        }),
+        defineField({
+            name: 'introductionBody',
+            title: 'Introduction Body',
+            type: 'text',
+            rows: 5,
+            group: 'hero',
+        }),
+        defineField({
+            name: 'introductionImage',
+            title: 'Introduction Image',
+            type: 'image',
+            options: { hotspot: true },
+            group: 'hero',
+        }),
+
         // Trust Indicators
         defineField({
             name: 'trustTitle',

@@ -27,9 +27,9 @@ export function ResourcesClient({ blogPosts, categories, title, description, new
     const filteredPosts = blogPosts.filter((post) => {
         const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
         const matchesSearch = searchQuery === "" ||
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.category.toLowerCase().includes(searchQuery.toLowerCase());
+            post.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            (post.category?.toLowerCase() || '').includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
