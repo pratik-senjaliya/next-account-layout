@@ -6,10 +6,9 @@ export default defineType({
     type: 'document',
     groups: [
         { name: 'hero', title: 'Hero Section' },
-        { name: 'whatWeDo', title: 'What We Do' },
-        { name: 'timeline', title: 'Timeline' },
-        { name: 'mission', title: 'Mission' },
-        { name: 'values', title: 'Values' },
+        { name: 'whyWeExist', title: 'Why We Exist' },
+        { name: 'values', title: 'Core Values' },
+        { name: 'team', title: 'Team' },
         { name: 'seo', title: 'SEO' },
     ],
     fields: [
@@ -48,90 +47,33 @@ export default defineType({
             group: 'hero',
         }),
 
-        // What We Do
+        // Why We Exist
         defineField({
-            name: 'whatWeDoTitle',
-            title: 'What We Do Title',
+            name: 'whyWeExistTitle',
+            title: 'Why We Exist Title',
             type: 'string',
-            group: 'whatWeDo',
+            group: 'whyWeExist',
         }),
         defineField({
-            name: 'whatWeDoDescription',
-            title: 'What We Do Description',
+            name: 'whyWeExistBody',
+            title: 'Why We Exist Body',
             type: 'text',
-            group: 'whatWeDo',
+            rows: 5,
+            group: 'whyWeExist',
         }),
         defineField({
-            name: 'stats',
-            title: 'Stats',
-            type: 'array',
-            of: [{ type: 'stat' }],
-            group: 'whatWeDo',
-        }),
-
-        // Timeline
-        defineField({
-            name: 'timelineTitle',
-            title: 'Timeline Title',
-            type: 'string',
-            group: 'timeline',
-        }),
-        defineField({
-            name: 'timelineEvents',
-            title: 'Timeline Events',
-            type: 'array',
-            group: 'timeline',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        defineField({ name: 'year', type: 'string', title: 'Year' }),
-                        defineField({ name: 'event', type: 'text', title: 'Event Description' }),
-                    ],
-                },
-            ],
-        }),
-
-        // Mission (Why We're Here)
-        defineField({
-            name: 'missionTitle',
-            title: 'Mission Title',
-            type: 'string',
-            group: 'mission',
-        }),
-        defineField({
-            name: 'missionDescription',
-            title: 'Mission Description',
-            type: 'array',
-            of: [{ type: 'text' }], // Using array of text to support multiple paragraphs
-            group: 'mission',
-        }),
-        defineField({
-            name: 'missionEmphasis',
-            title: 'Mission Emphasis',
-            type: 'string',
-            description: 'Bold text at the end of the mission section',
-            group: 'mission',
-        }),
-        defineField({
-            name: 'missionImage',
-            title: 'Mission Image',
+            name: 'whyWeExistImage',
+            title: 'Why We Exist Image',
             type: 'image',
             options: { hotspot: true },
-            group: 'mission',
+            group: 'whyWeExist',
         }),
 
-        // Values
+        // Core Values
         defineField({
             name: 'valuesTitle',
             title: 'Values Title',
             type: 'string',
-            group: 'values',
-        }),
-        defineField({
-            name: 'valuesDescription',
-            title: 'Values Description',
-            type: 'text',
             group: 'values',
         }),
         defineField({
@@ -145,9 +87,36 @@ export default defineType({
                     fields: [
                         defineField({ name: 'title', type: 'string', title: 'Title' }),
                         defineField({ name: 'description', type: 'text', title: 'Description' }),
-                    ]
+                        defineField({
+                            name: 'icon',
+                            type: 'string',
+                            title: 'Icon Name',
+                            description: 'Lucide icon name (e.g., shield-check, lock, eye, trending-up)'
+                        }),
+                    ],
+                    preview: {
+                        select: {
+                            title: 'title',
+                            subtitle: 'icon',
+                        },
+                    },
                 }
             ],
+        }),
+
+        // Team Section
+        defineField({
+            name: 'teamTitle',
+            title: 'Team Section Title',
+            type: 'string',
+            group: 'team',
+        }),
+        defineField({
+            name: 'teamBody',
+            title: 'Team Section Body',
+            type: 'text',
+            rows: 4,
+            group: 'team',
         }),
 
         // CTA Section
@@ -155,7 +124,7 @@ export default defineType({
             name: 'finalCTA',
             title: 'Final CTA Section',
             type: 'finalCtaSection',
-            group: 'values',
+            group: 'team',
         }),
     ],
 })
