@@ -176,21 +176,25 @@ export default async function IndustryPage({ params }: PageProps) {
 
       </Section>
 
-      {/* 3.5 Content CTA */}
-      <Section background="gray" spacing="sm" className="bg-neutral-50">
+      {/* Content CTA */}
+      <Section background="primary" spacing="md" className="bg-gradient-to-r from-neutral-800 to-neutral-900">
         <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-neutral-900 mb-4">{industry.introCTA?.title || "Ready to Get Started?"}</h3>
-            <p className="text-lg text-neutral-600 mb-6">{industry.introCTA?.description || "Get a customized quote for your business needs"}</p>
-            <Link href={industry.introCTA?.cta?.link || "/contact"}>
-              <Button
-                variant={industry.introCTA?.cta?.variant || "primary"}
-                size="lg"
-                className="px-12 py-4 text-lg font-bold shadow-lg"
-              >
-                {industry.introCTA?.cta?.text || "Request a Quote"}
-              </Button>
-            </Link>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+            <div className="text-center md:text-left flex-1">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{industry.introCTA?.title || "Ready to Get Started?"}</h3>
+              <p className="text-base md:text-lg text-neutral-300">{industry.introCTA?.description || "Get a customized quote for your business needs"}</p>
+            </div>
+            <div className="flex-shrink-0">
+              <Link href={industry.introCTA?.cta?.link || "/contact"}>
+                <Button
+                  variant={industry.introCTA?.cta?.variant || "secondary"}
+                  size="lg"
+                  className="bg-secondary-500 hover:bg-secondary-600 text-white px-10 py-4 text-base md:text-lg font-bold shadow-xl whitespace-nowrap"
+                >
+                  {industry.introCTA?.cta?.text || "Request a Quote"}
+                </Button>
+              </Link>
+            </div>
           </div>
         </Container>
       </Section>
