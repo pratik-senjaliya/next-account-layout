@@ -48,7 +48,8 @@
 
   html {
     @apply scroll-smooth;
-    font-size: 80%;
+    font-size: 88%;
+    /* Global scaling: optimized for client preference (110% zoom → 100% zoom) */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
