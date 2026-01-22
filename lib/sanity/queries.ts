@@ -102,9 +102,17 @@ export async function getServiceBySlug(slug: string) {
     testimonial,
     faqs,
     heroCTA,
-    introCTA,
+    introCTA {
+      title,
+      description,
+      cta
+    },
     whyChooseCTA,
-    finalCTA,
+    finalCTA {
+      title,
+      description,
+      cta
+    },
     seo {
       metaTitle,
       metaDescription,
@@ -178,9 +186,13 @@ export async function getIndustryBySlug(slug: string) {
     testimonial,
     faqs,
     heroCTA,
-    introCTA,
+    introCTA {\n      title,\n      description,\n      cta\n    },
     whyChooseCTA,
-    finalCTA,
+    finalCTA {
+      title,
+      description,
+      cta
+    },
     seo {
       metaTitle,
       metaDescription,
@@ -262,9 +274,13 @@ export async function getHireStaffBySlug(slug: string) {
     faqs,
     process,
     heroCTA,
-    introCTA,
+    introCTA {\n      title,\n      description,\n      cta\n    },
     whyChooseCTA,
-    finalCTA,
+    finalCTA {
+      title,
+      description,
+      cta
+    },
     seo {
       metaTitle,
       metaDescription,
@@ -323,7 +339,12 @@ export async function getHomePage() {
     blogTitle,
     blogDescription,
     faqTitle,
-    faqs
+    faqs,
+    finalCTA {
+      title,
+      description,
+      cta
+    }
   }`
 
   return client.fetch(query)
@@ -354,7 +375,12 @@ export async function getAboutPage() {
     "missionImage": missionImage.asset->url,
     valuesTitle,
     valuesDescription,
-    values
+    values,
+    finalCTA {
+      title,
+      description,
+      cta
+    }
   }`
   return client.fetch(query)
 }
@@ -430,7 +456,9 @@ export async function getBlogPage() {
         "openGraphImage": openGraphImage.asset->url
       },
       title,
-      description
+      description,
+      newsletterTitle,
+      newsletterDescription
     }`
   return client.fetch(query)
 }

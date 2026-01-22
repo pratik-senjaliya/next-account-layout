@@ -111,7 +111,7 @@ export const MobileMenu: React.FC<{
       })) || [],
     },
     {
-      name: "Hire Staff",
+      name: "Hire Our Staff",
       href: "#",
       submenu: navData?.hireStaff.map(position => ({
         name: position.title,
@@ -120,7 +120,7 @@ export const MobileMenu: React.FC<{
       })) || [],
     },
     {
-      name: "Industries",
+      name: "Industries We Serve",
       href: "#",
       submenu: navData?.industries.map(industry => ({
         name: industry.title,

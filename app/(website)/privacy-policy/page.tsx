@@ -7,7 +7,7 @@ import { client } from "@/lib/sanity/client";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 // Enable ISR with 1-hour revalidation
-export const revalidate = 3600;
+export const revalidate = 60;
 
 async function getPrivacyPolicy() {
     const data = await client.fetch(`

@@ -178,15 +178,15 @@ export default async function HireStaffPage({ params }: PageProps) {
       <Section background="gray" spacing="sm" className="py-16 bg-neutral-50">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h3>
-            <p className="text-lg text-neutral-600 mb-6">Get a customized quote for your business needs</p>
-            <Link href={position.introCTA?.link || "/contact"}>
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">{position.introCTA?.title || "Ready to Get Started?"}</h3>
+            <p className="text-lg text-neutral-600 mb-6">{position.introCTA?.description || "Get a customized quote for your business needs"}</p>
+            <Link href={position.introCTA?.cta?.link || "/contact"}>
               <Button
-                variant={position.introCTA?.variant || "primary"}
+                variant={position.introCTA?.cta?.variant || "primary"}
                 size="lg"
                 className="px-12 py-4 text-lg font-bold shadow-lg"
               >
-                {position.introCTA?.text || "Request a Quote"}
+                {position.introCTA?.cta?.text || "Request a Quote"}
               </Button>
             </Link>
           </div>
@@ -270,8 +270,8 @@ export default async function HireStaffPage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
-              <div className="mt-12">
-                <Link href={position.whyChooseCTA?.link || "/contact"}>
+              <div className="mt-12 text-center mr-[8rem]">
+                <Link href={position.whyChooseCTA?.link || "/contact"} className="inline-block">
                   <Button
                     variant={position.whyChooseCTA?.variant || "secondary"}
                     size="lg"
@@ -348,20 +348,19 @@ export default async function HireStaffPage({ params }: PageProps) {
         <Container className="relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
-              Ready to Upgrade Your <br />{position.title}?
+              {position.finalCTA?.title || `Ready to Upgrade Your ${position.title}?`}
             </h2>
             <p className="text-lg md:text-xl mb-10 text-white/95 leading-relaxed font-medium">
-              Join elite businesses that trust our experts with their growth.
-              Schedule your strategy session today.
+              {position.finalCTA?.description || "Join elite businesses that trust our experts with their growth. Schedule your strategy session today."}
             </p>
-            <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <Link href={position.finalCTA?.link || "/contact"}>
+            <div className="flex justify-center">
+              <Link href={position.finalCTA?.cta?.link || "/contact"}>
                 <Button
-                  variant={position.finalCTA?.variant || "secondary"}
+                  variant={position.finalCTA?.cta?.variant || "secondary"}
                   size="lg"
                   className="bg-white text-secondary-600 hover:bg-neutral-100 px-10 py-4 text-lg font-bold shadow-2xl rounded-2xl transform hover:scale-105 transition-all border-2 border-transparent"
                 >
-                  {position.finalCTA?.text || "Get Started Today"}
+                  {position.finalCTA?.cta?.text || "Get Started Today"}
                 </Button>
               </Link>
             </div>

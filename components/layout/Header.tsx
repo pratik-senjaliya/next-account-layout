@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
       })) || [],
     },
     {
-      name: "Hire Staff",
+      name: "Hire Our Staff",
       href: "#",
       submenu: navData?.hireStaff.map(position => ({
         name: position.title,
@@ -147,7 +147,7 @@ export const Header: React.FC = () => {
       })) || [],
     },
     {
-      name: "Industries",
+      name: "Industries We Serve",
       href: "#",
       submenu: navData?.industries.map(industry => ({
         name: industry.title,
@@ -231,7 +231,7 @@ export const Header: React.FC = () => {
                             <div className="col-span-8">
                               <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
                                 <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
-                                  Our {item.name}
+                                  {item.name}
                                 </h3>
                               </div>
                               <div className="grid grid-cols-2 gap-x-6 gap-y-4">

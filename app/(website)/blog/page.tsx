@@ -39,6 +39,8 @@ export default async function ResourcesPage() {
       categories={allCategories}
       title={page?.title}
       description={page?.description}
+      newsletterTitle={page?.newsletterTitle}
+      newsletterDescription={page?.newsletterDescription}
     />
   );
 }

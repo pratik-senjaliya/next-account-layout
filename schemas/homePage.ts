@@ -195,5 +195,13 @@ export default defineType({
             of: [{ type: 'faq' }],
             group: 'faq',
         }),
+
+        // CTA Section
+        defineField({
+            name: 'finalCTA',
+            title: 'Final CTA Section',
+            type: 'finalCtaSection',
+            group: 'faq',
+        }),
     ],
 })

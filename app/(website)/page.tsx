@@ -352,11 +352,11 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="relative w-full overflow-hidden">
-            <div className="flex w-max animate-scroll gap-16 items-center hover:[animation-play-state:paused] py-4">
-              {[...(data.partners || []), ...(data.partners || [])].map((partner: any, i: number) => (
+            <div className="flex w-max animate-scroll gap-16 items-center py-4">
+              {[...(data.partners || []), ...(data.partners || []), ...(data.partners || [])].map((partner: any, i: number) => (
                 <div
                   key={i}
-                  className="relative w-48 h-16 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 flex-shrink-0 flex items-center justify-center"
+                  className="relative w-48 h-16 opacity-100 hover:scale-110 transition-all duration-300 flex-shrink-0 flex items-center justify-center"
                 >
                   {partner && partner.logo ? (
                     <Image
@@ -463,30 +463,19 @@ export default async function HomePage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Ready to Get Started?
+              {data.finalCTA?.title || "Ready to Get Started?"}
             </h2>
             <p className="text-xl mb-8 text-primary-100 leading-relaxed">
-              Join thousands of businesses that trust us with their operations.
-              Schedule a consultation today and see how we can help your business
-              grow.
+              {data.finalCTA?.description || "Join thousands of businesses that trust us with their operations. Schedule a consultation today and see how we can help your business grow."}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
+            <div className="flex justify-center">
+              <Link href={data.finalCTA?.cta?.link || "/contact"}>
                 <Button
-                  variant="secondary"
+                  variant={data.finalCTA?.cta?.variant || "secondary"}
                   size="lg"
                   className="bg-white text-primary-700 hover:bg-primary-50 border-2 border-transparent"
                 >
-                  Schedule a Call
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                >
-                  Learn More
+                  {data.finalCTA?.cta?.text || "Schedule a Call"}
                 </Button>
               </Link>
             </div>

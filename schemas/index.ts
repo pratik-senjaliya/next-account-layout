@@ -8,6 +8,7 @@ import processStep from './objects/processStep'
 import stat from './objects/stat'
 import seo from './objects/seo'
 import cta from './objects/cta'
+import finalCtaSection from './objects/finalCtaSection'
 
 // Documents
 import post from './post'
@@ -22,6 +23,7 @@ import privacyPolicy from './privacyPolicy'
 
 import blogPage from './blogPage'
 import settings from './settings'
+import newsletterSubscription from './newsletterSubscription'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -33,6 +35,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         stat,
         seo,
         cta,
+        finalCtaSection,
 
         // Documents
         settings,
@@ -47,5 +50,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         privacyPolicy,
 
         contactSubmission,
+        newsletterSubscription,
     ],
 }

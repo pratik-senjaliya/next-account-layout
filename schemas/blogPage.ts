@@ -22,6 +22,17 @@ export default defineType({
             type: 'text',
             rows: 3,
         }),
+        defineField({
+            name: 'newsletterTitle',
+            title: 'Newsletter Section Title',
+            type: 'string',
+        }),
+        defineField({
+            name: 'newsletterDescription',
+            title: 'Newsletter Section Description',
+            type: 'text',
+            rows: 3,
+        }),
     ],
     preview: {
         select: {

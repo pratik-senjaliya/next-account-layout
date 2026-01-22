@@ -167,8 +167,8 @@ export default defineType({
         }),
         defineField({
             name: 'introCTA',
-            title: 'After Intro CTA',
-            type: 'cta',
+            title: 'After Intro CTA Section',
+            type: 'finalCtaSection',
             group: 'intro',
         }),
         defineField({
@@ -179,8 +179,8 @@ export default defineType({
         }),
         defineField({
             name: 'finalCTA',
-            title: 'Final CTA',
-            type: 'cta',
+            title: 'Final CTA Section',
+            type: 'finalCtaSection',
             group: 'content',
         }),
     ],

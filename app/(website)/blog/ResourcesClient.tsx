@@ -8,15 +8,18 @@ import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import Link from "next/link";
 import type { BlogPost } from "@/lib/blog";
+import { Newsletter } from "@/components/ui/Newsletter";
 
 interface ResourcesClientProps {
     blogPosts: BlogPost[];
     categories: string[];
     title?: string;
     description?: string;
+    newsletterTitle?: string;
+    newsletterDescription?: string;
 }
 
-export function ResourcesClient({ blogPosts, categories, title, description }: ResourcesClientProps) {
+export function ResourcesClient({ blogPosts, categories, title, description, newsletterTitle, newsletterDescription }: ResourcesClientProps) {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -191,25 +194,10 @@ export function ResourcesClient({ blogPosts, categories, title, description }: R
                 className="bg-gradient-to-r from-primary-700 to-primary-800"
             >
                 <Container>
-                    <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                            Stay Updated
-                        </h2>
-                        <p className="text-xl mb-8 text-primary-100 leading-relaxed">
-                            Subscribe to our newsletter and get the latest insights, tips, and
-                            resources delivered to your inbox.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white"
-                            />
-                            <button className="px-8 py-3 bg-white text-primary-700 font-semibold rounded-lg hover:bg-primary-50 transition-colors">
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
+                    <Newsletter
+                        title={newsletterTitle}
+                        description={newsletterDescription}
+                    />
                 </Container>
             </Section>
         </>

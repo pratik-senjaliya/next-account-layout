@@ -6,11 +6,12 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ReadingProgress } from "@/components/ui/ReadingProgress";
 import { ShareButtons } from "@/components/ui/ShareButtons";
 import { FAQ } from "@/components/ui/FAQ";
-import { getPostBySlug, getAllPosts, getAllPostSlugs } from "@/lib/sanity/queries";
+import { getPostBySlug, getAllPosts, getAllPostSlugs, getBlogPage } from "@/lib/sanity/queries";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { Metadata } from "next";
+import { Newsletter } from "@/components/ui/Newsletter";
 
 // ... existing imports
 
@@ -59,6 +60,7 @@ export default async function BlogPostPage(props: {
 
   const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`;
   const allPosts = await getAllPosts();
+  const blogPage = await getBlogPage();
 
   return (
     <>
@@ -297,33 +299,17 @@ export default async function BlogPostPage(props: {
         </Section>
       )}
 
-      {/* CTA */}
+      {/* Newsletter */}
       <Section
         background="primary"
         spacing="lg"
         className="bg-gradient-to-r from-primary-700 to-primary-800"
       >
         <Container>
-          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-xl mb-8 text-primary-100 leading-relaxed">
-              Get expert guidance and support to help your business succeed.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <button className="px-8 py-3 bg-white text-primary-700 font-semibold rounded-lg hover:bg-primary-50 transition-colors">
-                  Contact Us
-                </button>
-              </Link>
-              <Link href="/services">
-                <button className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
-                  Our Services
-                </button>
-              </Link>
-            </div>
-          </div>
+          <Newsletter
+            title={blogPage?.newsletterTitle}
+            description={blogPage?.newsletterDescription}
+          />
         </Container>
       </Section>
     </>

@@ -149,5 +149,13 @@ export default defineType({
                 }
             ],
         }),
+
+        // CTA Section
+        defineField({
+            name: 'finalCTA',
+            title: 'Final CTA Section',
+            type: 'finalCtaSection',
+            group: 'values',
+        }),
     ],
 })

@@ -217,7 +217,7 @@ export async function Footer() {
 
             {/* eBranding Studio Attribution */}
             <p className="text-sm text-neutral-500">
-              Design & develop by{" "}
+              Design & Develop by{" "}
               <a
                 href="https://ebranding.studio/"
                 target="_blank"
