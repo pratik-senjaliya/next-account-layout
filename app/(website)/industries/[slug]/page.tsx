@@ -229,11 +229,11 @@ export default async function IndustryPage({ params }: PageProps) {
       {/* 5. Why choose us Section */}
       <Section background="primary" spacing="lg" className="bg-neutral-900 text-white overflow-hidden">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative">
-            <div className="animate-fade-in-left">
-              <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-sm mb-6 block">Why Partner With Us</span>
-              <h2 className="text-4xl md:text-6xl font-bold mb-12 leading-tight tracking-tight text-white">The {industry.title} <br />Advantage</h2>
-              <div className="space-y-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative">
+            <div className="animate-fade-in-left lg:col-span-7">
+              <span className="text-secondary-400 font-bold uppercase tracking-[0.2em] text-xs mb-6 block">Why Partner With Us</span>
+              <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight tracking-tight text-white">The {industry.title} <br />Advantage</h2>
+              <div className="space-y-8">
                 {(industry.industryBenefits && industry.industryBenefits.length > 0 ? industry.industryBenefits : industry.whyChooseUs).map((item: { title: string; description: string }, i: number) => (
                   <div key={i} className="flex gap-8 group animate-fade-in-up" style={{ animationDelay: `${i * 0.15 + 0.2}s` }}>
                     <div className="flex-shrink-0 w-16 h-16 bg-white/5 rounded-[20px] flex items-center justify-center text-secondary-400 border border-white/10 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300">
@@ -242,25 +242,25 @@ export default async function IndustryPage({ params }: PageProps) {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-2xl font-bold mb-3 text-white">{item.title}</h4>
-                      <p className="text-lg text-neutral-400 leading-relaxed max-w-md">{item.description}</p>
+                      <h4 className="text-xl font-bold mb-3 text-white">{item.title}</h4>
+                      <p className="text-base text-neutral-400 leading-relaxed max-w-xl">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-12 text-center mr-[8rem]">
+              <div className="mt-8 text-center mr-[8rem]">
                 <Link href={industry.whyChooseCTA?.link || "/contact"} className="inline-block">
                   <Button
                     variant={industry.whyChooseCTA?.variant || "secondary"}
                     size="lg"
-                    className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-4 text-lg font-bold shadow-xl"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white px-12 py-4 text-base font-bold shadow-xl"
                   >
                     {industry.whyChooseCTA?.text || "Talk to an Expert"}
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="relative h-[37.5rem] lg:h-[43.75rem] animate-fade-in-right">
+            <div className="relative h-[32rem] lg:h-[38rem] animate-fade-in-right lg:order-2 lg:col-span-5">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
               <div className="relative h-full rounded-[60px] overflow-hidden shadow-2xl border-8 border-white/5">
                 <Image
