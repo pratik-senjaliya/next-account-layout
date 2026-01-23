@@ -146,9 +146,10 @@ export default defineType({
             group: 'content',
         }),
         defineField({
-            name: 'testimonial',
-            title: 'Testimonial',
-            type: 'testimonial',
+            name: 'testimonials',
+            title: 'Testimonials',
+            type: 'array',
+            of: [{ type: 'testimonial' }],
             group: 'content',
         }),
         defineField({

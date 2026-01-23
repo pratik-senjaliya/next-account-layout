@@ -42,7 +42,8 @@ export function generateMetadata(config: SEOConfig): Metadata {
   } = { ...defaultSEO, ...config };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yoursite.com";
-  const fullTitle = `${title} | ${defaultSEO.author || "Xconcile"}`;
+  // Don't add site name suffix here - Next.js will handle it via title template
+  const fullTitle = title;
 
   // Construct the current page URL
   // Priority: 1. canonicalUrl (explicit override) 2. siteUrl + slug 3. siteUrl (home)

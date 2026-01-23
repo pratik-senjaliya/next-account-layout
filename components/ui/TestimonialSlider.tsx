@@ -61,7 +61,7 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
                     {testimonials.map((testimonial, index) => (
                         <div
                             key={index}
-                            className="flex-[0_0_100%] min-w-0 px-2 md:px-4"
+                            className="flex-[0_0_100%] md:flex-[0_0_50%] min-w-0 px-2 md:px-4"
                         >
                             <Testimonial {...testimonial} />
                         </div>
@@ -76,8 +76,8 @@ export const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
                         <button
                             key={index}
                             className={`w-3 h-3 rounded-full transition-all duration-300 ${index === selectedIndex
-                                    ? "bg-primary-600 w-8"
-                                    : "bg-neutral-300 hover:bg-neutral-400"
+                                ? "bg-primary-600 w-8"
+                                : "bg-neutral-300 hover:bg-neutral-400"
                                 }`}
                             onClick={() => scrollTo(index)}
                             aria-label={`Go to testimonial ${index + 1}`}
