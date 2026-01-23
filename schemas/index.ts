@@ -20,6 +20,7 @@ import aboutPage from './aboutPage'
 import contactSubmission from './contactSubmission'
 import contactPage from './contactPage'
 import privacyPolicy from './privacyPolicy'
+import teamMember from './teamMember'
 
 import blogPage from './blogPage'
 import settings from './settings'
@@ -48,6 +49,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         post,
         contactPage,
         privacyPolicy,
+        teamMember,
 
         contactSubmission,
         newsletterSubscription,

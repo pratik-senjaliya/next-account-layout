@@ -125,7 +125,24 @@ export const Header: React.FC = () => {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    {
+      name: "Company",
+      href: "#",
+      submenu: [
+        {
+          name: "Our Company",
+          href: "/about",
+          description: "Learn about our mission, values, and what drives us",
+          icon: getIcon("building"),
+        },
+        {
+          name: "Our Team",
+          href: "/team",
+          description: "Meet the talented professionals behind our success",
+          icon: getIcon("users"),
+        },
+      ],
+    },
     {
       name: "Services",
       href: "#",

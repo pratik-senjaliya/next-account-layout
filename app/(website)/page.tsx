@@ -491,7 +491,7 @@ export default async function HomePage() {
       {/* FAQ Section */}
       <Section background="white" spacing="lg">
         <Container>
-          <FAQ items={data.faqs} title={data.faqTitle} showMoreLink={true} />
+          <FAQ items={data.faqs} title={data.faqTitle} showMoreLink={false} />
         </Container>
       </Section>
 

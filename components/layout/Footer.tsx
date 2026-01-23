@@ -6,7 +6,8 @@ import { getSettings, getAllServices, getAllIndustries, getAllHireStaff } from "
 
 const company = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "Our Company", href: "/about" },
+  { name: "Our Team", href: "/team" },
   { name: "Contact", href: "/contact" },
 ];
 
