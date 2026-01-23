@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
-import { Testimonial } from "@/components/ui/Testimonial";
+import { TestimonialSlider } from "@/components/ui/TestimonialSlider";
 import { SubIndustryAccordion } from "@/components/ui/SubIndustryAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -288,11 +288,15 @@ export default async function IndustryPage({ params }: PageProps) {
       <Section background="gray" spacing="lg">
         <Container>
           <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <Testimonial
-              quote={industry.testimonial.quote}
-              author={industry.testimonial.author}
-              role={industry.testimonial.role}
-              company={industry.testimonial.company}
+            <TestimonialSlider
+              testimonials={[
+                {
+                  quote: industry.testimonial.quote,
+                  author: industry.testimonial.author,
+                  role: industry.testimonial.role,
+                  company: industry.testimonial.company,
+                },
+              ]}
             />
           </div>
         </Container>

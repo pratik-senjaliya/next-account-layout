@@ -4,7 +4,7 @@ import { generateMetadata as genMeta } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { Testimonial } from "@/components/ui/Testimonial";
+import { TestimonialSlider } from "@/components/ui/TestimonialSlider";
 import { StatCard } from "@/components/ui/StatCard";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { FAQ } from "@/components/ui/FAQ";
@@ -326,17 +326,7 @@ export default async function HomePage() {
               {data.testimonialsDescription}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {data.testimonials?.map((testimonial: any, index: number) => (
-              <div
-                key={index}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.15}s` }}
-              >
-                <Testimonial {...testimonial} />
-              </div>
-            ))}
-          </div>
+          <TestimonialSlider testimonials={data.testimonials || []} />
         </Container>
       </Section>
 

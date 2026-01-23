@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
-import { Testimonial } from "@/components/ui/Testimonial";
+import { TestimonialSlider } from "@/components/ui/TestimonialSlider";
 import { ExperienceCards } from "@/components/ui/ExperienceCards";
 import { SoftwareGrid } from "@/components/ui/SoftwareGrid";
 import { notFound } from "next/navigation";
@@ -315,11 +315,15 @@ export default async function HireStaffPage({ params }: PageProps) {
       <Section background="gray" spacing="lg">
         <Container>
           <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <Testimonial
-              quote={position.testimonial.quote}
-              author={position.testimonial.author}
-              role={position.testimonial.role}
-              company={position.testimonial.company}
+            <TestimonialSlider
+              testimonials={[
+                {
+                  quote: position.testimonial.quote,
+                  author: position.testimonial.author,
+                  role: position.testimonial.role,
+                  company: position.testimonial.company,
+                },
+              ]}
             />
           </div>
         </Container>

@@ -10,7 +10,7 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { FAQ } from "@/components/ui/FAQ";
-import { Testimonial } from "@/components/ui/Testimonial";
+import { TestimonialSlider } from "@/components/ui/TestimonialSlider";
 import { ServiceSectionsAccordion } from "@/components/ui/ServiceSectionsAccordion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -310,11 +310,15 @@ export default async function ServicePage({ params }: PageProps) {
       <Section background="gray" spacing="lg" className="py-24 md:py-32">
         <Container>
           <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <Testimonial
-              quote={service.testimonial.quote}
-              author={service.testimonial.author}
-              role={service.testimonial.role}
-              company={service.testimonial.company}
+            <TestimonialSlider
+              testimonials={[
+                {
+                  quote: service.testimonial.quote,
+                  author: service.testimonial.author,
+                  role: service.testimonial.role,
+                  company: service.testimonial.company,
+                },
+              ]}
             />
           </div>
         </Container>
