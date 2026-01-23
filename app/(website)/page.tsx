@@ -382,7 +382,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Partner Logos */}
-      <Section background="gray" spacing="md">
+      <Section background="white" spacing="md">
         <Container>
           <div className="text-center mb-10 animate-fade-in-up">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
