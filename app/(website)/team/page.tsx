@@ -97,13 +97,14 @@ export default async function TeamPage() {
                                     style={{ animationDelay: `${index * 0.15}s` }}
                                 >
                                     {/* Image Side */}
-                                    <div className={`relative h-[28rem] lg:h-[36rem] w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg ${index % 2 === 1 ? "lg:order-last" : ""}`}>
+                                    <div className={`relative h-[28rem] lg:h-[36rem] w-full max-w-lg mx-auto rounded-2xl overflow-hidden shadow-lg ${index % 2 === 1 ? "lg:order-last" : ""}`}>
                                         {member.image ? (
                                             <Image
                                                 src={member.image}
                                                 alt={member.name}
                                                 fill
                                                 className="object-cover hover:scale-105 transition-transform duration-700"
+                                                unoptimized
                                             />
                                         ) : (
                                             <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
