@@ -79,6 +79,17 @@ export default defineType({
             options: { hotspot: true },
             group: 'hero',
         }),
+        defineField({
+            name: 'introductionCta',
+            title: 'Introduction CTA',
+            type: 'object',
+            description: 'Call-to-action button for the introduction section',
+            fields: [
+                defineField({ name: 'text', type: 'string', title: 'Button Text', initialValue: 'Learn More' }),
+                defineField({ name: 'link', type: 'string', title: 'Button Link', initialValue: '/contact' }),
+            ],
+            group: 'hero',
+        }),
 
         // Trust Indicators
         defineField({
@@ -146,8 +157,20 @@ export default defineType({
                     fields: [
                         defineField({ name: 'title', type: 'string', title: 'Title' }),
                         defineField({ name: 'description', type: 'text', title: 'Description' }),
-                        defineField({ name: 'linkText', type: 'string', title: 'Link Text' }),
-                        defineField({ name: 'linkHref', type: 'string', title: 'Link URL' }),
+                        defineField({
+                            name: 'linkText',
+                            type: 'string',
+                            title: 'Link Text',
+                            hidden: true,
+                            description: 'Deprecated: Links are no longer displayed on home page features'
+                        }),
+                        defineField({
+                            name: 'linkHref',
+                            type: 'string',
+                            title: 'Link URL',
+                            hidden: true,
+                            description: 'Deprecated: Links are no longer displayed on home page features'
+                        }),
                         defineField({ name: 'image', type: 'image', title: 'Image', options: { hotspot: true } }),
                     ],
                 },

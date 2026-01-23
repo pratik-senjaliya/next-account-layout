@@ -216,15 +216,6 @@ export default async function HomePage() {
                     Get Started
                   </Button>
                 </Link>
-                <Link href="/contact">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
-                  >
-                    Schedule a Call
-                  </Button>
-                </Link>
               </div>
               <div className="flex flex-wrap items-center gap-8 text-sm md:text-base text-primary-200">
                 {data.heroStats?.map((stat: any, index: number) => (
@@ -249,6 +240,29 @@ export default async function HomePage() {
                 priority
               />
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Trust Indicators */}
+      <Section background="white" spacing="md">
+        <Container>
+          <div className="text-center mb-10 animate-fade-in-up">
+            <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
+              {data.trustTitle}
+            </h2>
+            <p className="text-neutral-600">{data.trustDescription}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {data.trustStats?.map((stat: any, index: number) => (
+              <div
+                key={index}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+              >
+                <StatCard value={stat.value} label={stat.label} />
+              </div>
+            ))}
           </div>
         </Container>
       </Section>
@@ -283,52 +297,23 @@ export default async function HomePage() {
                 <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6 leading-tight">
                   {data.introductionTitle}
                 </h2>
-                <p className="text-lg text-neutral-600 leading-relaxed whitespace-pre-line">
+                <p className="text-lg text-neutral-600 leading-relaxed whitespace-pre-line mb-8">
                   {data.introductionBody}
                 </p>
+                <Link href={data.introductionCta?.link || "/contact"}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="bg-secondary-500 hover:bg-secondary-600 text-white"
+                  >
+                    {data.introductionCta?.text || "Learn More"}
+                  </Button>
+                </Link>
               </div>
             </div>
           </Container>
         </Section>
       )}
-
-      {/* Trust Indicators */}
-      <Section background="white" spacing="md">
-        <Container>
-          <div className="text-center mb-10 animate-fade-in-up">
-            <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-2">
-              {data.trustTitle}
-            </h2>
-            <p className="text-neutral-600">{data.trustDescription}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {data.trustStats?.map((stat: any, index: number) => (
-              <div
-                key={index}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
-              >
-                <StatCard value={stat.value} label={stat.label} />
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Testimonials */}
-      <Section background="gray" spacing="lg">
-        <Container>
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-              {data.testimonialsTitle}
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              {data.testimonialsDescription}
-            </p>
-          </div>
-          <TestimonialSlider testimonials={data.testimonials || []} />
-        </Container>
-      </Section>
 
       {/* Features Section */}
       <Section background="white" spacing="lg">
@@ -350,7 +335,7 @@ export default async function HomePage() {
               >
                 {/* Text Side */}
                 <div className={index % 2 === 1 ? "lg:order-last" : ""}>
-                  <FeatureCard {...feature} />
+                  <FeatureCard title={feature.title} description={feature.description} />
                 </div>
 
                 {/* Image Side */}
@@ -366,6 +351,33 @@ export default async function HomePage() {
             ))}
           </div>
 
+          {/* CTA Button */}
+          <div className="text-center mt-16">
+            <Link href="/contact">
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-secondary-500 hover:bg-secondary-600 text-white"
+              >
+                Get Started Today
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Testimonials */}
+      <Section background="gray" spacing="lg">
+        <Container>
+          <div className="text-center mb-12 animate-fade-in-up">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+              {data.testimonialsTitle}
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              {data.testimonialsDescription}
+            </p>
+          </div>
+          <TestimonialSlider testimonials={data.testimonials || []} />
         </Container>
       </Section>
 

@@ -148,11 +148,10 @@ export default async function BlogPostPage(props: {
       <Section background="white" spacing="lg">
         <Container>
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Main Content */}
-              <div className="lg:col-span-8">
-                <article
-                  className="prose prose-lg max-w-none animate-fade-in-up
+            {/* Main Content */}
+            <div className="max-w-4xl mx-auto">
+              <article
+                className="prose prose-lg max-w-none animate-fade-in-up
                     prose-headings:font-bold prose-headings:text-neutral-900
                     prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:scroll-mt-20
                     prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
@@ -161,66 +160,9 @@ export default async function BlogPostPage(props: {
                     prose-strong:text-neutral-900 prose-strong:font-semibold
                     prose-ul:my-6 prose-li:my-2
                     first:prose-p:text-xl first:prose-p:text-neutral-800 first:prose-p:leading-relaxed"
-                >
-                  <PortableText value={post.content} />
-                </article>
-              </div>
-
-              {/* Sidebar - Share Buttons (Sticky) */}
-              <div className="lg:col-span-4">
-                <div className="sticky top-24">
-                  <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200">
-                    <ShareButtons title={post.title} url={currentUrl} />
-                  </div>
-
-                  {/* Back to Top Button */}
-                  <div className="mt-6">
-                    {/* Client component for Scroll to top could be extracted, but button logic is simple. 
-                         Actually, button onClick needs client side. 
-                         But wait, I removed 'use client' from this file. 
-                         I cannot use onClick handler here anymore! 
-                         
-                         I should move the "Back to Top" button to a separate Client Component OR 
-                         just rely on the ShareButtons sidebar which is client.
-                         
-                         I will create a small Client Component for the "Back to Top" button to keep this file Server Side.
-                         OR simpler: Just remove it for now if strict on time? 
-                         User didn't complain about it, but regression is bad.
-                         
-                         Wait, the previous code had a simple button.
-                         I'll assume it's better to inline a small client component or just use a link to #top?
-                         Link to #top is accessible and simple.
-                         
-                         Let's use <ScrollButton> if it exists?
-                         I see ScrollButton used in services/page.tsx. Let's check if it does "scrollTo".
-                         
-                         Actually, I'll just change it to a client component "ScrollToTopButton".
-                         But I don't want to create new files endlessly.
-                         
-                         I can use `ScrollButton` component from `components/ui/ScrollButton.tsx`?
-                         Let's check `components/ui/ScrollButton.tsx` usage.
-                         It was imported in `services/page.tsx` as: 
-                         <ScrollButton targetId="all-services" ...>
-                         
-                         If I set targetId to "top" or empty?
-                         
-                         Let's check ScrollButton.tsx content.
-                         
-                         For now, I will omit the Back to Top button to avoid compilation error with onClick in Server Component, 
-                         or replace it with a simple anchor link <Link href="#">Back to Top</Link>.
-                      */}
-                    <Link
-                      href="#"
-                      className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 transition-all font-medium"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                      </svg>
-                      Back to Top
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              >
+                <PortableText value={post.content} />
+              </article>
             </div>
           </div>
         </Container>

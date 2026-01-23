@@ -210,6 +210,7 @@ export function ContactForm({ data }: { data: any }) {
                                         className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 appearance-none bg-white"
                                     >
                                         <option value="tax-preparation">Tax Preparation</option>
+                                        <option value="sales-use-tax-compliance">Sales & Use Tax Compliance</option>
                                         <option value="bookkeeping">Bookkeeping</option>
                                         <option value="payroll">Payroll</option>
                                         <option value="full-service-accounting">Full-Service Accounting</option>
