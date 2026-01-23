@@ -315,7 +315,7 @@ export const Header: React.FC = () => {
                 <Button
                   variant="primary"
                   size="sm"
-                  className="bg-secondary-600 hover:bg-secondary-700"
+                  className="bg-secondary-600 hover:bg-secondary-700 w-44"
                 >
                   Schedule a Call
                 </Button>

@@ -312,22 +312,22 @@ export default async function HireStaffPage({ params }: PageProps) {
 
       {/* 5.5. Risk-Free Trial Section - NEW */}
       {/* 6. Testimonial Section */}
-      <Section background="gray" spacing="lg">
-        <Container>
-          <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <TestimonialSlider
-              testimonials={[
-                {
-                  quote: position.testimonial.quote,
-                  author: position.testimonial.author,
-                  role: position.testimonial.role,
-                  company: position.testimonial.company,
-                },
-              ]}
-            />
-          </div>
-        </Container>
-      </Section>
+      {position.testimonials && position.testimonials.length > 0 && (
+        <Section background="gray" spacing="lg">
+          <Container>
+            <div className="max-w-5xl mx-auto animate-fade-in-up">
+              <TestimonialSlider
+                testimonials={position.testimonials.map((t: any) => ({
+                  quote: t.quote,
+                  author: t.author,
+                  role: t.role,
+                  company: t.company,
+                }))}
+              />
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* 7. FAQ Section */}
       <Section background="white" spacing="lg">

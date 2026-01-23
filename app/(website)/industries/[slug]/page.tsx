@@ -285,22 +285,22 @@ export default async function IndustryPage({ params }: PageProps) {
       </Section>
 
       {/* 6. Testimonial Section */}
-      <Section background="gray" spacing="lg">
-        <Container>
-          <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <TestimonialSlider
-              testimonials={[
-                {
-                  quote: industry.testimonial.quote,
-                  author: industry.testimonial.author,
-                  role: industry.testimonial.role,
-                  company: industry.testimonial.company,
-                },
-              ]}
-            />
-          </div>
-        </Container>
-      </Section>
+      {industry.testimonials && industry.testimonials.length > 0 && (
+        <Section background="gray" spacing="lg">
+          <Container>
+            <div className="max-w-5xl mx-auto animate-fade-in-up">
+              <TestimonialSlider
+                testimonials={industry.testimonials.map((t: any) => ({
+                  quote: t.quote,
+                  author: t.author,
+                  role: t.role,
+                  company: t.company,
+                }))}
+              />
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* 7. FAQ Section */}
       <Section background="white" spacing="lg">

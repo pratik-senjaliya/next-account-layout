@@ -307,22 +307,22 @@ export default async function ServicePage({ params }: PageProps) {
       </Section>
 
 
-      <Section background="gray" spacing="lg" className="py-24 md:py-32">
-        <Container>
-          <div className="max-w-5xl mx-auto animate-fade-in-up">
-            <TestimonialSlider
-              testimonials={[
-                {
-                  quote: service.testimonial.quote,
-                  author: service.testimonial.author,
-                  role: service.testimonial.role,
-                  company: service.testimonial.company,
-                },
-              ]}
-            />
-          </div>
-        </Container>
-      </Section>
+      {service.testimonials && service.testimonials.length > 0 && (
+        <Section background="gray" spacing="lg" className="py-24 md:py-32">
+          <Container>
+            <div className="max-w-5xl mx-auto animate-fade-in-up">
+              <TestimonialSlider
+                testimonials={service.testimonials.map((t: any) => ({
+                  quote: t.quote,
+                  author: t.author,
+                  role: t.role,
+                  company: t.company,
+                }))}
+              />
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* 7. FAQ Section */}
       <Section background="white" spacing="lg">

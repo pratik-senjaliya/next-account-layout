@@ -99,7 +99,7 @@ export async function getServiceBySlug(slug: string) {
     serviceAreas,
     process,
     whyChooseUs,
-    testimonial,
+    testimonials,
     faqs,
     heroCTA,
     introCTA {
@@ -154,7 +154,7 @@ export async function getAllIndustries() {
     features,
     process,
     whyChooseUs,
-    testimonial,
+    testimonials,
     faqs
   }`
 
@@ -183,7 +183,7 @@ export async function getIndustryBySlug(slug: string) {
     features,
     process,
     whyChooseUs,
-    testimonial,
+    testimonials,
     faqs,
     heroCTA,
     introCTA {\n      title,\n      description,\n      cta\n    },
