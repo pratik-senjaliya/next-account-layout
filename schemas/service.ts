@@ -90,13 +90,6 @@ export default defineType({
             group: 'intro',
         }),
         defineField({
-            name: 'features',
-            title: 'Features',
-            type: 'array',
-            of: [{ type: 'feature' }],
-            group: 'content',
-        }),
-        defineField({
             name: 'serviceAreas',
             title: 'Service Areas / Capabilities',
             type: 'array',

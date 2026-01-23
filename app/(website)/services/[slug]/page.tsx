@@ -160,41 +160,16 @@ export default async function ServicePage({ params }: PageProps) {
         <Container>
           <div className="text-center mb-16 max-w-3xl mx-auto animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
-              {service.serviceAreas && service.serviceAreas.length > 0
-                ? 'Comprehensive Service Delivery'
-                : 'Service Capabilities'}
+              Comprehensive Service Delivery
             </h2>
             <p className="text-lg text-neutral-600 leading-relaxed font-medium">
-              {service.serviceAreas && service.serviceAreas.length > 0
-                ? `Detailed breakdown of our ${service.title} expertise and deliverables.`
-                : `Comprehensive and specialized ${service.title} solutions built around your business's specific requirements.`}
+              Detailed breakdown of our {service.title} expertise and deliverables.
             </p>
           </div>
 
-          {/* Conditional: Show ServiceAreasAccordion if data exists, otherwise show features grid */}
-          {service.serviceAreas && service.serviceAreas.length > 0 ? (
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <ServiceSectionsAccordion serviceAreas={service.serviceAreas} />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {service.features.map((feature: { title: string; description: string }, index: number) => (
-                <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.15}s` }}>
-                  <Card hover className="p-10 border-none shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start bg-white rounded-3xl h-full">
-                    <div className="p-4 bg-primary-50 text-primary-600 rounded-2xl mb-8 flex-shrink-0">
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-neutral-900 mb-4">{feature.title}</h3>
-                      <p className="text-lg text-neutral-600 leading-relaxed">{feature.description}</p>
-                    </div>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <ServiceSectionsAccordion serviceAreas={service.serviceAreas} />
+          </div>
         </Container>
       </Section>
 

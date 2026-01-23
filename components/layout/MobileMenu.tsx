@@ -101,7 +101,7 @@ export const MobileMenu: React.FC<{
   const navigation = [
     { name: "Home", href: "/" },
     {
-      name: "Company",
+      name: "About Us",
       href: "#",
       submenu: [
         {

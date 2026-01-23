@@ -126,7 +126,7 @@ export const Header: React.FC = () => {
   const navigation = [
     { name: "Home", href: "/" },
     {
-      name: "Company",
+      name: "About Us",
       href: "#",
       submenu: [
         {
@@ -243,9 +243,9 @@ export const Header: React.FC = () => {
                       {/* Mega Menu */}
                       {hoveredMenu === item.name && item.submenu.length > 0 && (
                         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[56rem] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                          <div className="grid grid-cols-12 gap-8">
-                            {/* Services Column */}
-                            <div className="col-span-8">
+                          {item.name === "About Us" ? (
+                            // About Us: Full width without featured section
+                            <>
                               <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
                                 <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-wider">
                                   {item.name}
@@ -272,30 +272,63 @@ export const Header: React.FC = () => {
                                   </Link>
                                 ))}
                               </div>
-                            </div>
-
-                            {/* Featured Section */}
-                            <div className="col-span-4 bg-neutral-900 rounded-xl p-6 text-white flex flex-col justify-between relative overflow-hidden group">
-                              <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-all duration-500"></div>
-                              <div>
-                                <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-xs font-bold uppercase tracking-widest rounded mb-3">
-                                  Partner with us
-                                </span>
-                                <h4 className="text-xl font-bold mb-2">Ready to scale?</h4>
-                                <p className="text-sm text-neutral-400 mb-4 leading-relaxed">
-                                  Let our expert team handle your finances while you focus on what you do best.
-                                </p>
+                            </>
+                          ) : (
+                            // Other menus: 8-column submenu + 4-column featured section
+                            <div className="grid grid-cols-12 gap-8">
+                              {/* Services Column */}
+                              <div className="col-span-8">
+                                <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
+                                  <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-wider">
+                                    {item.name}
+                                  </h3>
+                                </div>
+                                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                                  {item.submenu.map((subItem) => (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className="group flex items-start gap-4 p-3 rounded-lg hover:bg-neutral-50 transition-colors"
+                                    >
+                                      <div className="mt-1 p-2 bg-primary-50 text-primary-600 rounded-lg group-hover:bg-primary-100 group-hover:text-primary-700 transition-colors">
+                                        {subItem.icon}
+                                      </div>
+                                      <div>
+                                        <div className="text-base font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                                          {subItem.name}
+                                        </div>
+                                        <p className="text-sm text-neutral-500 line-clamp-2 mt-0.5">
+                                          {subItem.description}
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
                               </div>
-                              <Link href="/contact" className="w-full">
-                                <Button
-                                  size="sm"
-                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-sm font-bold"
-                                >
-                                  Free Consultation
-                                </Button>
-                              </Link>
+
+                              {/* Featured Section */}
+                              <div className="col-span-4 bg-neutral-900 rounded-xl p-6 text-white flex flex-col justify-between relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-all duration-500"></div>
+                                <div>
+                                  <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-xs font-bold uppercase tracking-widest rounded mb-3">
+                                    Partner with us
+                                  </span>
+                                  <h4 className="text-xl font-bold mb-2">Ready to scale?</h4>
+                                  <p className="text-sm text-neutral-400 mb-4 leading-relaxed">
+                                    Let our expert team handle your finances while you focus on what you do best.
+                                  </p>
+                                </div>
+                                <Link href="/contact" className="w-full">
+                                  <Button
+                                    size="sm"
+                                    className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-sm font-bold"
+                                  >
+                                    Free Consultation
+                                  </Button>
+                                </Link>
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       )}
                     </div>
