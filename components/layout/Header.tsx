@@ -200,7 +200,7 @@ export const Header: React.FC = () => {
                       <Link
                         href={item.href}
                         className={cn(
-                          "px-3 py-2 text-lg font-medium transition-colors duration-200 flex items-center gap-1",
+                          "px-3 py-2 text-base font-medium transition-colors duration-200 flex items-center gap-1",
                           "text-neutral-700 hover:text-primary-600"
                         )}
                       >
@@ -225,7 +225,7 @@ export const Header: React.FC = () => {
 
                       {/* Mega Menu */}
                       {hoveredMenu === item.name && item.submenu.length > 0 && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[50rem] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[56rem] bg-white rounded-xl shadow-2xl border border-neutral-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                           <div className="grid grid-cols-12 gap-8">
                             {/* Services Column */}
                             <div className="col-span-8">
@@ -245,10 +245,10 @@ export const Header: React.FC = () => {
                                       {subItem.icon}
                                     </div>
                                     <div>
-                                      <div className="text-lg font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                                      <div className="text-base font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
                                         {subItem.name}
                                       </div>
-                                      <p className="text-base text-neutral-500 line-clamp-2 mt-0.5">
+                                      <p className="text-sm text-neutral-500 line-clamp-2 mt-0.5">
                                         {subItem.description}
                                       </p>
                                     </div>
@@ -264,15 +264,15 @@ export const Header: React.FC = () => {
                                 <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-xs font-bold uppercase tracking-widest rounded mb-3">
                                   Partner with us
                                 </span>
-                                <h4 className="text-2xl font-bold mb-2">Ready to scale?</h4>
-                                <p className="text-base text-neutral-400 mb-4 leading-relaxed">
+                                <h4 className="text-xl font-bold mb-2">Ready to scale?</h4>
+                                <p className="text-sm text-neutral-400 mb-4 leading-relaxed">
                                   Let our expert team handle your finances while you focus on what you do best.
                                 </p>
                               </div>
                               <Link href="/contact" className="w-full">
                                 <Button
                                   size="sm"
-                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-base font-bold"
+                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-sm font-bold"
                                 >
                                   Free Consultation
                                 </Button>

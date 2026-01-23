@@ -106,7 +106,7 @@ export default async function HireStaffPage({ params }: PageProps) {
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-[1.1] tracking-tight">
               {position.title}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-primary-100 mb-12 max-w-3xl leading-relaxed font-medium">
               {position.longDescription}
             </p>
             <Link href={position.heroCTA?.link || "/contact"}>

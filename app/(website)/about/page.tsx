@@ -79,13 +79,6 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "About Us", href: "/about" },
-        ]}
-      />
-
       {/* Hero Section */}
       <Section
         background="primary"
@@ -95,6 +88,13 @@ export default async function AboutPage() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&h=1080&fit=crop')] opacity-10 bg-cover bg-center"></div>
 
         <Container className="relative z-10">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "About Us" },
+            ]}
+            className="mb-8 text-primary-200"
+          />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
@@ -106,7 +106,7 @@ export default async function AboutPage() {
                   </span>
                 )}
               </h1>
-              <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl text-primary-100 mb-10 max-w-2xl leading-relaxed">
                 {data.heroDescription}
               </p>
             </div>

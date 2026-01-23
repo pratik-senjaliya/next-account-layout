@@ -82,7 +82,7 @@ export async function Footer() {
                   />
                 </div>
               </Link>
-              <p className="text-lg mb-6 text-neutral-400 max-w-xs">
+              <p className="text-md mb-6 text-neutral-400 max-w-xs">
                 {settings?.footerDescription || "Professional accounting and financial services to help your business thrive."}
               </p>
 
@@ -118,7 +118,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/${item.slug}`}
-                      className="text-lg hover:text-white transition-colors text-neutral-400"
+                      className="text-md hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -137,7 +137,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/industries/${item.slug}`}
-                      className="text-lg hover:text-white transition-colors text-neutral-400"
+                      className="text-md hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -156,7 +156,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/${item.slug}`}
-                      className="text-lg hover:text-white transition-colors text-neutral-400"
+                      className="text-md hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -175,7 +175,7 @@ export async function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-lg hover:text-white transition-colors text-neutral-400"
+                      className="text-md hover:text-white transition-colors text-neutral-400"
                     >
                       {item.name}
                     </Link>
@@ -187,7 +187,7 @@ export async function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-lg hover:text-white transition-colors text-neutral-400"
+                      className="text-md hover:text-white transition-colors text-neutral-400"
                     >
                       {item.name}
                     </Link>
@@ -211,12 +211,12 @@ export async function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-lg text-neutral-500">
+            <p className="text-md text-neutral-500">
               © {new Date().getFullYear()} {settings?.companyName || "Xconcile"}. All rights reserved.
             </p>
 
             {/* eBranding Studio Attribution */}
-            <p className="text-lg text-neutral-500">
+            <p className="text-md text-neutral-500">
               Design & Develop by{" "}
               <a
                 href="https://ebranding.studio/"

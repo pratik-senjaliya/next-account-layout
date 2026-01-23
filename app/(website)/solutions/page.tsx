@@ -33,7 +33,7 @@ export default function SolutionsPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
               Business Solutions
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
               Comprehensive solutions designed to address your unique business
               challenges and drive sustainable growth.
             </p>

@@ -203,7 +203,7 @@ export default async function HomePage() {
                   </span>
                 )}
               </h1>
-              <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl text-primary-100 mb-10 max-w-2xl leading-relaxed">
                 {data.heroDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
