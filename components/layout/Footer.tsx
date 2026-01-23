@@ -82,7 +82,7 @@ export async function Footer() {
                   />
                 </div>
               </Link>
-              <p className="text-sm mb-6 text-neutral-400 max-w-xs">
+              <p className="text-lg mb-6 text-neutral-400 max-w-xs">
                 {settings?.footerDescription || "Professional accounting and financial services to help your business thrive."}
               </p>
 
@@ -110,7 +110,7 @@ export async function Footer() {
 
             {/* Services */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+              <h3 className="text-white font-semibold mb-4 text-lg uppercase tracking-wide">
                 Services
               </h3>
               <ul className="space-y-3">
@@ -118,7 +118,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/${item.slug}`}
-                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                      className="text-lg hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -129,7 +129,7 @@ export async function Footer() {
 
             {/* Industries */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+              <h3 className="text-white font-semibold mb-4 text-lg uppercase tracking-wider">
                 Industries
               </h3>
               <ul className="space-y-3">
@@ -137,7 +137,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/industries/${item.slug}`}
-                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                      className="text-lg hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -148,7 +148,7 @@ export async function Footer() {
 
             {/* Hire Staff */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+              <h3 className="text-white font-semibold mb-4 text-lg uppercase tracking-wider">
                 Hire Staff
               </h3>
               <ul className="space-y-3">
@@ -156,7 +156,7 @@ export async function Footer() {
                   <li key={item.slug}>
                     <Link
                       href={`/${item.slug}`}
-                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                      className="text-lg hover:text-white transition-colors text-neutral-400"
                     >
                       {item.title}
                     </Link>
@@ -167,7 +167,7 @@ export async function Footer() {
 
             {/* Company */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+              <h3 className="text-white font-semibold mb-4 text-lg uppercase tracking-wide">
                 Company
               </h3>
               <ul className="space-y-3">
@@ -175,7 +175,7 @@ export async function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                      className="text-lg hover:text-white transition-colors text-neutral-400"
                     >
                       {item.name}
                     </Link>
@@ -187,7 +187,7 @@ export async function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm hover:text-white transition-colors text-neutral-400"
+                      className="text-lg hover:text-white transition-colors text-neutral-400"
                     >
                       {item.name}
                     </Link>
@@ -198,7 +198,7 @@ export async function Footer() {
                 <li>
                   <Link
                     href="/privacy-policy"
-                    className="text-sm hover:text-white transition-colors text-neutral-400"
+                    className="text-base hover:text-white transition-colors text-neutral-400"
                   >
                     Privacy Policy
                   </Link>
@@ -211,12 +211,12 @@ export async function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-neutral-500">
+            <p className="text-lg text-neutral-500">
               © {new Date().getFullYear()} {settings?.companyName || "Xconcile"}. All rights reserved.
             </p>
 
             {/* eBranding Studio Attribution */}
-            <p className="text-sm text-neutral-500">
+            <p className="text-lg text-neutral-500">
               Design & Develop by{" "}
               <a
                 href="https://ebranding.studio/"

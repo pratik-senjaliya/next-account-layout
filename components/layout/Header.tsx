@@ -200,7 +200,7 @@ export const Header: React.FC = () => {
                       <Link
                         href={item.href}
                         className={cn(
-                          "px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center gap-1",
+                          "px-3 py-2 text-lg font-medium transition-colors duration-200 flex items-center gap-1",
                           "text-neutral-700 hover:text-primary-600"
                         )}
                       >
@@ -230,7 +230,7 @@ export const Header: React.FC = () => {
                             {/* Services Column */}
                             <div className="col-span-8">
                               <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100">
-                                <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                                <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-wider">
                                   {item.name}
                                 </h3>
                               </div>
@@ -245,10 +245,10 @@ export const Header: React.FC = () => {
                                       {subItem.icon}
                                     </div>
                                     <div>
-                                      <div className="text-sm font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                                      <div className="text-lg font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
                                         {subItem.name}
                                       </div>
-                                      <p className="text-xs text-neutral-500 line-clamp-2 mt-0.5">
+                                      <p className="text-base text-neutral-500 line-clamp-2 mt-0.5">
                                         {subItem.description}
                                       </p>
                                     </div>
@@ -261,18 +261,18 @@ export const Header: React.FC = () => {
                             <div className="col-span-4 bg-neutral-900 rounded-xl p-6 text-white flex flex-col justify-between relative overflow-hidden group">
                               <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-all duration-500"></div>
                               <div>
-                                <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-[10px] font-bold uppercase tracking-widest rounded mb-3">
+                                <span className="inline-block px-2 py-1 bg-primary-500/20 text-primary-300 text-xs font-bold uppercase tracking-widest rounded mb-3">
                                   Partner with us
                                 </span>
-                                <h4 className="text-lg font-bold mb-2">Ready to scale?</h4>
-                                <p className="text-xs text-neutral-400 mb-4 leading-relaxed">
+                                <h4 className="text-2xl font-bold mb-2">Ready to scale?</h4>
+                                <p className="text-base text-neutral-400 mb-4 leading-relaxed">
                                   Let our expert team handle your finances while you focus on what you do best.
                                 </p>
                               </div>
                               <Link href="/contact" className="w-full">
                                 <Button
                                   size="sm"
-                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-xs font-bold"
+                                  className="w-full bg-white text-neutral-900 hover:bg-neutral-100 border-none text-base font-bold"
                                 >
                                   Free Consultation
                                 </Button>
