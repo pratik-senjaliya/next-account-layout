@@ -9,6 +9,7 @@ export interface BlogPost {
   author: string;
   authorRole: string;
   image: string;
+  imageAlt?: string;
   readTime: string;
 }
 
