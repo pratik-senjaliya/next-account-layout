@@ -204,14 +204,14 @@ export default defineType({
                 defineField({ name: 'description', type: 'text' }),
             ],
         }),
-        // Standard Sections
-        defineField({
-            name: 'features',
-            title: 'Features',
-            type: 'array',
-            of: [{ type: 'feature' }],
-            group: 'content',
-        }),
+        // // Standard Sections
+        // defineField({
+        //     name: 'features',
+        //     title: 'Features',
+        //     type: 'array',
+        //     of: [{ type: 'feature' }],
+        //     group: 'content',
+        // }),
         defineField({
             name: 'gettingStarted',
             title: 'Getting Started Steps',

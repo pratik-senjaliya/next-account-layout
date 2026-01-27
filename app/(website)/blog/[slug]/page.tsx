@@ -130,7 +130,7 @@ export default async function BlogPostPage(props: {
         <Section background="white" spacing="sm">
           <Container>
             <div className="max-w-4xl mx-auto">
-              <div className="relative h-96 md:h-[32rem] lg:h-[36rem] rounded-2xl overflow-hidden shadow-xl -mt-16 mb-12 animate-fade-in-up">
+              <div className="relative h-96 md:h-[32rem] lg:h-[36rem] rounded-2xl overflow-hidden shadow-xl -mt-16 mb-6 animate-fade-in-up">
                 <Image
                   src={post.image}
                   alt={post.imageAlt || post.title}

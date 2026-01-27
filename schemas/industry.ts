@@ -141,14 +141,14 @@ export default defineType({
             of: [{ type: 'processStep' }],
             group: 'content',
         }),
-        // Fallback/standard fields
-        defineField({
-            name: 'features',
-            title: 'Features (General)',
-            type: 'array',
-            of: [{ type: 'feature' }],
-            group: 'content',
-        }),
+        // // Fallback/standard fields
+        // defineField({
+        //     name: 'features',
+        //     title: 'Features (General)',
+        //     type: 'array',
+        //     of: [{ type: 'feature' }],
+        //     group: 'content',
+        // }),
         defineField({
             name: 'process',
             title: 'Process (General)',
