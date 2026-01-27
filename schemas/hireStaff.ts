@@ -60,6 +60,15 @@ export default defineType({
             title: 'Hero Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'hero',
         }),
         defineField({
@@ -67,6 +76,15 @@ export default defineType({
             title: 'Intro Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'intro',
         }),
         defineField({
@@ -129,7 +147,20 @@ export default defineType({
                                 title: 'Platform',
                                 fields: [
                                     { name: 'name', type: 'string', title: 'Software Name' },
-                                    { name: 'logo', type: 'image', title: 'Logo (Optional)', options: { hotspot: true } },
+                                    {
+                                        name: 'logo',
+                                        type: 'image',
+                                        title: 'Logo (Optional)',
+                                        options: { hotspot: true },
+                                        fields: [
+                                            {
+                                                name: 'alt',
+                                                type: 'string',
+                                                title: 'Alternative Text',
+                                                description: 'Important for SEO and accessibility',
+                                            }
+                                        ]
+                                    },
                                 ],
                                 preview: {
                                     select: {

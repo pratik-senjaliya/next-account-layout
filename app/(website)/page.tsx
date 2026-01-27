@@ -184,7 +184,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-10">
           <Image
             src={data.heroImage}
-            alt="Professional business team"
+            alt={data.heroImageAlt || "Professional business team"}
             fill
             className="object-cover"
             priority
@@ -234,7 +234,7 @@ export default async function HomePage() {
             >
               <Image
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
-                alt="Business professionals working together"
+                alt={data.introductionImageAlt || "Business professionals working together"}
                 fill
                 className="object-cover"
                 priority
@@ -342,7 +342,7 @@ export default async function HomePage() {
                 <div className={`relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg ${index % 2 === 1 ? "lg:order-first" : ""}`}>
                   <Image
                     src={feature.image}
-                    alt={feature.title}
+                    alt={feature.imageAlt || feature.title}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-700"
                   />
@@ -402,7 +402,7 @@ export default async function HomePage() {
                   {partner && partner.logo ? (
                     <Image
                       src={partner.logo}
-                      alt={partner.name || "Partner Logo"}
+                      alt={partner.logoAlt || partner.name || "Partner Logo"}
                       fill
                       className="object-contain"
                     />
@@ -450,7 +450,7 @@ export default async function HomePage() {
                   <div className="relative h-48 mb-4 -m-6 mb-4">
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={post.imageAlt || post.title}
                       fill
                       className="object-cover"
                     />

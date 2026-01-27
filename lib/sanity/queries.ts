@@ -12,6 +12,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     author,
     authorRole,
     "image": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     readTime,
     "content": ""
   }`
@@ -31,6 +32,7 @@ export async function getPostBySlug(slug: string) {
     author,
     authorRole,
     "image": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     readTime,
     faqs
   }`
@@ -62,7 +64,9 @@ export async function getAllServices() {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -89,7 +93,9 @@ export async function getServiceBySlug(slug: string) {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -117,7 +123,8 @@ export async function getServiceBySlug(slug: string) {
       metaTitle,
       metaDescription,
       metaKeywords,
-      "openGraphImage": openGraphImage.asset->url
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
     }
   }`
 
@@ -142,7 +149,9 @@ export async function getAllIndustries() {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -171,7 +180,9 @@ export async function getIndustryBySlug(slug: string) {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -197,7 +208,8 @@ export async function getIndustryBySlug(slug: string) {
       metaTitle,
       metaDescription,
       metaKeywords,
-      "openGraphImage": openGraphImage.asset->url
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
     }
   }`
 
@@ -222,7 +234,9 @@ export async function getAllHireStaff() {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -252,7 +266,9 @@ export async function getHireStaffBySlug(slug: string) {
     longDescription,
     icon,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     "image": image.asset->url,
+    "imageAlt": image.alt,
     "intro": {
       "title": introTitle,
       "content": introContent,
@@ -263,7 +279,8 @@ export async function getHireStaffBySlug(slug: string) {
       category,
       platforms[] {
         name,
-        "logo": logo.asset->url
+        "logo": logo.asset->url,
+        "logoAlt": logo.alt
       }
     },
     trial,
@@ -285,7 +302,8 @@ export async function getHireStaffBySlug(slug: string) {
       metaTitle,
       metaDescription,
       metaKeywords,
-      "openGraphImage": openGraphImage.asset->url
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
     }
   }`
 
@@ -308,16 +326,19 @@ export async function getHomePage() {
       metaTitle,
       metaDescription,
       metaKeywords,
-      "openGraphImage": openGraphImage.asset->url
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
     },
     heroTitle,
     heroTitleHighlight,
     heroDescription,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     heroStats,
     introductionTitle,
     introductionBody,
     "introductionImage": introductionImage.asset->url,
+    "introductionImageAlt": introductionImage.alt,
     trustTitle,
     trustDescription,
     trustStats,
@@ -331,13 +352,15 @@ export async function getHomePage() {
       description,
       linkText,
       linkHref,
-      "image": image.asset->url
+      "image": image.asset->url,
+      "imageAlt": image.alt
     },
     partnersTitle,
     partnersDescription,
     partners[] {
       name,
-      "logo": logo.asset->url
+      "logo": logo.asset->url,
+      "logoAlt": logo.alt
     },
     blogTitle,
     blogDescription,
@@ -361,15 +384,18 @@ export async function getAboutPage() {
       metaTitle,
       metaDescription,
       metaKeywords,
-      "openGraphImage": openGraphImage.asset->url
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
     },
     heroTitle,
     heroTitleHighlight,
     heroDescription,
     "heroImage": heroImage.asset->url,
+    "heroImageAlt": heroImage.alt,
     whyWeExistTitle,
     whyWeExistBody,
     "whyWeExistImage": whyWeExistImage.asset->url,
+    "whyWeExistImageAlt": whyWeExistImage.alt,
     valuesTitle,
     values[] {
       title,

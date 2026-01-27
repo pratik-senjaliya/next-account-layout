@@ -4,6 +4,7 @@ import Image from 'next/image';
 interface Platform {
     name: string;
     logo?: string;
+    logoAlt?: string;
 }
 
 interface SoftwareCategory {
@@ -35,7 +36,7 @@ export function SoftwareGrid({ categories }: SoftwareGridProps) {
                                     <div className="relative w-6 h-6 flex-shrink-0">
                                         <Image
                                             src={platform.logo}
-                                            alt={`${platform.name} logo`}
+                                            alt={platform.logoAlt || `${platform.name} logo`}
                                             fill
                                             className="object-contain"
                                         />

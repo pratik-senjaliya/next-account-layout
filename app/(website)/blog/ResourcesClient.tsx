@@ -96,7 +96,7 @@ export function ResourcesClient({ blogPosts, categories, title, description, new
                                         <div className="relative h-64 md:h-full min-h-[18.75rem]">
                                             <Image
                                                 src={featuredPost.image}
-                                                alt={featuredPost.title}
+                                                alt={featuredPost.imageAlt || featuredPost.title}
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
@@ -151,7 +151,7 @@ export function ResourcesClient({ blogPosts, categories, title, description, new
                                         <div className="relative h-48 mb-4 -m-6 mb-4 overflow-hidden">
                                             <Image
                                                 src={post.image}
-                                                alt={post.title}
+                                                alt={post.imageAlt || post.title}
                                                 fill
                                                 className="object-cover group-hover:scale-110 transition-transform duration-500"
                                             />

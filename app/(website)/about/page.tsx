@@ -116,7 +116,7 @@ export default async function AboutPage() {
             >
               <Image
                 src={data.heroImage || staticData.heroImage}
-                alt="About Us"
+                alt={data.heroImageAlt || "About Us"}
                 fill
                 className="object-cover"
                 priority
@@ -134,7 +134,7 @@ export default async function AboutPage() {
             <div className="relative h-[25rem] lg:h-[31.25rem] rounded-2xl overflow-hidden shadow-lg animate-fade-in-left">
               <Image
                 src={data.whyWeExistImage || staticData.whyWeExistImage}
-                alt={data.whyWeExistTitle || staticData.whyWeExistTitle}
+                alt={data.whyWeExistImageAlt || data.whyWeExistTitle || staticData.whyWeExistTitle}
                 fill
                 className="object-cover"
               />

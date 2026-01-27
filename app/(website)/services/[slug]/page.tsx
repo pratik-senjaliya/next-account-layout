@@ -86,7 +86,7 @@ export default async function ServicePage({ params }: PageProps) {
         <div className="absolute inset-0 opacity-20">
           <Image
             src={service.heroImage}
-            alt={service.title}
+            alt={service.heroImageAlt || service.title}
             fill
             className="object-cover"
             priority
@@ -145,7 +145,7 @@ export default async function ServicePage({ params }: PageProps) {
             <div className="relative h-[37.5rem] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
               <Image
                 src={service.image}
-                alt={`${service.title} specialists`}
+                alt={service.imageAlt || `${service.title} specialists`}
                 fill
                 className="object-cover"
               />

@@ -44,6 +44,15 @@ export default defineType({
             title: 'Hero Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'hero',
         }),
 
@@ -66,6 +75,15 @@ export default defineType({
             title: 'Why We Exist Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'whyWeExist',
         }),
 

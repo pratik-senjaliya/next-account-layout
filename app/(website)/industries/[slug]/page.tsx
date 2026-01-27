@@ -86,7 +86,7 @@ export default async function IndustryPage({ params }: PageProps) {
         <div className="absolute inset-0 opacity-20">
           <Image
             src={industry.heroImage}
-            alt={industry.title}
+            alt={industry.heroImageAlt || industry.title}
             fill
             className="object-cover"
             priority
@@ -146,7 +146,7 @@ export default async function IndustryPage({ params }: PageProps) {
             <div className="relative h-[37.5rem] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
               <Image
                 src={industry.image}
-                alt={`${industry.title} specialists`}
+                alt={industry.imageAlt || `${industry.title} specialists`}
                 fill
                 className="object-cover"
               />

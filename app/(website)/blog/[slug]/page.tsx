@@ -133,7 +133,7 @@ export default async function BlogPostPage(props: {
               <div className="relative h-96 md:h-[32rem] lg:h-[36rem] rounded-2xl overflow-hidden shadow-xl -mt-16 mb-12 animate-fade-in-up">
                 <Image
                   src={post.image}
-                  alt={post.title}
+                  alt={post.imageAlt || post.title}
                   fill
                   className="object-cover"
                   priority
@@ -192,7 +192,7 @@ export default async function BlogPostPage(props: {
                         <div className="relative h-48 w-full overflow-hidden">
                           <Image
                             src={relatedPost.image}
-                            alt={relatedPost.title}
+                            alt={relatedPost.imageAlt || relatedPost.title}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
                           />

@@ -87,7 +87,7 @@ export default async function HireStaffPage({ params }: PageProps) {
         <div className="absolute inset-0 opacity-20">
           <Image
             src={position.heroImage}
-            alt={position.title}
+            alt={position.heroImageAlt || position.title}
             fill
             className="object-cover"
             priority
@@ -146,7 +146,7 @@ export default async function HireStaffPage({ params }: PageProps) {
             <div className="relative h-[37.5rem] rounded-[60px] overflow-hidden shadow-large animate-fade-in-right order-1 lg:order-2">
               <Image
                 src={position.image}
-                alt={`${position.title} specialists`}
+                alt={position.imageAlt || `${position.title} specialists`}
                 fill
                 className="object-cover"
               />

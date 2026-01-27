@@ -48,6 +48,15 @@ export default defineType({
             title: 'Hero Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'hero',
         }),
         defineField({
@@ -77,6 +86,15 @@ export default defineType({
             title: 'Introduction Image',
             type: 'image',
             options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                    description: 'Important for SEO and accessibility',
+                    validation: (Rule) => Rule.required(),
+                }
+            ],
             group: 'hero',
         }),
         defineField({
@@ -171,7 +189,21 @@ export default defineType({
                             hidden: true,
                             description: 'Deprecated: Links are no longer displayed on home page features'
                         }),
-                        defineField({ name: 'image', type: 'image', title: 'Image', options: { hotspot: true } }),
+                        defineField({
+                            name: 'image',
+                            type: 'image',
+                            title: 'Image',
+                            options: { hotspot: true },
+                            fields: [
+                                {
+                                    name: 'alt',
+                                    type: 'string',
+                                    title: 'Alternative Text',
+                                    description: 'Important for SEO and accessibility',
+                                    validation: (Rule) => Rule.required(),
+                                }
+                            ]
+                        }),
                     ],
                 },
             ],
@@ -199,7 +231,20 @@ export default defineType({
                     type: 'object',
                     fields: [
                         defineField({ name: 'name', type: 'string', title: 'Partner Name' }),
-                        defineField({ name: 'logo', type: 'image', title: 'Logo', options: { hotspot: true } }),
+                        defineField({
+                            name: 'logo',
+                            type: 'image',
+                            title: 'Logo',
+                            options: { hotspot: true },
+                            fields: [
+                                {
+                                    name: 'alt',
+                                    type: 'string',
+                                    title: 'Alternative Text',
+                                    description: 'Important for SEO and accessibility',
+                                }
+                            ]
+                        }),
                     ],
                     preview: {
                         select: {
