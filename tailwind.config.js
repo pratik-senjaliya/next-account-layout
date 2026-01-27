@@ -8,33 +8,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary brand colors - Deep navy blue (professional, trustworthy)
+        // Primary brand colors - Deep Teal (derived from logo)
         primary: {
-          50: "#f0f4f8",
-          100: "#d9e2ec",
-          200: "#bcccdc",
-          300: "#9fb3c8",
-          400: "#829ab1",
-          500: "#627d98", // Medium navy
-          600: "#486581", // Standard navy
-          700: "#334e68", // Dark navy
-          800: "#243b53", // Very dark navy
-          900: "#102a43", // Deepest navy (hero backgrounds)
-          950: "#0a1929",
+          50: "#e8f0f2",
+          100: "#d1e2e6",
+          200: "#a4c6ce",
+          300: "#76a9b5",
+          400: "#498d9d",
+          500: "#1c7185", // Main brand color
+          600: "#165a6a",
+          700: "#10434f",
+          800: "#0b2d35",
+          900: "#05161a",
+          950: "#020b0d",
         },
-        // Secondary accent colors - Professional teal/cyan (like Bench.co)
+        // Secondary accent colors - Vibrant Green (derived from logo accents)
         secondary: {
-          50: "#f0fdfa",
-          100: "#ccfbf1",
-          200: "#99f6e4",
-          300: "#5eead4",
-          400: "#2dd4bf",
-          500: "#14b8a6", // Main teal
-          600: "#0d9488", // Darker teal (CTAs)
-          700: "#0f766e",
-          800: "#115e59",
-          900: "#134e4a",
-          950: "#042f2e",
+          50: "#f0f7ed",
+          100: "#e2f0dc",
+          200: "#c6e2b9",
+          300: "#a9d396",
+          400: "#8dc573",
+          500: "#71b751", // Main accent
+          600: "#5a9240",
+          700: "#436d30",
+          800: "#2d4920",
+          900: "#162410",
+          950: "#0b1208",
         },
         // Neutral grays for text and backgrounds
         neutral: {
